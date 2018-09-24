@@ -6,13 +6,15 @@ public class Produto {
     private String descricao;
     private double valorCompra;
     private double valorVenda;
+    private Secao secao;
 
 
-    public Produto(String descricao, double valorCompra, double valorVenda)
+    public Produto(String descricao, double valorCompra, double valorVenda, Secao secao)
     {
         setDescricao(descricao);
         setValorCompra(valorCompra);
         setValorVenda(valorVenda);
+        setSecao(secao);
 
     }
 
@@ -44,7 +46,15 @@ public class Produto {
     {
         return codigoProduto++;
     }
-    //
+    public Secao getSecao()
+    {
+        return secao;
+    }
+    public void setSecao(Secao secao)
+    {
+        this.secao = secao;
+    }
+
 
 
     @Override
@@ -53,7 +63,8 @@ public class Produto {
                "Código do Produto: " + getProximoCodigoProduto() + "\n" +
                "Descrição: " + getDescricao() + "\n" +
                "Valor Compra: " + getValorCompra() + "\n" +
-               "Valor Venda: " + getValorVenda();
+               "Valor Venda: " + getValorVenda() + "\n" +
+                "Seção: " + getSecao();
 
     }
 }
