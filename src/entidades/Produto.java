@@ -2,7 +2,7 @@ package entidades;
 
 public class Produto {
 
-    private int codigoProduto = 0;
+    private static int codigoProduto = 1;
     private String descricao;
     private double valorCompra;
     private double valorVenda;
@@ -13,14 +13,7 @@ public class Produto {
         setDescricao(descricao);
         setValorCompra(valorCompra);
         setValorVenda(valorVenda);
-        if (this.codigoProduto == 0)
-        {
-            this.codigoProduto = 1;
-        }
-        else
-        {
-            this.codigoProduto++;
-        }
+
     }
 
     public String getDescricao()
@@ -47,16 +40,16 @@ public class Produto {
     {
         this.valorVenda = valorVenda;
     }
-    public int getCodigoProduto()
+    public static int getProximoCodigoProduto()
     {
-        return codigoProduto;
+        return codigoProduto++;
     }
 
 
     @Override
     public String toString(){
         return "PRODUTO:" +
-               "Código do Produto: " + getCodigoProduto() + "\n" +
+               "Código do Produto: " + getProximoCodigoProduto() + "\n" +
                "Descrição: " + getDescricao() + "\n" +
                "Valor Compra: " + getValorCompra() + "\n" +
                "Valor Venda: " + getValorVenda();
