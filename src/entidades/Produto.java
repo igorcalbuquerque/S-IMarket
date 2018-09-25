@@ -17,6 +17,14 @@ public class Produto {
         setSecao(secao);
 
     }
+    public Produto(String descricao, double valorVenda, Secao secao)
+    {
+        setDescricao(descricao);
+        setValorCompra(valorCompra);
+        setValorVenda(valorVenda);
+        setSecao(secao);
+
+    }
 
     public String getDescricao()
     {

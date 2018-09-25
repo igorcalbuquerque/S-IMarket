@@ -2,7 +2,7 @@ package entidades;
 
 public class Secao {
 
-    private Produto produto;
+    private static int codigoProduto = 1;
     private String descricao;
 
     public Secao(String descricao)
@@ -11,20 +11,15 @@ public class Secao {
 
     }
 
-    public Produto getProduto() {
-        return produto;
-    }
-
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-    }
-
     public String getDescricao() {
         return descricao;
     }
-
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+    public static int getProximoCodigoProduto()
+    {
+        return codigoProduto++;
     }
 
     @Override
