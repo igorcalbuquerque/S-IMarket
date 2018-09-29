@@ -18,10 +18,6 @@ public class Secao {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    public int getProximoCodigoProduto()
-    {
-        return codigoProduto++;
-    }
 
     @Override
     public String toString(){
