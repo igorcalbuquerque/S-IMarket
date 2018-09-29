@@ -1,17 +1,16 @@
 package entidades;
 
+import java.util.ArrayList;
+
 public class Carrinho {
 
-    private int codigoDaVenda = 1;
-    private Produto produto;
-    private int quantidade;
+    private static int codigoDaVenda = 0;
+    private ArrayList<ProdutoVenda> carrinho;
     private double valorTotal;
 
-    public Carrinho(Produto produto, int quantidade)
-    {
-        this.produto = produto;
-        this.quantidade = quantidade;
-        this.valorTotal = produto.getValorVenda() * quantidade;
+    public Carrinho(){
+        codigoDaVenda = getProximoCodigoDaVenda();
+        this.carrinho = new ArrayList<ProdutoVenda>();
     }
 
     public int getProximoCodigoDaVenda(){ return codigoDaVenda++; }
