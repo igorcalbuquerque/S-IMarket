@@ -26,5 +26,6 @@ public class Main {
         //Funcionario funcionario = new Funcionario("Igor", "08976547385", endereco, "Gerente", "mae");
 
         //System.out.println(funcionario.toString());
+        //teste sau
     }
 }
