@@ -1,3 +1,6 @@
+import dados.RepositorioSecao;
+import entidades.Secao;
+
 import java.util.Scanner;
 
 public class SIMarket {
@@ -55,6 +58,17 @@ public class SIMarket {
 
             switch (opcao)
             {
+                case 4:
+                    Scanner entradaSecao = new Scanner(System.in);
+                    System.out.print("Digite o nome da Seção que Deseja Cadastrar: \t");
+                    String secaoCadastro = entradaSecao.nextLine();
+
+                    RepositorioSecao repositorioSecao = new RepositorioSecao();
+                    Secao secao = new Secao(secaoCadastro);
+
+                    repositorioSecao.addSecao(secao);
+
+                    System.out.println(repositorioSecao.listarSecoes());
 
             }
 
