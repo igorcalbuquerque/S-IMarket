@@ -2,12 +2,11 @@ package entidades;
 
 public class Produto {
 
-    private static int codigoProduto = 1;
+    private int codigoProduto;
     private String descricao;
     private double valorCompra;
     private double valorVenda;
     private Secao secao;
-
 
     public Produto(String descricao, double valorCompra, double valorVenda, Secao secao)
     {
@@ -15,17 +14,19 @@ public class Produto {
         setValorCompra(valorCompra);
         setValorVenda(valorVenda);
         setSecao(secao);
-
     }
+
     public Produto(String descricao, double valorVenda, Secao secao)
     {
         setDescricao(descricao);
         setValorCompra(valorCompra);
         setValorVenda(valorVenda);
         setSecao(secao);
-
     }
-
+    public int getCodigoProduto(){return codigoProduto;}
+    public void setCodigoProduto(int novoCodigo){
+        codigoProduto = novoCodigo;
+    }
     public String getDescricao()
     {
         return descricao;
@@ -50,10 +51,6 @@ public class Produto {
     {
         this.valorVenda = valorVenda;
     }
-    public static int getProximoCodigoProduto()
-    {
-        return codigoProduto++;
-    }
     public Secao getSecao()
     {
         return secao;
@@ -63,16 +60,12 @@ public class Produto {
         this.secao = secao;
     }
 
-
-
     @Override
     public String toString(){
-        return "PRODUTO:" +
-               "Código do Produto: " + getProximoCodigoProduto() + "\n" +
+        return "Código do Produto: " + getCodigoProduto() + "\n" +
                "Descrição: " + getDescricao() + "\n" +
                "Valor Compra: " + getValorCompra() + "\n" +
                "Valor Venda: " + getValorVenda() + "\n" +
-                "Seção: " + getSecao();
-
+                "Seção: " + getSecao().getDescricao()+ "\n" ;
     }
 }
