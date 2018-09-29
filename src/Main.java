@@ -11,8 +11,8 @@ public class Main {
     {
 
 
-        Endereco endereco = new Endereco("Antonio Paulo de Miranda", "Centro", "Garanhuns", "55293340", "PE");
-        /*Secao secao = new Secao("Cereais");
+        //Endereco endereco = new Endereco("Antonio Paulo de Miranda", "Centro", "Garanhuns", "55293340", "PE");
+        Secao secao = new Secao("Cereais");
         Secao secao2 = new Secao("Bebidas");
         Secao secaoLimpeza = new Secao("Limpeza");
         Produto produto = new Produto("Cereal", 20.0, 25,secao);
@@ -22,9 +22,9 @@ public class Main {
         System.out.println(produto.toString());
         System.out.println(produto2.toString());
         System.out.println(produtoLimpeza.toString());
-        System.out.println(endereco.toString());*/
-        Funcionario funcionario = new Funcionario("Igor", "08976547385", endereco, "Gerente", "mae");
+        //System.out.println(endereco.toString());
+        //Funcionario funcionario = new Funcionario("Igor", "08976547385", endereco, "Gerente", "mae");
 
-        System.out.println(funcionario.toString());
+        //System.out.println(funcionario.toString());
     }
 }
