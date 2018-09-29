@@ -2,25 +2,30 @@ package entidades;
 
 public class Secao {
 
-    private int codigo;
+    private static int codigo = 0;
     private String descricao;
 
     public Secao(String descricao)
     {
-        //setCodigo(codigo);
+        setCodigo(getProximoCodigo());
         setDescricao(descricao);
     }
-    public int getCodigo(){return codigo;}
-    public void setCodigo(int novoCodigo){ codigo = novoCodigo;}
+    public int getCodigo()
+    {return codigo;
+    }
+    public void setCodigo(int novoCodigo)
+    {
+        this.codigo = novoCodigo;
+    }
     public String getDescricao() {
         return descricao;
     }
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    public int getProximoCodigoProduto()
+    public int getProximoCodigo()
     {
-        return codigo++;
+        return ++this.codigo;
     }
 
     @Override
