@@ -14,11 +14,12 @@ public class RepositorioSecao {
         secoes.add(secao);
     }
     public void removeSecao(int codigo){
-        for(Secao s:secoes){
-            if(codigo == s.getCodigo()){
-                secoes.remove(s);
-                break;
-            }
+        Secao secao = buscarSecao(codigo);
+        if(secao !=null){
+            secoes.remove(secao);
+        }
+        else{
+            System.out.println("A Secao informada NAO existe!!!");
         }
     }
     public Secao buscarSecao(int codigo){

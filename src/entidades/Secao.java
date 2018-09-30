@@ -2,7 +2,8 @@ package entidades;
 
 public class Secao {
 
-    private int codigoProduto;
+    private static int codigoAutomatico = 0;
+    private int codigo;
     private String descricao;
 
     public Secao(int codigo, String descricao)
@@ -10,8 +11,13 @@ public class Secao {
         setCodigo(codigo);
         setDescricao(descricao);
     }
-    public int getCodigo(){return codigoProduto;}
-    public void setCodigo(int novoCodigo){ codigoProduto = novoCodigo;}
+    public Secao(String descricao){
+        codigoAutomatico++;
+        setCodigo(codigoAutomatico);
+        setDescricao(descricao);
+    }
+    public int getCodigo(){return codigo;}
+    public void setCodigo(int novoCodigo){ codigo = novoCodigo;}
     public String getDescricao() {
         return descricao;
     }

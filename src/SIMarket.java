@@ -5,6 +5,8 @@ import java.util.Scanner;
 
 public class SIMarket {
 
+    private static RepositorioSecao repositorioSecao = new RepositorioSecao();
+
     public static void main (String[] args)
     {
 
@@ -14,16 +16,10 @@ public class SIMarket {
         System.out.println("===========================================");
         System.out.println("===========================================");
 
-
-
-
-        if(chamadas())
-        {
-            menu();
+        while(chamadaLogin() == false){
+            chamadaLogin();
         }
-
-
-
+        menu();
     }
 
     public static boolean login(String user, String senha)
@@ -46,36 +42,82 @@ public class SIMarket {
             System.out.println("===========================================");
             System.out.println("===========================================");
 
-
             System.out.println("1 - CAIXA");
             System.out.println("2 - PRODUTOS");
-            System.out.println("3 - CADASTRAR PRODUTOS");
-            System.out.println("4 - CADASTRAR SEÇÂO");
-            System.out.println("5 - CLIENTES");
-            System.out.println("6 - CADASTRAR CLIENTES");
+            System.out.println("3 - SEÇÂO");
+            System.out.println("4 - CLIENTES");
+            System.out.println("88 - SAIR !!!");
+
             System.out.printf("Digite a Opção desejada: \t");
             opcao = entradaOpcao.nextInt();
 
             switch (opcao)
             {
-                case 4:
-                    Scanner entradaSecao = new Scanner(System.in);
-                    System.out.print("Digite o nome da Seção que Deseja Cadastrar: \t");
-                    String secaoCadastro = entradaSecao.nextLine();
-
-                    RepositorioSecao repositorioSecao = new RepositorioSecao();
-                    Secao secao = new Secao(secaoCadastro);
-
-                    repositorioSecao.addSecao(secao);
-
-                    System.out.println(repositorioSecao.listarSecoes());
-
+                case 3:
+                    subMenuSecao();
+                    break;
             }
 
 
         }while (opcao != 88);
+
     }
-    public static boolean chamadas()
+    public static void subMenuSecao(){
+
+        int opcao;
+        Scanner entradaOpcao = new Scanner(System.in);
+        System.out.println("1 - CADASTRAR SECAO");
+        System.out.println("2 - REMOVER SECAO");
+        System.out.println("3 - LISTAR SECOES");
+        System.out.println("4 - SAIR !!!");
+
+        System.out.println("Insira a opcao desejada : \t");
+        opcao = entradaOpcao.nextInt();
+
+        switch (opcao){
+            case 1:
+                Scanner entradaDescricaoSecao = new Scanner(System.in);
+                Scanner entradaOpcaoCodigo = new Scanner(System.in);
+                System.out.print("\nDigite o nome da Seção que Deseja Cadastrar: \t");
+                String descricaoSecao = entradaDescricaoSecao.nextLine();
+
+                System.out.print("\nDeseja gerar codigo Automaticamente? (1)SIM (2)NAO \t");
+                int opcaoCodigo =  entradaOpcaoCodigo.nextInt();
+                Secao novaSecao;
+
+                switch (opcaoCodigo){
+                    case 1:
+                        novaSecao = new Secao(descricaoSecao);
+                        repositorioSecao.addSecao(novaSecao);
+                        System.out.println(repositorioSecao.listarSecoes());
+                        break;
+                    case 2:
+                        Scanner entradaCodigo = new Scanner(System.in);
+                        System.out.print("\nDigite o Codigo da Seção que Deseja Cadastrar: \t");
+                        int codigo = entradaCodigo.nextInt();
+                        novaSecao = new Secao(codigo, descricaoSecao);
+                        repositorioSecao.addSecao(novaSecao);
+                        System.out.println(repositorioSecao.listarSecoes());
+                        break;
+                }
+                break;
+            case 2:
+                Scanner entradaCodigo = new Scanner(System.in);
+                int codigo;
+                System.out.print("\nDigite o Codigo da Seção a ser Removida : \t");
+                codigo = entradaCodigo.nextInt();
+                repositorioSecao.removeSecao(codigo);
+                break;
+            case 3:
+                System.out.println(repositorioSecao.listarSecoes());
+                break;
+             default:
+                 menu();
+                 break;
+        }
+
+    }
+    public static boolean chamadaLogin()
     {
         Scanner entradaUser = new Scanner(System.in);
         Scanner entradaSenha = new Scanner(System.in);
