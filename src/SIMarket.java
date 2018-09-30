@@ -64,6 +64,12 @@ public class SIMarket {
     }
     public static void subMenuSecao(){
 
+        System.out.println("===========================================");
+        System.out.println("===========================================");
+        System.out.println("====== S & I Markets (MENU SEÇÂO) =========");
+        System.out.println("===========================================");
+        System.out.println("===========================================");
+
         int opcao;
         Scanner entradaOpcao = new Scanner(System.in);
         System.out.println("1 - CADASTRAR SECAO");

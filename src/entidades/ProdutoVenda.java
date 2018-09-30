@@ -22,4 +22,11 @@ public class ProdutoVenda {
     public void setProdutoVenda(Produto novoProduto) {
         produto= novoProduto;
     }
+
+    @Override
+    public String toString()
+    {
+        return "Produto: " + getProduto() + "\n" +
+                "Quantidade: " + getQuantidade();
+    }
 }
