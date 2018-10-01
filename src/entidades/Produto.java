@@ -62,10 +62,7 @@ public class Produto {
 
     @Override
     public String toString(){
-        return "Código do Produto: " + getCodigoProduto() + "\n" +
-               "Descrição: " + getDescricao() + "\n" +
-               "Valor Compra: " + getValorCompra() + "\n" +
-               "Valor Venda: " + getValorVenda() + "\n" +
-                "Seção: " + getSecao().getDescricao()+ "\n" ;
+        return "Código : "+getCodigoProduto()+"Descrição: "+getDescricao()+"Valor Compra: "+getValorCompra()+"Valor Venda: " +
+                getValorVenda()+"Seção: "+getSecao().getDescricao()+ "\n";
     }
 }

@@ -115,6 +115,7 @@ public class SIMarket {
                 repositorioSecao.removeSecao(codigo);
                 break;
             case 3:
+                System.out.println("=======SECOES CADASTRADAS=======");
                 System.out.println(repositorioSecao.listarSecoes());
                 break;
              default:

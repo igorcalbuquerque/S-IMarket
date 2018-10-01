@@ -22,11 +22,12 @@ public class ProdutoVenda {
     public void setProdutoVenda(Produto novoProduto) {
         produto= novoProduto;
     }
-
+    public double getTotal(){
+        return quantidade*getProduto().getValorVenda();
+    }
     @Override
     public String toString()
     {
-        return "Produto: " + getProduto() + "\n" +
-                "Quantidade: " + getQuantidade();
+        return "Produto: " + getProduto().toString() + "Quantidade: " + getQuantidade()+"Total : RS "+getTotal()+"\n";
     }
 }
