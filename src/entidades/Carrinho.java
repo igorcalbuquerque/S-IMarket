@@ -68,4 +68,7 @@ public class Carrinho {
             return data.toString()+"\n"+"CODIGO DA VENDA:"+getCodigo()+toStringProdutosVenda();
         }
     }
+    public ArrayList<ProdutoVenda> getCarrinho(){
+        return carrinho;
+    }
 }
