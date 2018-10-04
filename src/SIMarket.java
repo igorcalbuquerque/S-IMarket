@@ -1,14 +1,14 @@
-import dados.RepositorioSecao;
-import entidades.Secao;
+import dados.*;
+import entidades.*;
 
 import java.util.Scanner;
 
 public class SIMarket {
 
     private static RepositorioSecao repositorioSecao = new RepositorioSecao();
+    private static RepositorioProduto repositorioProduto = new RepositorioProduto();
 
-    public static void main (String[] args)
-    {
+    public static void main (String[] args){
 
         System.out.println("===========================================");
         System.out.println("===========================================");
@@ -22,16 +22,14 @@ public class SIMarket {
         menu();
     }
 
-    public static boolean login(String user, String senha)
-    {
+    public static boolean login(String user, String senha) {
         if (user.equals("igor") && senha.equals("123")){
             return true;
         }
         return false;
     }
 
-    public static void menu()
-    {
+    public static void menu(){
         Scanner entradaOpcao = new Scanner(System.in);
         int opcao;
         do{
@@ -56,7 +54,11 @@ public class SIMarket {
                 case 3:
                     subMenuSecao();
                     break;
+                case 2:
+                    subMenuProduto();
+                    break;
             }
+
 
 
         }while (opcao != 88);
@@ -124,8 +126,148 @@ public class SIMarket {
         }
 
     }
-    public static boolean chamadaLogin()
-    {
+    public static void subMenuProduto(){
+        Scanner entradaOpcao = new Scanner(System.in);
+
+        System.out.println("1 - INSERIR PRODUTO ");
+        System.out.println("2 - REMOVE PRODUTO ");
+        System.out.println("3 - LISTAR PRODUTOS");
+        System.out.println("4 - MODIFICAR PRODUTO");
+        System.out.println("88 - SAIR !!!");
+
+        System.out.print("Digite sua opcao :  \t");
+        int opcao = entradaOpcao.nextInt();
+
+        Scanner entradaCodigo = new Scanner(System.in);
+        Scanner entradaDescricao = new Scanner(System.in);
+        Scanner entradaValorCompra = new Scanner(System.in);
+        Scanner entradaValorVenda = new Scanner(System.in);
+        Scanner entradaSecao = new Scanner(System.in);
+        Scanner entradaOpcaoModificao = new Scanner(System.in);
+
+        int codigoProduto;
+        String descricao;
+        double valorCompra;
+        double valorVenda;
+        int codigoSecao;
+        Secao secao;
+        Produto produto;
+        int opcaoModificacao;
+
+        switch (opcao){
+            case 1:
+                Scanner opcaoDeCodigo = new Scanner(System.in);
+
+                System.out.println("Insira as informacoes Solicitadas !!!");
+                System.out.print("Gerar codigo Automatico? (1)SIM (2)NAO \t");
+                int opcaoCodigo = opcaoDeCodigo.nextInt();
+
+                switch (opcaoCodigo){
+
+                    case 1:
+
+                        System.out.print("Descricao :  \t");
+                        descricao = entradaDescricao.nextLine();
+                        System.out.print("Valor de Compra :  \t");
+                        valorCompra = entradaValorCompra.nextDouble();
+                        System.out.print("Valor de Venda :   \t");
+                        valorVenda = entradaValorVenda.nextDouble();
+                        System.out.print("Codigo da Secao :   \t");
+                        codigoSecao = entradaSecao.nextInt();
+                        secao = repositorioSecao.buscarSecao(codigoSecao);
+
+                        produto = new Produto(descricao,valorCompra,valorCompra,secao);
+                        repositorioProduto.adicionarProduto(produto);
+                        break;
+
+                    case 2:
+
+                        System.out.print("Codigo :  \t");
+                        codigoProduto = entradaCodigo.nextInt();
+                        System.out.print("Descricao :  \t");
+                        descricao = entradaDescricao.nextLine();
+                        System.out.print("Valor de Compra :  \t");
+                        valorCompra = entradaValorCompra.nextDouble();
+                        System.out.print("Valor de Venda :   \t");
+                        valorVenda = entradaValorVenda.nextDouble();
+                        System.out.print("Codigo da Secao :   \t");
+                        codigoSecao = entradaSecao.nextInt();
+                        secao = repositorioSecao.buscarSecao(codigoSecao);
+
+                        produto = new Produto(codigoProduto,descricao,valorCompra,valorVenda,secao);
+                        repositorioProduto.adicionarProduto(produto);
+                        break;
+                }
+                break;
+
+            case 2:
+
+                System.out.print("Insira o Codigo do produto que deseja remover :  \t");
+                codigoProduto = entradaCodigo.nextInt();
+                repositorioProduto.removerProduto(codigoProduto);
+                break;
+
+            case 3:
+
+                System.out.println(repositorioProduto.listarProdutos());
+                break;
+
+            case 4:
+
+                System.out.print("Insira o Codigo do produto que deseja Modificar :  \t");
+                codigoProduto = entradaCodigo.nextInt();
+                produto = repositorioProduto.buscarProduto(codigoProduto);
+
+                System.out.println("Informacao Atual");
+                System.out.println(produto.toString());
+
+                System.out.println("1 - MODIFICAR CODIGO ");
+                System.out.println("2 - MODIFICAR DESCRICAO");
+                System.out.println("3 - MODIFICAR VALOR COMPRA");
+                System.out.println("4 - MODIFICAR VALOR VENDA");
+                System.out.println("5 - MODIFICAR SECAO ");
+                System.out.println("88 - SAIR !!!");
+                opcaoModificacao = entradaOpcaoModificao.nextInt();
+                switch (opcaoModificacao){
+                    case 1:
+                        System.out.print("Insira o Novo Codigo :  \t");
+                        codigoProduto = entradaCodigo.nextInt();
+                        produto.setCodigoProduto(codigoProduto);
+                        break;
+                    case 2:
+                        System.out.print("Insira a Nova Descricao :  \t");
+                        descricao = entradaDescricao.nextLine();
+                        produto.setDescricao(descricao);
+                        break;
+                    case 3:
+                        System.out.print("Insira a Novo Valor de Compra :  \t");
+                        valorCompra = entradaValorCompra.nextDouble();
+                        produto.setValorCompra(valorCompra);
+                        break;
+                    case 4:
+                        System.out.print("Insira a Novo Valor de Venda :  \t");
+                        valorVenda= entradaValorCompra.nextDouble();
+                        produto.setValorVenda(valorVenda);
+                        break;
+                    case 5:
+                        System.out.print("Insira o Codigo da Nova Secao :  \t");
+                        codigoSecao= entradaSecao.nextInt();
+                        secao = repositorioSecao.buscarSecao(codigoSecao);
+                        produto.setSecao(secao);
+                        break;
+                    default:
+                        subMenuProduto();
+                        break;
+                }
+                break;
+
+             default:
+                 menu();
+                 break;
+        }
+
+    }
+    public static boolean chamadaLogin() {
         Scanner entradaUser = new Scanner(System.in);
         Scanner entradaSenha = new Scanner(System.in);
 
@@ -135,6 +277,4 @@ public class SIMarket {
         String senha = entradaSenha.nextLine();
         return login(user,senha);
     }
-
-
 }

@@ -2,22 +2,26 @@ package entidades;
 
 public class Produto {
 
+    private static int codigoAutomatico = 0;
     private int codigoProduto;
     private String descricao;
     private double valorCompra;
     private double valorVenda;
     private Secao secao;
 
-    public Produto(String descricao, double valorCompra, double valorVenda, Secao secao)
+    public Produto(int codigo,String descricao, double valorCompra, double valorVenda, Secao secao)
     {
+        setCodigoProduto(codigo);
         setDescricao(descricao);
         setValorCompra(valorCompra);
         setValorVenda(valorVenda);
         setSecao(secao);
     }
 
-    public Produto(String descricao, double valorVenda, Secao secao)
+    public Produto(String descricao,double valorCompra ,double valorVenda, Secao secao)
     {
+        codigoAutomatico++;
+        setCodigoProduto(codigoAutomatico);
         setDescricao(descricao);
         setValorCompra(valorCompra);
         setValorVenda(valorVenda);
@@ -62,7 +66,7 @@ public class Produto {
 
     @Override
     public String toString(){
-        return "Código : "+getCodigoProduto()+"Descrição: "+getDescricao()+"Valor Compra: "+getValorCompra()+"Valor Venda: " +
-                getValorVenda()+"Seção: "+getSecao().getDescricao()+ "\n";
+        return "Código : "+getCodigoProduto()+" Descrição: "+getDescricao()+" Valor Compra: "+getValorCompra()+" Valor Venda: " +
+                getValorVenda()+" Seção: "+getSecao().getDescricao()+ "\n";
     }
 }
