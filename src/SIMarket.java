@@ -129,6 +129,12 @@ public class SIMarket {
     public static void subMenuProduto(){
         Scanner entradaOpcao = new Scanner(System.in);
 
+        System.out.println("===========================================");
+        System.out.println("===========================================");
+        System.out.println("====== S & I Markets (MENU PRODUTO) =======");
+        System.out.println("===========================================");
+        System.out.println("===========================================");
+
         System.out.println("1 - INSERIR PRODUTO ");
         System.out.println("2 - REMOVE PRODUTO ");
         System.out.println("3 - LISTAR PRODUTOS");
