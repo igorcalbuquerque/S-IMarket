@@ -317,6 +317,8 @@ public class SIMarket {
 
 
 
+
+
         switch (opcao)
         {
             case 1:
@@ -352,13 +354,35 @@ public class SIMarket {
                     Endereco enderecoSalvar = new Endereco(rua, numero, bairro, cidade, cep, uf);
                     Funcionario funcionario = new Funcionario(nome, cpf, enderecoSalvar, cargo, senha);
 
-
-
+                    repositorioFuncionario.adicionarPessoa(funcionario);
                 }
+                else
+                {
+                    boolean confere = false;
+                    System.out.println("Senha Não confere!!!");
+                    while(confere == false)
+                    {
+                        System.out.println("Digite a Senha Desejada: \t");
+                        senha = entradaSenha.nextLine();
+                        System.out.println("Confirme a Senha Digitada: \t");
+                        confirmaSenha = entradaConfirmaSenha.nextLine();
 
+                        if (senha.equals(confirmaSenha))
+                        {
+                            Endereco enderecoSalvar = new Endereco(rua, numero, bairro, cidade, cep, uf);
+                            Funcionario funcionario = new Funcionario(nome, cpf, enderecoSalvar, cargo, senha);
 
+                            repositorioFuncionario.adicionarPessoa(funcionario);
+                            confere = true;
+                        }
+                    }
+                }
+            case 2:
 
+                System.out.println("Digite o CPF do Funcionário a Ser Removido: \t");
+                String cpfFuncionario = entradaCpfFuncionario.nextLine();
 
+                repositorioFuncionario.removerPessoaCpf(cpfFuncionario);
 
         }
 
