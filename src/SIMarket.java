@@ -44,6 +44,7 @@ public class SIMarket {
             System.out.println("2 - PRODUTOS");
             System.out.println("3 - SEÇÂO");
             System.out.println("4 - CLIENTES");
+            System.out.println("5 - FUNCIONARIOS");
             System.out.println("88 - SAIR !!!");
 
             System.out.printf("Digite a Opção desejada: \t");
@@ -273,6 +274,30 @@ public class SIMarket {
         }
 
     }
+    public static void subMenuFuncionario()
+    {
+        System.out.println("===========================================");
+        System.out.println("===========================================");
+        System.out.println("==== S & I Markets (MENU FUNCIONARIO) =====");
+        System.out.println("===========================================");
+        System.out.println("===========================================");
+
+        System.out.println("1 - INSERIR FUNCIONARIO ");
+        System.out.println("2 - REMOVE FUNCIONARIO ");
+        System.out.println("3 - LISTAR FUNCIONARIO");
+        System.out.println("4 - MODIFICAR FUNCIONARIO");
+        System.out.println("88 - SAIR !!!");
+
+        Scanner entradaOpcao = new Scanner (System.in);
+
+        System.out.print("Digite sua opcao :  \t");
+        int opcao = entradaOpcao.nextInt();
+
+
+
+
+    }
+
     public static boolean chamadaLogin() {
         Scanner entradaUser = new Scanner(System.in);
         Scanner entradaSenha = new Scanner(System.in);
