@@ -7,7 +7,7 @@ public class ProdutoEstoque {
 
     public ProdutoEstoque(Produto prod, double quant){
         produto = prod;
-        quantidade = quant;
+       quantidade = quant;
     }
     public ProdutoEstoque(Produto prod){
         produto = prod;
@@ -27,6 +27,6 @@ public class ProdutoEstoque {
     }
     @Override
     public String toString(){
-        return produto.toString()+"Quantidade : "+quantidade;
+        return produto.toString() + " Quantidade : "+quantidade;
     }
 }

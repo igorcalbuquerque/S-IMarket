@@ -57,12 +57,11 @@ public class Endereco {
     @Override
     public String toString()
     {
-        return "Endereço:" +
-                "Rua: " + getRua() + "\n" +
+        return "Rua: " + getRua() + "\n" +
                 "Numero: "+getNumero()+
                 "Bairro: " + getBairro() + "\n" +
                 "Cidade: " + getCidade() + "\n" +
                 "CEP: " + getCep() + "\n" +
-                "UF: "  + getUf();
+                "UF: "  + getUf()+"\n";
     }
 }

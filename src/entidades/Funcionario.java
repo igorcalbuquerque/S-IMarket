@@ -3,10 +3,18 @@ package entidades;
 public class Funcionario extends Pessoa {
 
     private String cargo;
+    private String login;
     private String senha;
 
-    public Funcionario(String nome, String cpf, Endereco endereco, String cargo, String senha) {
+    public Funcionario(String nome, String cpf, Endereco endereco, String cargo, String login, String senha) {
         super(nome, cpf, endereco);
+        setLogin(login);
+        setCargo(cargo);
+        setSenha(senha);
+    }
+    public Funcionario(String nome, String cpf, Endereco endereco, String cargo,String senha) {
+        super(nome, cpf, endereco);
+        setLogin(cpf);
         setCargo(cargo);
         setSenha(senha);
     }
@@ -27,15 +35,12 @@ public class Funcionario extends Pessoa {
     {
         this.senha = senha;
     }
-
+    public String getLogin(){return this.login;}
+    public void setLogin(String login){this.login = login;}
 
     @Override
     public String toString()
     {
-        return "Funcionario" + "\n" +
-                "Nome: " + getNome() + "\n" +
-                "CPF: " + getCpf()  + "\n" +
-                getEndereco();
+        return "Nome: " + getNome() + " RG : "+getRg()+" CPF: " + getCpf()  + "\n"+getEndereco().toString();
     }
-
 }

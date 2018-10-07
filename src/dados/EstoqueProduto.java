@@ -18,6 +18,10 @@ public class EstoqueProduto {
         ProdutoEstoque produtoEstoque = new ProdutoEstoque(produto,quantidade);
         estoque.add(produtoEstoque);
     }
+    public void adicionarProduto(Produto produto){
+        ProdutoEstoque produtoEstoque = new ProdutoEstoque(produto);
+        estoque.add(produtoEstoque);
+    }
     public void decrementar(Carrinho carrinho){
         for(ProdutoVenda produtoVenda:carrinho.getCarrinho()){
 

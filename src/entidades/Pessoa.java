@@ -3,6 +3,7 @@ package entidades;
 public abstract class Pessoa {
 
     private String nome;
+    private String rg;
     private String cpf;
     private Endereco endereco;
 
@@ -21,6 +22,8 @@ public abstract class Pessoa {
     {
         this.nome = nome;
     }
+    public String getRg(){return this.rg;}
+    public void setRg(String rg){this.rg = rg;}
     public String getCpf()
     {
         return cpf;
@@ -34,6 +37,4 @@ public abstract class Pessoa {
     {
         return endereco;
     }
-
-
 }
