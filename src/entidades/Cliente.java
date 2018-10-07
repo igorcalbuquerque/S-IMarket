@@ -5,8 +5,8 @@ public class Cliente extends Pessoa {
     private String telefone;
     private String email;
 
-    public Cliente(String nome, String cpf, Endereco endereco) {
-        super(nome, cpf, endereco);
+    public Cliente(String nome, String rg,String cpf, Endereco endereco) {
+        super(nome, rg, cpf, endereco);
     }
 
     public String getTelefone()

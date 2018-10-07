@@ -352,7 +352,7 @@ public class SIMarket {
                 if (senha.equals(confirmaSenha))
                 {
                     Endereco enderecoSalvar = new Endereco(rua, numero, bairro, cidade, cep, uf);
-                    Funcionario funcionario = new Funcionario(nome, cpf, enderecoSalvar, cargo, senha);
+                    Funcionario funcionario = new Funcionario(nome, rg,cpf, enderecoSalvar, cargo, senha);
 
                     repositorioFuncionario.adicionarPessoa(funcionario);
                 }
@@ -370,21 +370,36 @@ public class SIMarket {
                         if (senha.equals(confirmaSenha))
                         {
                             Endereco enderecoSalvar = new Endereco(rua, numero, bairro, cidade, cep, uf);
-                            Funcionario funcionario = new Funcionario(nome, cpf, enderecoSalvar, cargo, senha);
+                            Funcionario funcionario = new Funcionario(nome, rg, cpf, enderecoSalvar, cargo, senha);
 
                             repositorioFuncionario.adicionarPessoa(funcionario);
                             confere = true;
                         }
                     }
+
                 }
+                menu();
+                break;
+
             case 2:
 
                 System.out.println("Digite o CPF do Funcionário a Ser Removido: \t");
                 String cpfFuncionario = entradaCpfFuncionario.nextLine();
-
                 repositorioFuncionario.removerPessoaCpf(cpfFuncionario);
+                menu();
+                break;
 
+            case 3:
+                System.out.println("==========================================");
+                System.out.println("==========================================");
+                System.out.println("========== LISTA DE FUNCIONÁRIOS =========");
+                System.out.println("==========================================");
+                System.out.println("==========================================");
+                System.out.println(repositorioFuncionario.listarFucionarios());
+                menu();
+                break;
         }
+
 
 
 
