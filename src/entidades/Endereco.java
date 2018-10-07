@@ -58,7 +58,7 @@ public class Endereco {
     public String toString()
     {
         return "Rua: " + getRua() + "\n" +
-                "Numero: "+getNumero()+
+                "Numero: "+getNumero()+ "\n"+
                 "Bairro: " + getBairro() + "\n" +
                 "Cidade: " + getCidade() + "\n" +
                 "CEP: " + getCep() + "\n" +
