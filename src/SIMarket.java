@@ -7,6 +7,8 @@ public class SIMarket {
 
     private static RepositorioSecao repositorioSecao = new RepositorioSecao();
     private static RepositorioProduto repositorioProduto = new RepositorioProduto();
+    private static RepositorioPessoa repositorioPessoa = new RepositorioPessoa();
+
 
     public static void main (String[] args){
 
@@ -52,12 +54,16 @@ public class SIMarket {
 
             switch (opcao)
             {
-                case 3:
-                    subMenuSecao();
-                    break;
                 case 2:
                     subMenuProduto();
                     break;
+                case 3:
+                    subMenuSecao();
+                    break;
+                case 5:
+                    subMenuFuncionario();
+                    break;
+
             }
 
 
@@ -292,6 +298,70 @@ public class SIMarket {
 
         System.out.print("Digite sua opcao :  \t");
         int opcao = entradaOpcao.nextInt();
+
+        Scanner entradaNomeFuncionario = new Scanner(System.in);
+        Scanner entradaCpfFuncionario = new Scanner(System.in);
+        Scanner entradargFuncionario = new Scanner(System.in);
+        Scanner entradaEndereco = new Scanner(System.in);
+        Scanner entradaCargo = new Scanner(System.in);
+        Scanner entradaLogin = new Scanner(System.in);
+        Scanner entradaSenha = new Scanner(System.in);
+        Scanner entradaConfirmaSenha = new Scanner(System.in);
+
+        String nome;
+        String cpf;
+        String rg;
+        Endereco endereco;
+        String cargo;
+        String login;
+        String senha;
+
+
+
+        switch (opcao)
+        {
+            case 1:
+                System.out.println("Digite o Nome do Funcionário: \t");
+                nome = entradaNomeFuncionario.nextLine();
+                System.out.println("Digite o CPF do Funcionário: \t");
+                cpf = entradaCpfFuncionario.nextLine();
+                System.out.println("Digite o RG do Funcionário: \t");
+                rg = entradargFuncionario.nextLine();
+                System.out.println("Digite o nome da Rua: \t");
+                String rua = entradaEndereco.nextLine();
+                System.out.println("Digite o nome do Bairro: \t");
+                String bairro = entradaEndereco.nextLine();
+                System.out.println("Digite o número da casa: \t");
+                String numero = entradaEndereco.nextLine();
+                System.out.println("Digite o nome da Cidade: \t");
+                String cidade = entradaEndereco.nextLine();
+                System.out.println("Digite o número do CEP: \t");
+                String cep = entradaEndereco.nextLine();
+                System.out.println("Digite o nome da UF: \t");
+                String uf = entradaEndereco.nextLine();
+                System.out.println("Digite o Cargo do Funcionário: \t");
+                cargo = entradaCargo.nextLine();
+                System.out.println("Digite o Login (OPCIONAL): \t");
+                login = entradaLogin.nextLine();
+                System.out.println("Digite a Senha Desejada: \t");
+                senha = entradaSenha.nextLine();
+                System.out.println("Confirme a Senha Digitada: \t");
+                String confirmaSenha = entradaConfirmaSenha.nextLine();
+
+                if (senha.equals(confirmaSenha))
+                {
+                    Endereco enderecoSalvar = new Endereco(rua, numero, bairro, cidade, cep, uf);
+                    Funcionario funcionario = new Funcionario(nome, cpf, enderecoSalvar, cargo, senha);
+
+
+
+                }
+
+
+
+
+
+        }
 
 
 
