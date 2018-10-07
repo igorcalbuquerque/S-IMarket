@@ -5,7 +5,7 @@ import entidades.Pessoa;
 
 public abstract class RepositorioPessoa {
 
-    private ArrayList<Pessoa> pessoas;
+    protected ArrayList<Pessoa> pessoas;
 
     public RepositorioPessoa(){
         this.pessoas = new ArrayList<Pessoa>();

@@ -7,10 +7,9 @@ public class SIMarket {
 
     private static RepositorioSecao repositorioSecao = new RepositorioSecao();
     private static RepositorioProduto repositorioProduto = new RepositorioProduto();
-    private static RepositorioPessoa repositorioPessoa = new RepositorioPessoa();
+    private static RepositorioFuncionario repositorioFuncionario = new RepositorioFuncionario();
 
-
-    public static void main (String[] args){
+    public static void main(String[] args){
 
         System.out.println("===========================================");
         System.out.println("===========================================");
