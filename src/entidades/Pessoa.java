@@ -2,14 +2,15 @@ package entidades;
 
 public abstract class Pessoa {
 
-    private String nome;
-    private String rg;
-    private String cpf;
-    private Endereco endereco;
+    protected String nome;
+    protected String rg;
+    protected String cpf;
+    protected Endereco endereco;
 
-    public Pessoa(String nome, String cpf, Endereco endereco)
+    public Pessoa(String nome, String rg,String cpf, Endereco endereco)
     {
         setNome(nome);
+        setRg(rg);
         setCpf(cpf);
         this.endereco = endereco;
     }
