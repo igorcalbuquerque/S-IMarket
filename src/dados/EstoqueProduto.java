@@ -1,9 +1,6 @@
 package dados;
 
-import entidades.ProdutoEstoque;
-import entidades.Produto;
-import entidades.Carrinho;
-import entidades.ProdutoVenda;
+import entidades.*;
 
 import java.util.ArrayList;
 
@@ -60,5 +57,15 @@ public class EstoqueProduto {
             lista+=produtoEstoque.toString();
         }
         return lista;
+    }
+    public void incrementar(NotaFiscal nota){
+        for(ProdutoVenda produtoVenda:nota.getNota()){
+            for(ProdutoEstoque produtoEstoque:this.estoque){
+                if(produtoVenda.getProduto().getCodigoProduto() == produtoEstoque.getProduto().getCodigoProduto()||
+                   produtoVenda.getProduto().getCodigoBarra() == produtoEstoque.getProduto().getCodigoBarra()){
+                    produtoEstoque.incrementar(produtoVenda.getQuantidade());
+                }
+            }
+        }
     }
 }

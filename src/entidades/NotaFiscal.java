@@ -38,7 +38,7 @@ public class NotaFiscal {
     public void setSerie(int serie){this.serie = serie;}
     public Fornecedor getFornecedor(){return this.fornecedor;}
     public void setFornecedor(Fornecedor fornecedor){this.fornecedor = fornecedor;}
-
+    public ArrayList<ProdutoVenda> getNota(){return this.nota;}
     public String toString(){
         String str = "Numero : "+getNumero()+"Serie : "+getSerie()+"\n"+fornecedor.toString();
         double total = 0;

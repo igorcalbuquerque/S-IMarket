@@ -16,4 +16,23 @@ public class RepositorioFornecedor {
         }
         return null;
     }
+    public void adicionarFornecedor(Fornecedor fornecedor){
+        fornecedores.add(fornecedor);
+    }
+    public void removerFornecedor(int codigo){
+        Fornecedor fornecedor = buscarFornecedor(codigo);
+        if(fornecedor!= null){
+            fornecedores.remove(fornecedor);
+        }
+        else{
+            System.out.println("Fornecedor nao encontrado!!!");
+        }
+    }
+    public String listarFornecedor(){
+        String lista = "";
+        for(Fornecedor fornecedor:this.fornecedores){
+            lista+=fornecedor.toString();
+        }
+        return lista;
+    }
 }
