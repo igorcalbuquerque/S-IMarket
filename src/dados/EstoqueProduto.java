@@ -1,7 +1,6 @@
 package dados;
 
 import entidades.*;
-
 import java.util.ArrayList;
 
 public class EstoqueProduto {

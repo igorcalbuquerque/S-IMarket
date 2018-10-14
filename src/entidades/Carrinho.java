@@ -27,7 +27,7 @@ public class Carrinho {
     public int getProximoCodigoDaVenda(){ return codigoDaVenda++; }
 
     public void adicionarItem(Produto produto, double quantidade){
-        ProdutoVenda produtoVenda = new ProdutoVenda(quantidade,produto);
+        ProdutoVenda produtoVenda = new ProdutoVenda(produto, quantidade);
         carrinho.add(produtoVenda);
         getValorTotal();
     }

@@ -25,8 +25,7 @@ public class ProdutoVenda extends ProdutoEstoque{
     public double getValorCompra(){return this.valorCompra;}
     public double getValorVenda(){return this.valorVenda;}
     @Override
-    public String toString()
-    {
+    public String toString(){
         return "Codigo Barra: "+produto.getCodigoBarra()+"\nDescricao : "+produto.getDescricao()+"\nQuantidade: "+getQuantidade()+
                "\nValor Venda : "+produto.getValorVenda()+"\nTotal : RS "+getTotal()+"\n";
     }
