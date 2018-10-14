@@ -2,16 +2,16 @@ package entidades;
 
 public class ProdutoEstoque {
 
-    private Produto produto;
-    private double quantidade;
+    protected Produto produto;
+    protected double quantidade;
 
     public ProdutoEstoque(Produto prod, double quant){
-        produto = prod;
-       quantidade = quant;
+        this.produto = prod;
+        this.quantidade = quant;
     }
     public ProdutoEstoque(Produto prod){
-        produto = prod;
-        quantidade = 0;
+        this.produto = prod;
+        this.quantidade = 0;
     }
     public Produto getProduto(){
         return produto;
@@ -27,6 +27,6 @@ public class ProdutoEstoque {
     }
     @Override
     public String toString(){
-        return produto.toString() + " Quantidade : "+quantidade;
+        return produto.toString() + "Quantidade : "+quantidade+"\n";
     }
 }

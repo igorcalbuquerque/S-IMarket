@@ -1,44 +1,33 @@
 package entidades;
 
-public class ProdutoVenda {
+public class ProdutoVenda extends ProdutoEstoque{
 
-    private Produto produto;
-    private double quantidade;
     private double valorCompra;
     private double valorVenda;
 
-    public ProdutoVenda(Double quant,Produto p){
-        setQuantidade(quant);
-        setProduto(p);
+    public ProdutoVenda(Produto produto,double quant){
+        super(produto,quant);
+        this.valorCompra = produto.getValorCompra();
+        this.valorVenda = produto.getValorVenda();
+    }
+    public ProdutoVenda(Produto produto,double valorCompra,double valorVenda,double quant){
+        super(produto,quant);
+        this.valorCompra = valorCompra;
+        this.valorVenda = valorVenda;
+    }
 
-    }
-    public double getQuantidade(){
-        return quantidade;
-    }
     public void setQuantidade(double quant){
         quantidade = quant;
-    }
-    public Produto getProduto(){
-        return produto;
-    }
-    public void setProduto(Produto p ){
-        produto = p;
-    }
-    public void setProdutoVenda(Produto novoProduto) {
-        produto= novoProduto;
     }
     public double getTotal(){
         return quantidade*getProduto().getValorVenda();
     }
-    public double getValorCompra(){return valorCompra;}
-    public void setValorCompra(double valorCompra){this.valorCompra = valorCompra;}
-    public double getValorVenda(){return valorVenda;}
-    public void getValorVenda(double ValorVenda){this.valorVenda = ValorVenda;}
-
+    public double getValorCompra(){return this.valorCompra;}
+    public double getValorVenda(){return this.valorVenda;}
     @Override
     public String toString()
     {
-        return "Produto: " + getProduto().toString() + " Quantidade: " + getQuantidade()+" valorCompra : "+produto.getValorCompra()+
-                " Total : RS "+getTotal()+"\n";
+        return "Codigo Barra: "+produto.getCodigoBarra()+"\nDescricao : "+produto.getDescricao()+"\nQuantidade: "+getQuantidade()+
+               "\nValor Venda : "+produto.getValorVenda()+"\nTotal : RS "+getTotal()+"\n";
     }
 }

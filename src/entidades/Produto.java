@@ -1,26 +1,27 @@
 package entidades;
 
-public class Produto {
+public class    Produto {
 
     private static int codigoAutomatico = 0;
     private int codigoProduto;
+    private int codigoBarra;
     private String descricao;
     private double valorCompra;
     private double valorVenda;
     private Secao secao;
 
-    public Produto(int codigo,String descricao, double valorCompra, double valorVenda, Secao secao)
-    {
+    public Produto(int codigo,int codigoBarra,String descricao, double valorCompra, double valorVenda, Secao secao){
         setCodigoProduto(codigo);
+        setCodigoBarra(codigoBarra);
         setDescricao(descricao);
         setValorCompra(valorCompra);
         setValorVenda(valorVenda);
         setSecao(secao);
     }
 
-    public Produto(String descricao,double valorCompra ,double valorVenda, Secao secao)
-    {
+    public Produto(int codigoBarra,String descricao,double valorCompra ,double valorVenda, Secao secao){
         codigoAutomatico++;
+        setCodigoBarra(codigoBarra);
         setCodigoProduto(codigoAutomatico);
         setDescricao(descricao);
         setValorCompra(valorCompra);
@@ -31,6 +32,8 @@ public class Produto {
     public void setCodigoProduto(int novoCodigo){
         codigoProduto = novoCodigo;
     }
+    public int getCodigoBarra(){return this.codigoProduto;}
+    public void setCodigoBarra(int novoCodigo){this.codigoBarra = novoCodigo;}
     public String getDescricao()
     {
         return descricao;
@@ -66,7 +69,7 @@ public class Produto {
 
     @Override
     public String toString(){
-        return "Código : "+getCodigoProduto()+" Descrição: "+getDescricao()+" Valor Compra: "+getValorCompra()+" Valor Venda: " +
-                getValorVenda()+" Seção: "+getSecao().getDescricao()+ "\n";
+        return "Código Interno: "+getCodigoProduto()+"\nCódigo Barra: "+getCodigoBarra()+"\nDescrição: "+getDescricao()+
+                "\nValor Compra: "+getValorCompra()+"\nValor Venda: "+getValorVenda()+"\nSeção: "+getSecao().getDescricao()+"\n";
     }
 }

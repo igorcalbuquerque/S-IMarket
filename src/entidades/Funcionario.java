@@ -6,7 +6,7 @@ public class Funcionario extends Pessoa {
     private String login;
     private String senha;
 
-    public Funcionario(String nome, String rg,String cpf, Endereco endereco, String cargo, String login, String senha) {
+    public Funcionario(String nome, String rg,String cpf, Endereco endereco, String cargo, String login, String senha){
         super(nome, rg,cpf, endereco);
         setLogin(login);
         setCargo(cargo);

@@ -19,14 +19,19 @@ public class EstoqueProduto {
         estoque.add(produtoEstoque);
     }
     public void adicionarProduto(Produto produto){
-        ProdutoEstoque produtoEstoque = new ProdutoEstoque(produto);
-        estoque.add(produtoEstoque);
+        if(produto != null){
+            ProdutoEstoque produtoEstoque = new ProdutoEstoque(produto);
+            estoque.add(produtoEstoque);
+        }
+        else{
+            System.out.println("O Produto solicitado nao existe!!!");
+        }
     }
     public void decrementar(Carrinho carrinho){
         for(ProdutoVenda produtoVenda:carrinho.getCarrinho()){
 
             for(ProdutoEstoque produtoEstoque:estoque){
-                if(produtoVenda.getProduto().getCodigoProduto() == produtoEstoque.getProduto().getCodigoProduto()){
+                if(produtoVenda.getProduto().getCodigoBarra() == produtoEstoque.getProduto().getCodigoBarra()){
                     produtoEstoque.decrementar(produtoVenda.getQuantidade());
                 }
             }
@@ -43,7 +48,7 @@ public class EstoqueProduto {
     }
     public ProdutoEstoque buscarProduto(int codigo){
         for(ProdutoEstoque produtoEstoque: estoque){
-            if (produtoEstoque.getProduto().getCodigoProduto() == codigo){
+            if (produtoEstoque.getProduto().getCodigoProduto() == codigo||produtoEstoque.getProduto().getCodigoBarra() == codigo){
                 return produtoEstoque;
             }
         }
