@@ -44,7 +44,15 @@ public class EstoqueProduto {
     }
     public ProdutoEstoque buscarProduto(int codigo){
         for(ProdutoEstoque produtoEstoque: estoque){
-            if (produtoEstoque.getProduto().getCodigoProduto() == codigo||produtoEstoque.getProduto().getCodigoBarra() == codigo){
+            if (produtoEstoque.getProduto().getCodigoProduto() == codigo){
+                return produtoEstoque;
+            }
+        }
+        return null;
+    }
+    public ProdutoEstoque buscarProduto(String codigo){
+        for(ProdutoEstoque produtoEstoque: estoque){
+            if (produtoEstoque.getProduto().getCodigoBarra().equals(codigo)){
                 return produtoEstoque;
             }
         }
@@ -58,13 +66,13 @@ public class EstoqueProduto {
         return lista;
     }
     public void incrementar(NotaFiscal nota){
-        for(ProdutoVenda produtoVenda:nota.getNota()){
+        for(ProdutoNotaFiscal produto:nota.getNota()){
             for(ProdutoEstoque produtoEstoque:this.estoque){
-                if(produtoVenda.getProduto().getCodigoProduto() == produtoEstoque.getProduto().getCodigoProduto()||
-                   produtoVenda.getProduto().getCodigoBarra() == produtoEstoque.getProduto().getCodigoBarra()){
-                    produtoEstoque.incrementar(produtoVenda.getQuantidade());
+                if(produto.getProduto().getCodigoProduto() == produtoEstoque.getProduto().getCodigoProduto()){
+                    produtoEstoque.incrementar(produto.getQuantidade());
                 }
             }
         }
     }
+
 }

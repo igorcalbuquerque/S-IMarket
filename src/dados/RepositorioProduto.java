@@ -9,6 +9,7 @@ public class RepositorioProduto {
     private ArrayList<Produto> produtos;
 
     public RepositorioProduto(){
+
         this.produtos = new ArrayList<Produto>();
     }
     public void adicionarProduto(Produto produto){

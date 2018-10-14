@@ -9,31 +9,39 @@ public class NotaFiscal {
     private String dataEmissao;
     private Calendar dataEntrada;
     private Fornecedor fornecedor;
-    private ArrayList<ProdutoVenda> nota;
+    private ArrayList<ProdutoNotaFiscal> nota;
     public NotaFiscal(int numero, int serie,String dataEmissao,Fornecedor fornecedor){
         this.numero = numero;
         this.serie = serie;
         this.dataEmissao = dataEmissao;
         this.dataEntrada = Calendar.getInstance();
         this.fornecedor = fornecedor;
-        this.nota = new ArrayList<ProdutoVenda>();
+        this.nota = new ArrayList<ProdutoNotaFiscal>();
     }
-    public void adicionarProduto(Produto produto,double valorCompra,double valorVenda, double quantidade){
-        ProdutoVenda produtoVenda = new ProdutoVenda(produto,valorCompra,valorVenda,quantidade);
-        nota.add(produtoVenda);
+    public void adicionarProduto(Produto produto,double valorCompra, double quantidade){
+        ProdutoNotaFiscal produtoNotaFiscal = new ProdutoNotaFiscal(produto,valorCompra,quantidade);
+        nota.add(produtoNotaFiscal);
     }
     public void removerProduto(int codigo){
-        ProdutoVenda produtoVenda = buscarProduto(codigo);
+        ProdutoNotaFiscal produtoVenda = buscarProduto(codigo);
         if(produtoVenda !=null){
             nota.remove(produtoVenda);
         }else{
             System.out.println("Produto nao contido nesta nota!!!");
         }
     }
-    private ProdutoVenda buscarProduto(int codigo){
-        for(ProdutoVenda produtoVenda:this.nota){
-            if(produtoVenda.getProduto().getCodigoProduto() == codigo||produtoVenda.getProduto().getCodigoBarra() == codigo){
-                return produtoVenda;
+    private ProdutoNotaFiscal buscarProduto(int codigo){
+        for(ProdutoNotaFiscal produto:this.nota){
+            if(produto.getProduto().getCodigoProduto() == codigo){
+                return produto;
+            }
+        }
+        return null;
+    }
+    private ProdutoNotaFiscal buscarProduto(String codigo){
+        for(ProdutoNotaFiscal produto:this.nota){
+            if(produto.getProduto().getCodigoBarra().equals(codigo)){
+                return produto;
             }
         }
         return null;
@@ -44,14 +52,14 @@ public class NotaFiscal {
     public void setSerie(int serie){this.serie = serie;}
     public Fornecedor getFornecedor(){return this.fornecedor;}
     public void setFornecedor(Fornecedor fornecedor){this.fornecedor = fornecedor;}
-    public ArrayList<ProdutoVenda> getNota(){return this.nota;}
+    public ArrayList<ProdutoNotaFiscal> getNota(){return this.nota;}
     public String getDataEmissao(){return this.dataEmissao;}
     public void setDataEmissao(String data){this.dataEmissao = data;}
     public Calendar getDataEntrada(){return this.dataEntrada;}
     public double getTotal(){
         double total = 0;
-        for(ProdutoVenda produtoVenda:this.nota){
-            total += produtoVenda.getTotal();
+        for(ProdutoNotaFiscal produto:this.nota){
+            total += produto.getTotal();
         }
         return total;
     }
@@ -60,9 +68,9 @@ public class NotaFiscal {
                fornecedor.toString();
         double total = 0;
 
-        for(ProdutoVenda produtoVenda:this.nota){
-            str += produtoVenda.toString();
-            total += produtoVenda.getTotal();
+        for(ProdutoNotaFiscal produto:this.nota){
+            str += produto.toString();
+            total += produto.getTotal();
         }
         str += "\nTOTAL : "+total;
         return str;

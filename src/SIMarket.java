@@ -5,9 +5,14 @@ import java.util.Scanner;
 
 public class SIMarket {
 
-    private static RepositorioSecao repositorioSecao = new RepositorioSecao();
-    private static RepositorioProduto repositorioProduto = new RepositorioProduto();
+    private static EstoqueProduto estoque = new EstoqueProduto();
+    private static RepositorioCliente clientes = new RepositorioCliente();
+    private static RepositorioFornecedor fornecedores = new RepositorioFornecedor();
     private static RepositorioFuncionario repositorioFuncionario = new RepositorioFuncionario();
+    private static RepositorioNotas notas = new RepositorioNotas();
+    private static RepositorioProduto repositorioProduto = new RepositorioProduto();
+    private static RepositorioSecao repositorioSecao = new RepositorioSecao();
+    private static RepositorioVenda vendas = new RepositorioVenda();
 
     public static void main(String[] args){
 
@@ -46,13 +51,14 @@ public class SIMarket {
             System.out.println("3 - SEÇÂO");
             System.out.println("4 - CLIENTES");
             System.out.println("5 - FUNCIONARIOS");
+            System.out.println("6 - ESTOQUE ");
+            System.out.println("7 - FORNECEDORES");
             System.out.println("88 - SAIR !!!");
 
-            System.out.printf("Digite a Opção desejada: \t");
+            System.out.print("Digite a Opção desejada: \t");
             opcao = entradaOpcao.nextInt();
 
-            switch (opcao)
-            {
+            switch (opcao){
                 case 2:
                     subMenuProduto();
                     break;
@@ -62,6 +68,9 @@ public class SIMarket {
                 case 5:
                     subMenuFuncionario();
                     break;
+                case 6:
+                    subMenuEstoque();
+                    break;
 
             }
 
@@ -69,6 +78,102 @@ public class SIMarket {
 
         }while (opcao != 88);
 
+    }
+    public static void subMenuEstoque(){
+        int opcao;
+        Scanner entradaOpcao = new Scanner(System.in);
+        do{
+
+            System.out.println("===========================================");
+            System.out.println("===========================================");
+            System.out.println("===== S & I Markets (MENU  ESTOQUE) =======");
+            System.out.println("===========================================");
+            System.out.println("===========================================");
+
+            System.out.println("1 - NOTA DE ENTRADA");
+            System.out.println("2 - RELATORIO DE ESTOQUE");
+            System.out.println("88 - SAIR");
+            System.out.println("Insira a opcao desejada : \t");
+            opcao = entradaOpcao.nextInt();
+
+            switch (opcao){
+                case 1:
+
+                    int opcaoNota;
+                    Scanner entradaOpcaoNota = new Scanner(System.in);
+
+                    int numero;
+                    int serie;
+                    String dataEmissao;
+                    int codigoFornecedor;
+                    Fornecedor fornecedor;
+
+                    Scanner entradaNumero = new Scanner(System.in);
+                    Scanner entradaSerie = new Scanner(System.in);
+                    Scanner entradaData = new Scanner(System.in);
+                    Scanner entradaFornecedor = new Scanner(System.in);
+
+                    System.out.print("NUMERO DA NOTA : \t");
+                    numero = entradaNumero.nextInt();
+                    System.out.print("SERIE : \t");
+                    serie = entradaSerie.nextInt();
+                    System.out.print("DATA DE EMISSAO(FORMATO 11-11-11) : \t");
+                    dataEmissao = entradaData.next();
+                    System.out.print("CODIGO FORNECEDOR : \t");
+                    codigoFornecedor = entradaFornecedor.nextInt();
+                    fornecedor = fornecedores.buscarFornecedor(codigoFornecedor);
+                    if(fornecedor == null){
+                        while(fornecedor == null){
+                            System.out.print("CODIGO FORNECEDOR : \t");
+                            codigoFornecedor = entradaFornecedor.nextInt();
+                            fornecedor = fornecedores.buscarFornecedor(codigoFornecedor);
+                        }
+                    }
+                    NotaFiscal nota = new NotaFiscal(numero,serie,dataEmissao,fornecedor);
+
+                    int codigoProduto;
+                    Produto produto;
+                    double valorCompra;
+                    double quantidade;
+
+                    Scanner entradaCodigoProduto = new Scanner(System.in);
+                    Scanner entradaQuantidade = new Scanner(System.in);
+                    Scanner entradaValorCompra = new Scanner(System.in);
+
+                    do{
+                        System.out.print("INSIRA O CODIGO DO PRODUTO : \t");
+                        codigoProduto = entradaCodigoProduto.nextInt();
+                        produto = repositorioProduto.buscarProduto(codigoProduto);
+
+                        if(produto == null){
+                            while(produto==null){
+                                System.out.print("INSIRA O CODIGO DO PRODUTO : \t");
+                                codigoProduto = entradaCodigoProduto.nextInt();
+                                produto = repositorioProduto.buscarProduto(codigoProduto);
+                            }
+                        }
+
+                        System.out.print("INSIRA O VALOR DE COMPRA : \t");
+                        valorCompra = entradaValorCompra.nextDouble();
+                        System.out.print("INSIRA QUANTIDADE : \t");
+                        quantidade = entradaQuantidade.nextDouble();
+
+                        ProdutoNotaFiscal produtoNotaFiscal = new ProdutoNotaFiscal(produto,valorCompra,quantidade);
+                        System.out.println("88 - FINALIZAR NOTA E SAIR ");
+
+                    }while(opcao != 88);
+                    estoque.incrementar(nota);
+                    notas.adicionarNotas(nota);
+                    subMenuEstoque();
+                    break;
+                case 2:
+                    System.out.println(estoque.listarEstoque());
+                    subMenuEstoque();
+                    break;
+            }
+
+        }while(opcao!=88);
+        menu();
     }
     public static void subMenuSecao(){
 
@@ -151,6 +256,7 @@ public class SIMarket {
         int opcao = entradaOpcao.nextInt();
 
         Scanner entradaCodigo = new Scanner(System.in);
+        Scanner entradaCodigoBarra = new Scanner(System.in);
         Scanner entradaDescricao = new Scanner(System.in);
         Scanner entradaValorCompra = new Scanner(System.in);
         Scanner entradaValorVenda = new Scanner(System.in);
@@ -158,6 +264,7 @@ public class SIMarket {
         Scanner entradaOpcaoModificao = new Scanner(System.in);
 
         int codigoProduto;
+        String codigoBarra;
         String descricao;
         double valorCompra;
         double valorVenda;
@@ -177,7 +284,8 @@ public class SIMarket {
                 switch (opcaoCodigo){
 
                     case 1:
-
+                        System.out.print("Codigo Barra :  \t");
+                        codigoBarra = entradaCodigoBarra.nextLine();
                         System.out.print("Descricao :  \t");
                         descricao = entradaDescricao.nextLine();
                         System.out.print("Valor de Compra :  \t");
@@ -188,7 +296,7 @@ public class SIMarket {
                         codigoSecao = entradaSecao.nextInt();
                         secao = repositorioSecao.buscarSecao(codigoSecao);
 
-                        produto = new Produto(descricao,valorCompra,valorCompra,secao);
+                        produto = new Produto(codigoBarra,descricao,valorCompra,valorVenda,secao);
                         repositorioProduto.adicionarProduto(produto);
                         break;
 
@@ -196,6 +304,8 @@ public class SIMarket {
 
                         System.out.print("Codigo :  \t");
                         codigoProduto = entradaCodigo.nextInt();
+                        System.out.print("Codigo Barra :  \t");
+                        codigoBarra = entradaCodigoBarra.nextLine();
                         System.out.print("Descricao :  \t");
                         descricao = entradaDescricao.nextLine();
                         System.out.print("Valor de Compra :  \t");
@@ -206,7 +316,7 @@ public class SIMarket {
                         codigoSecao = entradaSecao.nextInt();
                         secao = repositorioSecao.buscarSecao(codigoSecao);
 
-                        produto = new Produto(codigoProduto,descricao,valorCompra,valorVenda,secao);
+                        produto = new Produto(codigoProduto,codigoBarra,descricao,valorCompra,valorVenda,secao);
                         repositorioProduto.adicionarProduto(produto);
                         break;
                 }
@@ -279,8 +389,7 @@ public class SIMarket {
         }
 
     }
-    public static void subMenuFuncionario()
-    {
+    public static void subMenuFuncionario(){
         System.out.println("===========================================");
         System.out.println("===========================================");
         System.out.println("==== S & I Markets (MENU FUNCIONARIO) =====");
@@ -322,31 +431,31 @@ public class SIMarket {
         switch (opcao)
         {
             case 1:
-                System.out.println("Digite o Nome do Funcionário: \t");
+                System.out.print("Digite o Nome do Funcionário: \t");
                 nome = entradaNomeFuncionario.nextLine();
-                System.out.println("Digite o CPF do Funcionário: \t");
+                System.out.print("Digite o CPF do Funcionário: \t");
                 cpf = entradaCpfFuncionario.nextLine();
-                System.out.println("Digite o RG do Funcionário: \t");
+                System.out.print("Digite o RG do Funcionário: \t");
                 rg = entradargFuncionario.nextLine();
-                System.out.println("Digite o nome da Rua: \t");
+                System.out.print("Digite o nome da Rua: \t");
                 String rua = entradaEndereco.nextLine();
-                System.out.println("Digite o nome do Bairro: \t");
+                System.out.print("Digite o nome do Bairro: \t");
                 String bairro = entradaEndereco.nextLine();
-                System.out.println("Digite o número da casa: \t");
+                System.out.print("Digite o número da casa: \t");
                 String numero = entradaEndereco.nextLine();
-                System.out.println("Digite o nome da Cidade: \t");
+                System.out.print("Digite o nome da Cidade: \t");
                 String cidade = entradaEndereco.nextLine();
-                System.out.println("Digite o número do CEP: \t");
+                System.out.print("Digite o número do CEP: \t");
                 String cep = entradaEndereco.nextLine();
-                System.out.println("Digite o nome da UF: \t");
+                System.out.print("Digite o nome da UF: \t");
                 String uf = entradaEndereco.nextLine();
-                System.out.println("Digite o Cargo do Funcionário: \t");
+                System.out.print("Digite o Cargo do Funcionário: \t");
                 cargo = entradaCargo.nextLine();
-                System.out.println("Digite o Login (OPCIONAL): \t");
+                System.out.print("Digite o Login (OPCIONAL): \t");
                 login = entradaLogin.nextLine();
-                System.out.println("Digite a Senha Desejada: \t");
+                System.out.print("Digite a Senha Desejada: \t");
                 senha = entradaSenha.nextLine();
-                System.out.println("Confirme a Senha Digitada: \t");
+                System.out.print("Confirme a Senha Digitada: \t");
                 String confirmaSenha = entradaConfirmaSenha.nextLine();
 
                 if (senha.equals(confirmaSenha))
@@ -362,9 +471,9 @@ public class SIMarket {
                     System.out.println("Senha Não confere!!!");
                     while(confere == false)
                     {
-                        System.out.println("Digite a Senha Desejada: \t");
+                        System.out.print("Digite a Senha Desejada: \t");
                         senha = entradaSenha.nextLine();
-                        System.out.println("Confirme a Senha Digitada: \t");
+                        System.out.print("Confirme a Senha Digitada: \t");
                         confirmaSenha = entradaConfirmaSenha.nextLine();
 
                         if (senha.equals(confirmaSenha))
@@ -403,16 +512,15 @@ public class SIMarket {
 
 
 
-
     }
 
     public static boolean chamadaLogin() {
         Scanner entradaUser = new Scanner(System.in);
         Scanner entradaSenha = new Scanner(System.in);
 
-        System.out.printf("LOGIN: \t");
+        System.out.print("LOGIN: \t");
         String user = entradaUser.nextLine();
-        System.out.printf("SENHA: \t");
+        System.out.print("SENHA: \t");
         String senha = entradaSenha.nextLine();
         return login(user,senha);
     }

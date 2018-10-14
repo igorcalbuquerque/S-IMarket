@@ -27,6 +27,6 @@ public class Secao {
 
     @Override
     public String toString(){
-        return  "Codigo : "+getCodigo() + "Descricao : "+getDescricao()+"\n" ;
+        return  "Codigo : "+getCodigo() + " Descricao : "+getDescricao()+"\n" ;
     }
 }

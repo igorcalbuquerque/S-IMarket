@@ -10,12 +10,6 @@ public class ProdutoVenda extends ProdutoEstoque{
         this.valorCompra = produto.getValorCompra();
         this.valorVenda = produto.getValorVenda();
     }
-    public ProdutoVenda(Produto produto,double valorCompra,double valorVenda,double quant){
-        super(produto,quant);
-        this.valorCompra = valorCompra;
-        this.valorVenda = valorVenda;
-    }
-
     public void setQuantidade(double quant){
         quantidade = quant;
     }
