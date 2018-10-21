@@ -42,6 +42,7 @@ public abstract class RepositorioPessoa {
         Pessoa pessoa = buscarPessoaPorCpf(cpf);
         if(pessoa != null){
             pessoas.remove(pessoa);
+            System.out.println("Pessoa Removida Com Sucesso!!!");
         }
         else{
             System.out.println("Nao Existe o Cadastro Buscado!!!");

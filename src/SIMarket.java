@@ -557,11 +557,13 @@ public class SIMarket {
         Scanner entradaCpfCliente = new Scanner(System.in);
         Scanner entradargCliente = new Scanner(System.in);
         Scanner entradaEndereco = new Scanner(System.in);
+        Scanner entradaTelefone = new Scanner(System.in);
 
 
         String nome;
         String cpf;
         String rg;
+        String telefone;
 
 
         switch (opcao)
@@ -585,10 +587,15 @@ public class SIMarket {
                 String cep = entradaEndereco.nextLine();
                 System.out.print("Digite o nome da UF: \t");
                 String uf = entradaEndereco.nextLine();
+                System.out.print("Digite o Telefone: \t");
+                telefone = entradaEndereco.nextLine();
+                System.out.print("Digite o E-Mail: \t");
+                String email = entradaEndereco.nextLine();
+
 
                 Endereco enderecoSalvar = new Endereco(rua, numero, bairro, cidade, cep, uf);
 
-                Cliente cliente = new Cliente(nome, rg, cpf, enderecoSalvar);
+                Cliente cliente = new Cliente(nome, rg, cpf, enderecoSalvar, telefone, email);
                 repositorioCliente.adicionarPessoa(cliente);
                 break;
 
@@ -597,7 +604,7 @@ public class SIMarket {
 
                 System.out.println("Digite o CPF do Cliente a Ser Removido: \t");
                 String cpfCliente = entradaCpfCliente.nextLine();
-                repositorioFuncionario.removerPessoaCpf(cpfCliente);
+                repositorioCliente.removerPessoaCpf(cpfCliente);
                 menu();
                 break;
 
