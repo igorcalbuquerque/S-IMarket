@@ -590,6 +590,7 @@ public class SIMarket {
 
                 Cliente cliente = new Cliente(nome, rg, cpf, enderecoSalvar);
                 repositorioCliente.adicionarPessoa(cliente);
+                break;
 
 
             case 2:
