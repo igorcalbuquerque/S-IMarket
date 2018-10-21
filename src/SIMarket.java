@@ -13,6 +13,7 @@ public class SIMarket {
     private static RepositorioProduto repositorioProduto = new RepositorioProduto();
     private static RepositorioSecao repositorioSecao = new RepositorioSecao();
     private static RepositorioVenda vendas = new RepositorioVenda();
+    private static RepositorioCliente repositorioCliente = new RepositorioCliente();
 
     public static void main(String[] args){
 
@@ -59,11 +60,17 @@ public class SIMarket {
             opcao = entradaOpcao.nextInt();
 
             switch (opcao){
+                case 1:
+                    subMenuCaixa();
+                    break;
                 case 2:
                     subMenuProduto();
                     break;
                 case 3:
                     subMenuSecao();
+                    break;
+                case 4:
+                    subMenuCliente();
                     break;
                 case 5:
                     subMenuFuncionario();
@@ -419,7 +426,6 @@ public class SIMarket {
         String nome;
         String cpf;
         String rg;
-        Endereco endereco;
         String cargo;
         String login;
         String senha;
@@ -505,6 +511,102 @@ public class SIMarket {
                 System.out.println("==========================================");
                 System.out.println("==========================================");
                 System.out.println(repositorioFuncionario.listarFucionarios());
+                menu();
+                break;
+        }
+
+
+
+
+    }
+
+    public static void subMenuCaixa()
+    {
+        System.out.println("===========================================");
+        System.out.println("===========================================");
+        System.out.println("==== S & I Markets (MENU CAIXA) ===========");
+        System.out.println("===========================================");
+        System.out.println("===========================================");
+
+        System.out.print("1 - VENDA \t");
+        System.out.print("2 - CANCELAR VENDA \t");
+        System.out.print("3 - CONSULTAR PREÇO \t");
+
+
+    }
+
+    public static void subMenuCliente(){
+        System.out.println("===========================================");
+        System.out.println("===========================================");
+        System.out.println("==== S & I Markets (MENU CLIENTE) =========");
+        System.out.println("===========================================");
+        System.out.println("===========================================");
+
+        System.out.println("1 - INSERIR CLIENTE ");
+        System.out.println("2 - REMOVE CLIENTE ");
+        System.out.println("3 - LISTAR CLIENTE");
+        System.out.println("4 - MODIFICAR CLIENTE");
+        System.out.println("88 - SAIR !!!");
+
+        Scanner entradaOpcao = new Scanner (System.in);
+
+        System.out.print("Digite sua opcao :  \t");
+        int opcao = entradaOpcao.nextInt();
+
+        Scanner entradaNomeCliente = new Scanner(System.in);
+        Scanner entradaCpfCliente = new Scanner(System.in);
+        Scanner entradargCliente = new Scanner(System.in);
+        Scanner entradaEndereco = new Scanner(System.in);
+
+
+        String nome;
+        String cpf;
+        String rg;
+
+
+        switch (opcao)
+        {
+            case 1:
+                System.out.print("Digite o Nome do Cliente: \t");
+                nome = entradaNomeCliente.nextLine();
+                System.out.print("Digite o CPF do Cliente: \t");
+                cpf = entradaCpfCliente.nextLine();
+                System.out.print("Digite o RG do Cliente: \t");
+                rg = entradargCliente.nextLine();
+                System.out.print("Digite o nome da Rua: \t");
+                String rua = entradaEndereco.nextLine();
+                System.out.print("Digite o nome do Bairro: \t");
+                String bairro = entradaEndereco.nextLine();
+                System.out.print("Digite o número da casa: \t");
+                String numero = entradaEndereco.nextLine();
+                System.out.print("Digite o nome da Cidade: \t");
+                String cidade = entradaEndereco.nextLine();
+                System.out.print("Digite o número do CEP: \t");
+                String cep = entradaEndereco.nextLine();
+                System.out.print("Digite o nome da UF: \t");
+                String uf = entradaEndereco.nextLine();
+
+                Endereco enderecoSalvar = new Endereco(rua, numero, bairro, cidade, cep, uf);
+
+                Cliente cliente = new Cliente(nome, rg, cpf, enderecoSalvar);
+                repositorioCliente.adicionarPessoa(cliente);
+
+
+            case 2:
+
+                System.out.println("Digite o CPF do Cliente a Ser Removido: \t");
+                String cpfCliente = entradaCpfCliente.nextLine();
+                repositorioFuncionario.removerPessoaCpf(cpfCliente);
+                menu();
+                break;
+
+            case 3:
+                System.out.println("==========================================");
+                System.out.println("==========================================");
+                System.out.println("========== LISTA DE CLIENTES =============");
+                System.out.println("==========================================");
+                System.out.println("==========================================");
+                System.out.println(repositorioCliente.listarClientes());
                 menu();
                 break;
         }
