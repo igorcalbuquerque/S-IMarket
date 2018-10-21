@@ -30,6 +30,11 @@ public class Cliente extends Pessoa {
 
     public String toString()
     {
-        return "NOME: " + getNome() + "\n" + "CPF: " + getCpf() + "\n" + "RG: " + getRg() + "\n" + "TELEFONE: " + getTelefone() + "\n"+ "E-MAIL: "+ getEmail() + "\n" + "ENDEREÇO: " + getEndereco();
+        return "NOME: " + getNome() + "\n" +
+                "CPF: " + getCpf() + "\n" +
+                "RG: " + getRg() + "\n" +
+                "TELEFONE: " + getTelefone() + "\n"+
+                "E-MAIL: "+ getEmail() + "\n" +
+                "ENDEREÇO: " + getEndereco();
     }
 }

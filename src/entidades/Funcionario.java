@@ -42,6 +42,9 @@ public class Funcionario extends Pessoa {
     @Override
     public String toString()
     {
-        return "Nome: " + getNome() + "\nRG : "+getRg()+"\nCPF: " + getCpf()  + "\n"+getEndereco().toString();
+        return "Nome: " + getNome() + "\n" +
+                "RG : "+getRg()+"\n" +
+                "CPF: " + getCpf()  + "\n"
+                +getEndereco().toString();
     }
 }
