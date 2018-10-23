@@ -1,7 +1,6 @@
 package dados;
 
 import entidades.Produto;
-
 import java.util.ArrayList;
 
 public class RepositorioProduto {
@@ -30,6 +29,15 @@ public class RepositorioProduto {
                 return p;
             }
         }
+        return null;
+    }
+    public Produto buscarPorCodBarra(String codigo){
+        for(Produto produto : this.produtos){
+            if(produto.getCodigoBarra().equals(codigo)){
+                return produto;
+            }
+        }
+        System.out.println("Produto nao encontrado!!!");
         return null;
     }
     public String listarProdutos(){

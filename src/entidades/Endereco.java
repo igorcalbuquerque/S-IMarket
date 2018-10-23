@@ -55,8 +55,7 @@ public class Endereco {
     }
 
     @Override
-    public String toString()
-    {
+    public String toString(){
         return "Rua: " + getRua() + "\n" +
                 "Numero: "+getNumero()+ "\n"+
                 "Bairro: " + getBairro() + "\n" +

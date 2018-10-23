@@ -1,3 +1,5 @@
+package main;
+
 import dados.*;
 import entidades.*;
 
@@ -14,8 +16,11 @@ public class SIMarket {
     private static RepositorioSecao repositorioSecao = new RepositorioSecao();
     private static RepositorioVenda vendas = new RepositorioVenda();
     private static RepositorioCliente repositorioCliente = new RepositorioCliente();
+    private static Funcionario usuario;
 
     public static void main(String[] args){
+
+        iniciarCadastroPadrao();
 
         System.out.println("===========================================");
         System.out.println("===========================================");
@@ -23,24 +28,42 @@ public class SIMarket {
         System.out.println("===========================================");
         System.out.println("===========================================");
 
-        while(chamadaLogin() == false){
-            chamadaLogin();
-        }
+        String login;
+        String senha;
+
+        do{
+
+            Scanner entradaUser = new Scanner(System.in);
+            Scanner entradaSenha = new Scanner(System.in);
+
+            System.out.print("LOGIN: \t");
+            login = entradaUser.nextLine();
+            System.out.print("SENHA: \t");
+            senha = entradaSenha.nextLine();
+
+            Funcionario usuario = repositorioFuncionario.buscarPorLogin(login);
+            if(usuario!=null){
+                if(usuario.getSenha().equals(senha)){
+                    break;
+                }
+            }
+        }while ((usuario == null) || (usuario.getSenha().equals(senha)==false));
         menu();
     }
-
-    public static boolean login(String user, String senha) {
-        if (user.equals("igor") && senha.equals("123")){
-            return true;
+    public static boolean login(String login, String senha) {
+        Funcionario user = repositorioFuncionario.buscarPorLogin(login);
+        if(user!=null){
+            if(user.getSenha().equals(senha)){
+                setUsuario(user);
+                return true;
+            }
         }
         return false;
     }
-
     public static void menu(){
         Scanner entradaOpcao = new Scanner(System.in);
         int opcao;
         do{
-
             System.out.println("===========================================");
             System.out.println("===========================================");
             System.out.println("========== S & I Markets (MENU) ===========");
@@ -78,13 +101,9 @@ public class SIMarket {
                 case 6:
                     subMenuEstoque();
                     break;
-
             }
 
-
-
         }while (opcao != 88);
-
     }
     public static void subMenuEstoque(){
         int opcao;
@@ -519,22 +538,6 @@ public class SIMarket {
 
 
     }
-
-    public static void subMenuCaixa()
-    {
-        System.out.println("===========================================");
-        System.out.println("===========================================");
-        System.out.println("==== S & I Markets (MENU CAIXA) ===========");
-        System.out.println("===========================================");
-        System.out.println("===========================================");
-
-        System.out.print("1 - VENDA \t");
-        System.out.print("2 - CANCELAR VENDA \t");
-        System.out.print("3 - CONSULTAR PREÇO \t");
-
-
-    }
-
     public static void subMenuCliente(){
         System.out.println("===========================================");
         System.out.println("===========================================");
@@ -623,15 +626,113 @@ public class SIMarket {
 
 
     }
+    public static void subMenuCaixa(){
+        System.out.println("===========================================");
+        System.out.println("===========================================");
+        System.out.println("======= S & I Markets (MENU  VENDA) =======");
+        System.out.println("===========================================");
+        System.out.println("===========================================");
 
-    public static boolean chamadaLogin() {
-        Scanner entradaUser = new Scanner(System.in);
-        Scanner entradaSenha = new Scanner(System.in);
+        int opcao;
+        Scanner entradaOpcao = new Scanner(System.in);
 
-        System.out.print("LOGIN: \t");
-        String user = entradaUser.nextLine();
-        System.out.print("SENHA: \t");
-        String senha = entradaSenha.nextLine();
-        return login(user,senha);
+        System.out.println("1 - REALIZAR VENDA");
+        System.out.println("2 - CONSULTAR PRECO");
+        System.out.println("3 - CANCELAR VENDA ");
+        System.out.println("88 - SAIR");
+        System.out.println("Insira a opcao desejada : \t");
+        opcao = entradaOpcao.nextInt();
+
+        String codigo = "0";
+        double quantidade;
+        double valor;
+
+        Scanner entradaValor = new Scanner(System.in);
+        Scanner entradaCodigo = new Scanner(System.in);
+        Scanner entradaQuantidade = new Scanner(System.in);
+
+        switch (opcao){
+            case 1:
+                Carrinho carrinho = new Carrinho(getUsuario());
+                do{
+                    System.out.println(" (0) para finalizar Venda (1) Modificar Quantidade (2) Remover Produto ");
+                    System.out.print("Codigo do produto ou Opcao desejada: \t");
+                    codigo = entradaCodigo.next();
+                    switch (codigo.toCharArray()[0]){
+                        case '0':
+                            break;
+                        case '1':
+                            System.out.println("Modificacao de Quantidade");
+                            System.out.print("Insira o Codigo : \t");
+                            codigo = entradaQuantidade.next();
+                            System.out.print("Insira a quantidade : \t");
+                            quantidade = entradaQuantidade.nextDouble();
+                            ProdutoVenda produtoVenda = carrinho.buscarProduto(codigo);
+                            if(produtoVenda != null){
+                                produtoVenda.setQuantidade(quantidade);
+                            }
+                            break;
+                        case '2':
+                            System.out.println("Remover Produto!!!");
+                            System.out.print("Insira o Codigo : \t");
+                            codigo = entradaQuantidade.next();
+                            carrinho.removerItem(codigo);
+                            break;
+                        default:
+                            Produto produto = repositorioProduto.buscarPorCodBarra(codigo);
+                            if (produto != null){
+                                System.out.print("Insira a quantidade : \t");
+                                quantidade = entradaQuantidade.nextDouble();
+
+                                carrinho.adicionarItem(produto,quantidade);
+                            }
+                            break;
+                    }
+                    System.out.println("===========================================");
+                    System.out.println(carrinho.listarItens());
+                    System.out.println("===========================================");
+
+                }while(!codigo.equals("0"));
+
+                do {
+                    System.out.print("Insira o valor recebido : \t");
+                    valor = entradaValor.nextDouble();
+                    if(valor>=carrinho.getValorTotal()){
+                        System.out.println("Obrigado Pela Preferencia!!!");
+                        System.out.println("Troco : RS "+(valor-carrinho.getValorTotal()));
+                        vendas.adicionarVenda(carrinho);
+                    }
+                }while(valor < carrinho.getValorTotal());
+                subMenuCaixa();
+                break;
+            case 88:
+                menu();
+                break;
+        }
+    }
+    public static Funcionario getUsuario(){
+        return usuario;
+    }
+    public static void setUsuario(Funcionario funcionario){
+        usuario = funcionario;
+    }
+    public static void iniciarCadastroPadrao(){
+        Endereco endereco = new Endereco("RUA MELO PEIXOTO","12","BOA VISTA","GARANHUNS","55293-190","PE");
+        Cliente cliente = new Cliente("LULA DA SILVA","0000000","100.200.300-00",endereco,"(87)9999-9999","");
+        Secao secao = new Secao(1,"BEBIDAS");
+        Produto produto = new Produto("7894900010015","COCA COLA 350ML",1.49,2.49,secao);
+        Fornecedor fornecedor = new Fornecedor(1,"DISTR. CESAR",endereco);
+        Funcionario funcionario = new Funcionario("ADMIN","0000001","400.500.700-00",endereco,
+                "ADMIN","ADMIN","1234");
+        NotaFiscal nota = new NotaFiscal(1,1,"23-10-18",fornecedor);
+        nota.adicionarProduto(produto,1.55,12);
+
+        estoque.adicionarProduto(produto,12);
+        repositorioCliente.adicionarPessoa(cliente);
+        fornecedores.adicionarFornecedor(fornecedor);
+        repositorioFuncionario.adicionarPessoa(funcionario);
+        notas.adicionarNotas(nota);
+        repositorioProduto.adicionarProduto(produto);
+        repositorioSecao.addSecao(secao);
     }
 }

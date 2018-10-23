@@ -2,7 +2,6 @@ package dados;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.concurrent.ThreadPoolExecutor;
 
 import entidades.Carrinho;
 
@@ -19,6 +18,7 @@ public class RepositorioVenda {
         Carrinho carrinho = buscarCarrinho(codigo);
         if(carrinho != null){
             vendas.remove(carrinho);
+            System.out.println("A COMPRA FOI REMOVIDA!!!");
         }
         else{
             System.out.println("A COMPRA BUSCADA NAO EXISTE!!!");

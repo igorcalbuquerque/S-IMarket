@@ -11,13 +11,23 @@ public class EstoqueProduto {
         estoque = new ArrayList<ProdutoEstoque>();
     }
     public void adicionarProduto(Produto produto, double quantidade){
-        ProdutoEstoque produtoEstoque = new ProdutoEstoque(produto,quantidade);
-        estoque.add(produtoEstoque);
+        if(produto!=null){
+            ProdutoEstoque jaExiste = buscarProduto(produto.getCodigoBarra());
+            if(jaExiste == null){
+                ProdutoEstoque produtoEstoque = new ProdutoEstoque(produto,quantidade);
+                estoque.add(produtoEstoque);
+            }else{
+                jaExiste.incrementar(quantidade);
+            }
+        }
     }
     public void adicionarProduto(Produto produto){
         if(produto != null){
-            ProdutoEstoque produtoEstoque = new ProdutoEstoque(produto);
-            estoque.add(produtoEstoque);
+            ProdutoEstoque jaExiste = buscarProduto(produto.getCodigoBarra());
+            if(jaExiste == null){
+                ProdutoEstoque produtoEstoque = new ProdutoEstoque(produto,0);
+                estoque.add(produtoEstoque);
+            }
         }
         else{
             System.out.println("O Produto solicitado nao existe!!!");
