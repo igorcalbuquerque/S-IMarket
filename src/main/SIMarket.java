@@ -30,6 +30,7 @@ public class SIMarket {
 
         String login;
         String senha;
+        Funcionario usuario;
 
         do{
 
@@ -41,7 +42,7 @@ public class SIMarket {
             System.out.print("SENHA: \t");
             senha = entradaSenha.nextLine();
 
-            Funcionario usuario = repositorioFuncionario.buscarPorLogin(login);
+            usuario = repositorioFuncionario.buscarPorLogin(login);
 
             if(usuario!=null){
                 if(usuario.getSenha().equals(senha)){
@@ -49,7 +50,15 @@ public class SIMarket {
                 }
             }
         }while ((usuario == null) || (usuario.getSenha().equals(senha)==false));
-        menu();
+
+        if (usuario.isGerente())
+        {
+            menu();
+        }
+        else
+        {
+            menuAssociado();
+        }
     }
     public static boolean login(String login, String senha) {
         Funcionario user = repositorioFuncionario.buscarPorLogin(login);
@@ -61,6 +70,40 @@ public class SIMarket {
         }
         return false;
     }
+    public static void menuAssociado() {
+        Scanner entradaOpcao = new Scanner(System.in);
+        int opcao;
+        do {
+            System.out.println("===========================================");
+            System.out.println("===========================================");
+            System.out.println("========== S & I Markets (MENU) ===========");
+            System.out.println("===========================================");
+            System.out.println("===========================================");
+
+            System.out.println("1 - CAIXA");
+            System.out.println("2 - CLIENTES");
+            System.out.println("3 - ESTOQUE ");
+            System.out.println("88 - SAIR !!!");
+
+            System.out.print("Digite a Opção desejada: \t");
+            opcao = entradaOpcao.nextInt();
+
+            switch (opcao) {
+                case 1:
+                    subMenuCaixa();
+                    break;
+                case 2:
+                    subMenuCliente();
+                    break;
+                case 3:
+                    subMenuEstoque();
+                    break;
+
+            }
+
+        } while (opcao != 88);
+    }
+
     public static void menu(){
         Scanner entradaOpcao = new Scanner(System.in);
         int opcao;
@@ -438,7 +481,6 @@ public class SIMarket {
         Scanner entradaCpfFuncionario = new Scanner(System.in);
         Scanner entradargFuncionario = new Scanner(System.in);
         Scanner entradaEndereco = new Scanner(System.in);
-        Scanner entradaCargo = new Scanner(System.in);
         Scanner entradaLogin = new Scanner(System.in);
         Scanner entradaSenha = new Scanner(System.in);
         Scanner entradaConfirmaSenha = new Scanner(System.in);
@@ -446,7 +488,6 @@ public class SIMarket {
         String nome;
         String cpf;
         String rg;
-        String cargo;
         String login;
         String senha;
 
@@ -484,8 +525,6 @@ public class SIMarket {
                 String cep = entradaEndereco.nextLine();
                 System.out.print("Digite o nome da UF: \t");
                 String uf = entradaEndereco.nextLine();
-                System.out.print("Digite o Cargo do Funcionário: \t");
-                cargo = entradaCargo.nextLine();
                 System.out.print("Digite o Login (OPCIONAL): \t");
                 login = entradaLogin.nextLine();
                 System.out.print("Digite a Senha Desejada: \t");
@@ -496,7 +535,7 @@ public class SIMarket {
                 if (senha.equals(confirmaSenha))
                 {
                     Endereco enderecoSalvar = new Endereco(rua, numero, bairro, cidade, cep, uf);
-                    Funcionario funcionario = new Funcionario(nome, rg, cpf, enderecoSalvar, cargo, senha);
+                    Funcionario funcionario = new Funcionario(nome, rg, cpf, enderecoSalvar, false, senha);
 
                     repositorioFuncionario.adicionarPessoa(funcionario);
                 }
@@ -514,7 +553,7 @@ public class SIMarket {
                         if (senha.equals(confirmaSenha))
                         {
                             Endereco enderecoSalvar = new Endereco(rua, numero, bairro, cidade, cep, uf);
-                            Funcionario funcionario = new Funcionario(nome, rg, cpf, enderecoSalvar, cargo, senha);
+                            Funcionario funcionario = new Funcionario(nome, rg, cpf, enderecoSalvar, false, senha);
 
                             repositorioFuncionario.adicionarPessoa(funcionario);
                             confere = true;
@@ -743,12 +782,13 @@ public class SIMarket {
     }
     public static void iniciarCadastroPadrao(){
         Endereco endereco = new Endereco("RUA MELO PEIXOTO","12","BOA VISTA","GARANHUNS","55293-190","PE");
+        Endereco enderecoAssociado = new Endereco("RUA SÂO JOSÉ","375","CENTRO","GARANHUNS","55293-340","PE");
         Cliente cliente = new Cliente("LULA DA SILVA","0000000","100.200.300-00",endereco,"(87)9999-9999","");
         Secao secao = new Secao(1,"BEBIDAS");
         Produto produto = new Produto("7894900010015","COCA COLA 350ML",1.49,2.49,secao);
         Fornecedor fornecedor = new Fornecedor(1,"DISTR. CESAR",endereco);
-        Funcionario funcionario = new Funcionario("ADMIN","0000001","070.680.938-68",endereco,
-                "ADMIN","ADMIN","1234");
+        Funcionario funcionario = new Funcionario("ADMIN","0000001","07068093868",endereco,true,"ADMIN","1234");
+        Funcionario associado = new Funcionario("Jair Messias Bolsonaro", "8579645", "45317828791", enderecoAssociado, false, "BOZO", "123456");
         NotaFiscal nota = new NotaFiscal(1,1,"23-10-18",fornecedor);
         nota.adicionarProduto(produto,1.55,12);
 
@@ -756,6 +796,7 @@ public class SIMarket {
         repositorioCliente.adicionarPessoa(cliente);
         fornecedores.adicionarFornecedor(fornecedor);
         repositorioFuncionario.adicionarPessoa(funcionario);
+        repositorioFuncionario.adicionarPessoa(associado);
         notas.adicionarNotas(nota);
         repositorioProduto.adicionarProduto(produto);
         repositorioSecao.addSecao(secao);
