@@ -1,3 +1,9 @@
+/**
+ *
+ *
+ *
+ * @author Saú Cesar
+ */
 package entidades;
 
 public class ProdutoNotaFiscal extends ProdutoEstoque {

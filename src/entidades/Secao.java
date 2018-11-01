@@ -1,5 +1,12 @@
+/**
+ *
+ *
+ *
+ * @author Saú Cesar
+ */
+
 package entidades;
-//
+
 public class Secao {
 
     private static int codigoAutomatico = 0;

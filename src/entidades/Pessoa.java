@@ -1,3 +1,9 @@
+/**
+ *
+ *
+ *
+ * @author Igor Albuquerque
+ */
 package entidades;
 
 public abstract class Pessoa {

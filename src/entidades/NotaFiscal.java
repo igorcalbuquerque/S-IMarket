@@ -1,3 +1,9 @@
+/**
+ * Validator used to check whether given string is
+ * no longer than the specified amount of characters.
+ *
+ * @author Saú Cesar
+ */
 package entidades;
 
 import java.util.Calendar;
