@@ -487,7 +487,7 @@ public class SIMarket {
                 if (senha.equals(confirmaSenha))
                 {
                     Endereco enderecoSalvar = new Endereco(rua, numero, bairro, cidade, cep, uf);
-                    Funcionario funcionario = new Funcionario(nome, rg,cpf, enderecoSalvar, cargo, senha);
+                    Funcionario funcionario = new Funcionario(nome, rg, cpf, enderecoSalvar, cargo, senha);
 
                     repositorioFuncionario.adicionarPessoa(funcionario);
                 }
@@ -592,7 +592,7 @@ public class SIMarket {
                 System.out.print("Digite o nome da UF: \t");
                 String uf = entradaEndereco.nextLine();
                 System.out.print("Digite o Telefone: \t");
-                telefone = entradaEndereco.nextLine();
+                telefone = entradaTelefone.nextLine();
                 System.out.print("Digite o E-Mail: \t");
                 String email = entradaEndereco.nextLine();
 
@@ -700,7 +700,7 @@ public class SIMarket {
                     valor = entradaValor.nextDouble();
                     if(valor>=carrinho.getValorTotal()){
                         System.out.println("Obrigado Pela Preferencia!!!");
-                        System.out.println("Troco : RS "+(valor-carrinho.getValorTotal()));
+                        System.out.printf("Troco : RS %.2f\n",(valor-carrinho.getValorTotal()));
                         vendas.adicionarVenda(carrinho);
                     }
                 }while(valor < carrinho.getValorTotal());
