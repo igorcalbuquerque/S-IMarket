@@ -456,11 +456,20 @@ public class SIMarket {
 
         switch (opcao)
         {
+
             case 1:
                 System.out.print("Digite o Nome do Funcionário: \t");
                 nome = entradaNomeFuncionario.nextLine();
-                System.out.print("Digite o CPF do Funcionário: \t");
-                cpf = entradaCpfFuncionario.nextLine();
+
+                do {
+                    System.out.print("Digite o CPF do Funcionário: \t");
+                    cpf = entradaCpfFuncionario.nextLine();
+                    if (ValidaCpf.isCPF(cpf) != true)
+                    {
+                        System.out.println("CPF INVÁLIDO!!! DIGITE NOVAMENTE!");
+                    }
+                }while (ValidaCpf.isCPF(cpf) != true);
+
                 System.out.print("Digite o RG do Funcionário: \t");
                 rg = entradargFuncionario.nextLine();
                 System.out.print("Digite o nome da Rua: \t");
@@ -573,35 +582,50 @@ public class SIMarket {
         switch (opcao)
         {
             case 1:
-                System.out.print("Digite o Nome do Cliente: \t");
-                nome = entradaNomeCliente.nextLine();
-                System.out.print("Digite o CPF do Cliente: \t");
-                cpf = entradaCpfCliente.nextLine();
-                System.out.print("Digite o RG do Cliente: \t");
-                rg = entradargCliente.nextLine();
-                System.out.print("Digite o nome da Rua: \t");
-                String rua = entradaEndereco.nextLine();
-                System.out.print("Digite o nome do Bairro: \t");
-                String bairro = entradaEndereco.nextLine();
-                System.out.print("Digite o número da casa: \t");
-                String numero = entradaEndereco.nextLine();
-                System.out.print("Digite o nome da Cidade: \t");
-                String cidade = entradaEndereco.nextLine();
-                System.out.print("Digite o número do CEP: \t");
-                String cep = entradaEndereco.nextLine();
-                System.out.print("Digite o nome da UF: \t");
-                String uf = entradaEndereco.nextLine();
-                System.out.print("Digite o Telefone: \t");
-                telefone = entradaTelefone.nextLine();
-                System.out.print("Digite o E-Mail: \t");
-                String email = entradaEndereco.nextLine();
+
+                ValidaCpf validaCpf = new ValidaCpf();
 
 
-                Endereco enderecoSalvar = new Endereco(rua, numero, bairro, cidade, cep, uf);
 
-                Cliente cliente = new Cliente(nome, rg, cpf, enderecoSalvar, telefone, email);
-                repositorioCliente.adicionarPessoa(cliente);
+                    System.out.print("Digite o Nome do Cliente: \t");
+                    nome = entradaNomeCliente.nextLine();
+                do{
+                    System.out.print("Digite o CPF do Cliente: \t");
+                    cpf = entradaCpfCliente.nextLine();
+                    if (validaCpf.isCPF(cpf) != true)
+                    {
+                        System.out.println("CPF INVÁLIDO!!! DIGITE NOVAMENTE!");
+                    }
+                }while (validaCpf.isCPF(cpf) != true);
+
+                    System.out.print("Digite o RG do Cliente: \t");
+                    rg = entradargCliente.nextLine();
+                    System.out.print("Digite o nome da Rua: \t");
+                    String rua = entradaEndereco.nextLine();
+                    System.out.print("Digite o nome do Bairro: \t");
+                    String bairro = entradaEndereco.nextLine();
+                    System.out.print("Digite o número da casa: \t");
+                    String numero = entradaEndereco.nextLine();
+                    System.out.print("Digite o nome da Cidade: \t");
+                    String cidade = entradaEndereco.nextLine();
+                    System.out.print("Digite o número do CEP: \t");
+                    String cep = entradaEndereco.nextLine();
+                    System.out.print("Digite o nome da UF: \t");
+                    String uf = entradaEndereco.nextLine();
+                    System.out.print("Digite o Telefone: \t");
+                    telefone = entradaTelefone.nextLine();
+                    System.out.print("Digite o E-Mail: \t");
+                    String email = entradaEndereco.nextLine();
+
+                    Endereco enderecoSalvar = new Endereco(rua, numero, bairro, cidade, cep, uf);
+
+                    Cliente cliente = new Cliente(nome, rg, cpf, enderecoSalvar, telefone, email);
+                    repositorioCliente.adicionarPessoa(cliente);
+
+
                 break;
+
+
 
 
             case 2:
@@ -723,7 +747,7 @@ public class SIMarket {
         Secao secao = new Secao(1,"BEBIDAS");
         Produto produto = new Produto("7894900010015","COCA COLA 350ML",1.49,2.49,secao);
         Fornecedor fornecedor = new Fornecedor(1,"DISTR. CESAR",endereco);
-        Funcionario funcionario = new Funcionario("ADMIN","0000001","400.500.700-00",endereco,
+        Funcionario funcionario = new Funcionario("ADMIN","0000001","070.680.938-68",endereco,
                 "ADMIN","ADMIN","1234");
         NotaFiscal nota = new NotaFiscal(1,1,"23-10-18",fornecedor);
         nota.adicionarProduto(produto,1.55,12);
