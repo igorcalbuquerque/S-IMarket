@@ -783,7 +783,7 @@ public class SIMarket {
     public static void iniciarCadastroPadrao(){
         Endereco endereco = new Endereco("RUA MELO PEIXOTO","12","BOA VISTA","GARANHUNS","55293-190","PE");
         Endereco enderecoAssociado = new Endereco("RUA SÂO JOSÉ","375","CENTRO","GARANHUNS","55293-340","PE");
-        Cliente cliente = new Cliente("LULA DA SILVA","0000000","100.200.300-00",endereco,"(87)9999-9999","");
+        Cliente cliente = new Cliente("BENEVENUTO DACIOLO FONSECA DOS SANTOS","0000000","196.861.118-59",endereco,"(87)9999-9999","");
         Secao secao = new Secao(1,"BEBIDAS");
         Produto produto = new Produto("7894900010015","COCA COLA 350ML",1.49,2.49,secao);
         Fornecedor fornecedor = new Fornecedor(1,"DISTR. CESAR",endereco);
