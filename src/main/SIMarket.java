@@ -42,6 +42,7 @@ public class SIMarket {
             senha = entradaSenha.nextLine();
 
             Funcionario usuario = repositorioFuncionario.buscarPorLogin(login);
+
             if(usuario!=null){
                 if(usuario.getSenha().equals(senha)){
                     break;

@@ -18,7 +18,7 @@ public class RepositorioFuncionario extends RepositorioPessoa {
     }
     public Funcionario buscarPorLogin(String login){
         for(Pessoa funcionario:this.pessoas){
-            if(((Funcionario)funcionario).getLogin().equals(login)){
+            if(((Funcionario)funcionario).getLogin().equals(login) || ((Funcionario)funcionario).getCpf().equals(login)){
                 return (Funcionario)funcionario;
             }
         }
