@@ -8,6 +8,7 @@ package main;
 
 import dados.*;
 import entidades.*;
+import validacao.ValidaDados;
 
 import java.util.Scanner;
 
@@ -34,6 +35,13 @@ public class SIMarket {
         System.out.println("===========================================");
         System.out.println("===========================================");
 
+        boolean logado = login();
+        while (!logado){
+            logado= login();
+        }
+
+    }
+    public static boolean login() {
         String login;
         String senha;
         Funcionario usuario;
@@ -53,24 +61,26 @@ public class SIMarket {
             if(usuario!=null){
                 if(usuario.getSenha().equals(senha)){
                     break;
+                }else{
+                    System.out.println("SENHA INVALIDA!!!");
                 }
+            }else{
+                System.out.println("USUARIO INVALIDO!!!");
             }
         }while ((usuario == null) || (usuario.getSenha().equals(senha)==false));
 
-        if (usuario.isGerente())
-        {
-            menu();
-        }
-        else
-        {
-            menuAssociado();
-        }
-    }
-    public static boolean login(String login, String senha) {
         Funcionario user = repositorioFuncionario.buscarPorLogin(login);
         if(user!=null){
             if(user.getSenha().equals(senha)){
                 setUsuario(user);
+                if (usuario.isGerente())
+                {
+                    menu();
+                }
+                else
+                {
+                    menuAssociado();
+                }
                 return true;
             }
         }
@@ -89,6 +99,7 @@ public class SIMarket {
             System.out.println("1 - CAIXA");
             System.out.println("2 - CLIENTES");
             System.out.println("3 - ESTOQUE ");
+            System.out.println("4 - MUDAR USUARIO ");
             System.out.println("88 - SAIR !!!");
 
             System.out.print("Digite a Opção desejada: \t");
@@ -104,12 +115,16 @@ public class SIMarket {
                 case 3:
                     subMenuEstoque();
                     break;
+                case 4:
 
+                    while (!login()){
+                        login();
+                    }
+                    break;
             }
 
         } while (opcao != 88);
     }
-
     public static void menu(){
         Scanner entradaOpcao = new Scanner(System.in);
         int opcao;
@@ -167,10 +182,19 @@ public class SIMarket {
             System.out.println("===========================================");
 
             System.out.println("1 - NOTA DE ENTRADA");
-            System.out.println("2 - RELATORIO DE ESTOQUE");
+            System.out.println("2 - LISTAR NOTAS(POR DATA EMISSAO)");
+            System.out.println("3 - LISTAR NOTAS(POR DATA ENTRADA)");
+            System.out.println("4 - LISTAR NOTAS(POR NUMERO)");
+            System.out.println("5 - LISTAR NOTAS(POR FORNECEDOR)");
+            System.out.println("6 - RELATORIO DE ESTOQUE");
             System.out.println("88 - SAIR");
             System.out.println("Insira a opcao desejada : \t");
             opcao = entradaOpcao.nextInt();
+
+            int dia,mes,ano;
+            Scanner entradaData = new Scanner(System.in);
+            Scanner entradaFornecedor = new Scanner(System.in);
+            Scanner entradaNumero = new Scanner(System.in);
 
             switch (opcao){
                 case 1:
@@ -180,31 +204,37 @@ public class SIMarket {
 
                     int numero;
                     int serie;
-                    String dataEmissao;
+                    Data dataEmissao;
                     int codigoFornecedor;
                     Fornecedor fornecedor;
 
-                    Scanner entradaNumero = new Scanner(System.in);
+
                     Scanner entradaSerie = new Scanner(System.in);
-                    Scanner entradaData = new Scanner(System.in);
-                    Scanner entradaFornecedor = new Scanner(System.in);
 
                     System.out.print("NUMERO DA NOTA : \t");
                     numero = entradaNumero.nextInt();
                     System.out.print("SERIE : \t");
                     serie = entradaSerie.nextInt();
-                    System.out.print("DATA DE EMISSAO(FORMATO 11-11-11) : \t");
-                    dataEmissao = entradaData.next();
-                    System.out.print("CODIGO FORNECEDOR : \t");
-                    codigoFornecedor = entradaFornecedor.nextInt();
-                    fornecedor = fornecedores.buscarFornecedor(codigoFornecedor);
-                    if(fornecedor == null){
-                        while(fornecedor == null){
-                            System.out.print("CODIGO FORNECEDOR : \t");
-                            codigoFornecedor = entradaFornecedor.nextInt();
-                            fornecedor = fornecedores.buscarFornecedor(codigoFornecedor);
+                    do{
+                        System.out.println("DATA DE EMISSAO");
+                        System.out.print("DIA : ");
+                        dia = entradaData.nextInt();
+                        System.out.print("MES : ");
+                        mes = entradaData.nextInt();
+                        System.out.print("ANO : ");
+                        ano = entradaData.nextInt();
+                        dataEmissao = new Data(dia,mes,ano);
+                        if(!ValidaDados.isData(dataEmissao)){
+                            System.out.println("DATA INVALIDA!!!");
                         }
-                    }
+                    }while (!ValidaDados.isData(dataEmissao));
+
+                    do{
+                        System.out.print("CODIGO FORNECEDOR : \t");
+                        codigoFornecedor = entradaFornecedor.nextInt();
+                        fornecedor = fornecedores.buscarFornecedor(codigoFornecedor);
+                    }while (fornecedor==null);
+
                     NotaFiscal nota = new NotaFiscal(numero,serie,dataEmissao,fornecedor);
 
                     int codigoProduto;
@@ -221,28 +251,90 @@ public class SIMarket {
                         codigoProduto = entradaCodigoProduto.nextInt();
                         produto = repositorioProduto.buscarProduto(codigoProduto);
 
-                        if(produto == null){
-                            while(produto==null){
-                                System.out.print("INSIRA O CODIGO DO PRODUTO : \t");
-                                codigoProduto = entradaCodigoProduto.nextInt();
-                                produto = repositorioProduto.buscarProduto(codigoProduto);
-                            }
+                        if(produto!=null){
+                          System.out.print("INSIRA O VALOR DE COMPRA : \t");
+                          valorCompra = entradaValorCompra.nextDouble();
+                          System.out.print("INSIRA QUANTIDADE : \t");
+                          quantidade = entradaQuantidade.nextDouble();
+                          nota.adicionarProduto(produto,valorCompra,quantidade);
+                        }else{
+                            System.out.println("CODIGO INVALIDO!!!");
                         }
-
-                        System.out.print("INSIRA O VALOR DE COMPRA : \t");
-                        valorCompra = entradaValorCompra.nextDouble();
-                        System.out.print("INSIRA QUANTIDADE : \t");
-                        quantidade = entradaQuantidade.nextDouble();
-
-                        ProdutoNotaFiscal produtoNotaFiscal = new ProdutoNotaFiscal(produto,valorCompra,quantidade);
-                        System.out.println("88 - FINALIZAR NOTA E SAIR ");
-
+                        System.out.println("DIGITE (1)PARA CONTINUAR (88)PARA FECHAR NOTA");
+                        opcao = entradaOpcao.nextInt();
                     }while(opcao != 88);
+
                     estoque.incrementar(nota);
                     notas.adicionarNotas(nota);
                     subMenuEstoque();
                     break;
                 case 2:
+                    System.out.println("===========================================");
+                    System.out.println("===== LISTAR NOTAS(POR DATA EMISSAO) ======");
+                    System.out.println("===========================================");
+
+                    do{
+                        System.out.println("DATA DE EMISSAO");
+                        System.out.print("DIA : ");
+                        dia = entradaData.nextInt();
+                        System.out.print("MES : ");
+                        mes = entradaData.nextInt();
+                        System.out.print("ANO : ");
+                        ano = entradaData.nextInt();
+                        dataEmissao = new Data(dia,mes,ano);
+                        if(!ValidaDados.isData(dataEmissao)){
+                            System.out.println("DATA INVALIDA!!!");
+                        }
+                    }while (!ValidaDados.isData(dataEmissao));
+
+                    System.out.println(notas.listarNotasPorEmissao(dataEmissao));
+                    break;
+                case 3:
+                    System.out.println("===========================================");
+                    System.out.println("===== LISTAR NOTAS(POR DATA ENTRADA) ======");
+                    System.out.println("===========================================");
+
+                    Data dataEntrada;
+
+                    do{
+                        System.out.println("DATA DE ENTRADA");
+                        System.out.print("DIA : ");
+                        dia = entradaData.nextInt();
+                        System.out.print("MES : ");
+                        mes = entradaData.nextInt();
+                        System.out.print("ANO : ");
+                        ano = entradaData.nextInt();
+                        dataEntrada = new Data(dia,mes,ano);
+                        if(!ValidaDados.isData(dataEntrada)){
+                            System.out.println("DATA INVALIDA!!!");
+                        }
+                    }while (!ValidaDados.isData(dataEntrada));
+
+                    System.out.println(notas.listarNotasPorEntrada(dataEntrada));
+                    break;
+                case 4:
+                    System.out.println("===========================================");
+                    System.out.println("===== LISTAR NOTAS(POR NUMERO) ======");
+                    System.out.println("===========================================");
+
+                    System.out.println("Insira o Numero : ");
+                    int num = entradaNumero.nextInt();
+
+                    System.out.println(notas.listarNotasPorNumero(num));
+
+                    break;
+                case 5:
+                    System.out.println("===========================================");
+                    System.out.println("===== LISTAR NOTAS(POR FORNECEDOR) ======");
+                    System.out.println("===========================================");
+
+                    System.out.println("Insira o codigo : ");
+                    codigoFornecedor = entradaFornecedor.nextInt();
+
+                    System.out.println(notas.listarNotas(codigoFornecedor));
+                    break;
+
+                case 6:
                     System.out.println(estoque.listarEstoque());
                     subMenuEstoque();
                     break;
@@ -374,6 +466,7 @@ public class SIMarket {
 
                         produto = new Produto(codigoBarra,descricao,valorCompra,valorVenda,secao);
                         repositorioProduto.adicionarProduto(produto);
+                        estoque.adicionarProduto(produto);
                         break;
 
                     case 2:
@@ -394,6 +487,7 @@ public class SIMarket {
 
                         produto = new Produto(codigoProduto,codigoBarra,descricao,valorCompra,valorVenda,secao);
                         repositorioProduto.adicionarProduto(produto);
+                        estoque.adicionarProduto(produto);
                         break;
                 }
                 break;
@@ -403,6 +497,7 @@ public class SIMarket {
                 System.out.print("Insira o Codigo do produto que deseja remover :  \t");
                 codigoProduto = entradaCodigo.nextInt();
                 repositorioProduto.removerProduto(codigoProduto);
+                estoque.removerProduto(codigoProduto);
                 break;
 
             case 3:
@@ -511,11 +606,11 @@ public class SIMarket {
                 do {
                     System.out.print("Digite o CPF do Funcionário: \t");
                     cpf = entradaCpfFuncionario.nextLine();
-                    if (ValidaCpf.isCPF(cpf) != true)
+                    if (ValidaDados.isCPF(cpf) != true)
                     {
                         System.out.println("CPF INVÁLIDO!!! DIGITE NOVAMENTE!");
                     }
-                }while (ValidaCpf.isCPF(cpf) != true);
+                }while (ValidaDados.isCPF(cpf) != true);
 
                 System.out.print("Digite o RG do Funcionário: \t");
                 rg = entradargFuncionario.nextLine();
@@ -628,7 +723,7 @@ public class SIMarket {
         {
             case 1:
 
-                ValidaCpf validaCpf = new ValidaCpf();
+                ValidaDados ValidaDados = new ValidaDados();
 
 
 
@@ -637,11 +732,11 @@ public class SIMarket {
                 do{
                     System.out.print("Digite o CPF do Cliente: \t");
                     cpf = entradaCpfCliente.nextLine();
-                    if (validaCpf.isCPF(cpf) != true)
+                    if (ValidaDados.isCPF(cpf) != true)
                     {
                         System.out.println("CPF INVÁLIDO!!! DIGITE NOVAMENTE!");
                     }
-                }while (validaCpf.isCPF(cpf) != true);
+                }while (ValidaDados.isCPF(cpf) != true);
 
                     System.out.print("Digite o RG do Cliente: \t");
                     rg = entradargCliente.nextLine();
@@ -787,6 +882,7 @@ public class SIMarket {
         usuario = funcionario;
     }
     public static void iniciarCadastroPadrao(){
+
         Endereco endereco = new Endereco("RUA MELO PEIXOTO","12","BOA VISTA","GARANHUNS","55293-190","PE");
         Endereco enderecoAssociado = new Endereco("RUA SÂO JOSÉ","375","CENTRO","GARANHUNS","55293-340","PE");
         Cliente cliente = new Cliente("BENEVENUTO DACIOLO FONSECA DOS SANTOS","0000000","196.861.118-59",endereco,"(87)9999-9999","");
@@ -795,10 +891,11 @@ public class SIMarket {
         Fornecedor fornecedor = new Fornecedor(1,"DISTR. CESAR",endereco);
         Funcionario funcionario = new Funcionario("ADMIN","0000001","07068093868",endereco,true,"ADMIN","1234");
         Funcionario associado = new Funcionario("Jair Messias Bolsonaro", "8579645", "45317828791", enderecoAssociado, false, "BOZO", "123456");
-        NotaFiscal nota = new NotaFiscal(1,1,"23-10-18",fornecedor);
-        nota.adicionarProduto(produto,1.55,12);
+        NotaFiscal nota = new NotaFiscal(1,1,new Data(23,10,2018),fornecedor);
 
-        estoque.adicionarProduto(produto,12);
+        nota.adicionarProduto(produto,1.55,1);
+        estoque.adicionarProduto(produto);
+        estoque.incrementar(nota);
         repositorioCliente.adicionarPessoa(cliente);
         fornecedores.adicionarFornecedor(fornecedor);
         repositorioFuncionario.adicionarPessoa(funcionario);

@@ -12,11 +12,11 @@ import java.util.ArrayList;
 public class NotaFiscal {
     private int numero;
     private int serie;
-    private String dataEmissao;
+    private Data dataEmissao;
     private Calendar dataEntrada;
     private Fornecedor fornecedor;
     private ArrayList<ProdutoNotaFiscal> nota;
-    public NotaFiscal(int numero, int serie,String dataEmissao,Fornecedor fornecedor){
+    public NotaFiscal(int numero, int serie,Data dataEmissao,Fornecedor fornecedor){
         this.numero = numero;
         this.serie = serie;
         this.dataEmissao = dataEmissao;
@@ -59,8 +59,8 @@ public class NotaFiscal {
     public Fornecedor getFornecedor(){return this.fornecedor;}
     public void setFornecedor(Fornecedor fornecedor){this.fornecedor = fornecedor;}
     public ArrayList<ProdutoNotaFiscal> getNota(){return this.nota;}
-    public String getDataEmissao(){return this.dataEmissao;}
-    public void setDataEmissao(String data){this.dataEmissao = data;}
+    public Data getDataEmissao(){return this.dataEmissao;}
+    public void setDataEmissao(Data data){this.dataEmissao = data;}
     public Calendar getDataEntrada(){return this.dataEntrada;}
     public double getTotal(){
         double total = 0;
@@ -69,6 +69,7 @@ public class NotaFiscal {
         }
         return total;
     }
+    @Override
     public String toString(){
         String str = "Numero : "+getNumero()+"Serie : "+getSerie()+"\nData de Emissao :"+getDataEmissao()+"\n"+
                fornecedor.toString();
@@ -78,11 +79,11 @@ public class NotaFiscal {
             str += produto.toString();
             total += produto.getTotal();
         }
-        str += "\nTOTAL : "+total;
+        str += "\nTOTAL DA NOTA : "+total;
         return str;
     }
     public String toStringBasico(){
-        return "Numero : "+getNumero()+"Serie : "+getSerie()+"\nData de Emissao :"+getDataEmissao()+
+        return "Numero : "+getNumero()+"Serie : "+getSerie()+"\nData de Emissao :"+getDataEmissao().toString()+
                 "Data de Entrada : "+getDataEntrada().DAY_OF_MONTH+" - "+getDataEntrada().MONTH+" - "+
                 getDataEntrada().YEAR+"\nTotal da Nota :"+getTotal()+"\n";
     }

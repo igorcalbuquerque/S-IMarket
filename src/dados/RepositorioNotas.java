@@ -6,6 +6,7 @@
  */
 package dados;
 
+import entidades.Data;
 import entidades.NotaFiscal;
 import java.util.ArrayList;
 
@@ -24,14 +25,35 @@ public class RepositorioNotas {
         }
         return lista;
     }
-    public String listarNotas(int dia,int mes, int ano){
-        String dataBuscada = dia+" - "+mes+" - "+ano;
+    public String listarNotasPorEntrada(Data data){
+
         String lista = "";
+
         for(NotaFiscal nota: this.notas){
-            String dataEntradaNota = nota.getDataEntrada().DAY_OF_MONTH+" - "+nota.getDataEntrada().MONTH+
-                   " - "+nota.getDataEntrada().YEAR;
-            if(dataBuscada.equals(dataEntradaNota)){
+            Data dataEntradaNota = new Data(nota.getDataEntrada().DAY_OF_MONTH,nota.getDataEntrada().MONTH,nota.getDataEntrada().YEAR);
+            if(data.equals(dataEntradaNota)){
                 lista+=nota.toStringBasico();
+            }
+        }
+        return lista;
+    }
+    public String listarNotasPorEmissao(Data data){
+
+        String lista = "";
+
+        for(NotaFiscal nota: this.notas){
+            Data dataEmissao = new Data(nota.getDataEmissao().getDia(),nota.getDataEmissao().getMes(),nota.getDataEmissao().getAno());
+            if(data.equals(dataEmissao)){
+                lista+=nota.toStringBasico();
+            }
+        }
+        return lista;
+    }
+    public String listarNotasPorNumero(int numero){
+        String lista = "";
+        for(NotaFiscal nota:notas){
+            if(nota.getNumero() == numero){
+                lista += nota.toStringBasico();
             }
         }
         return lista;

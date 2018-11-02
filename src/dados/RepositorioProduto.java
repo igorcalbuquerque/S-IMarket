@@ -18,6 +18,19 @@ public class RepositorioProduto {
         this.produtos = new ArrayList<Produto>();
     }
     public void adicionarProduto(Produto produto){
+        Produto p = this.buscarProduto(produto.getCodigoProduto());
+        if (p != null){
+            System.out.println("O CODIGO INFORMADO JA EXISTE!!!");
+        }else{
+            p = this.buscarPorCodBarra(produto.getCodigoBarra());
+            if (p!=null){
+                System.out.println("O CODIGO INFORMADO JA EXISTE!!!");
+            }
+            else{
+                produtos.add(produto);
+            }
+        }
+
         produtos.add(produto);
     }
     public void removerProduto(int codigo){

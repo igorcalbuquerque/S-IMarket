@@ -20,4 +20,11 @@ public class ProdutoNotaFiscal extends ProdutoEstoque {
     public double getValorCompra(){
         return this.valorCompra;
     }
+    @Override
+    public String toString(){
+        String str = "CODIGO : "+this.getProduto().getCodigoProduto() +" CODIGO BARRA :"+this.getProduto().getCodigoBarra()+" DESCRICAO : "+
+                this.getProduto().getDescricao()+" VALOR COMPRA : "+this.valorCompra+" QUANTIDADE : "+this.quantidade+"TOTAL : "+getTotal()+
+                "\n";
+        return str;
+    }
 }

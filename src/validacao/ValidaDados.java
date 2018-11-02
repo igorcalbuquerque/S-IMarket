@@ -1,8 +1,10 @@
-package main;
+package validacao;
 
 import java.util.InputMismatchException;
 
-public class ValidaCpf {
+import entidades.Data;
+
+public class ValidaDados {
 
     public static boolean isCPF(String CPF) {
 
@@ -63,5 +65,31 @@ public class ValidaCpf {
     public static String imprimeCPF(String CPF) {
         return(CPF.substring(0, 3) + "." + CPF.substring(3, 6) + "." +
                 CPF.substring(6, 9) + "-" + CPF.substring(9, 11));
+    }
+    public static boolean isName(String name){
+
+        char[] caracteres = name.toCharArray();
+        char[] invalidos = {'1','!','2','@','3','#','4','*','5','%','6','7','&','8','9','(','0',')',
+                '<',',','>','.',';',':','/','?','[','{',']','}'};
+
+        for(char c:caracteres){
+            for(char i:invalidos){
+                if(c==i){
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+    public static boolean isData(Data data){
+        if(data == null){
+            return false;
+        }
+        if(data.getDia() > 0 && data.getDia()<=31 && data.getMes() > 0 && data.getMes() < 12 && data.getAno() > 0) {
+            return true;
+        }else {
+            return false;
+        }
     }
 }

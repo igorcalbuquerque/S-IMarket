@@ -83,11 +83,20 @@ public class EstoqueProduto {
         return lista;
     }
     public void incrementar(NotaFiscal nota){
-        for(ProdutoNotaFiscal produto:nota.getNota()){
+        for(ProdutoNotaFiscal produtoNota:nota.getNota()){
             for(ProdutoEstoque produtoEstoque:this.estoque){
-                if(produto.getProduto().getCodigoProduto() == produtoEstoque.getProduto().getCodigoProduto()){
-                    produtoEstoque.incrementar(produto.getQuantidade());
+                if(produtoNota.getProduto().getCodigoProduto() == produtoEstoque.getProduto().getCodigoProduto()){
+                    produtoEstoque.incrementar(produtoNota.getQuantidade());
                 }
+            }
+        }
+    }
+    public void removerProduto(int codigo){
+
+        for(ProdutoEstoque produtoEstoque:this.estoque){
+            if(produtoEstoque.getProduto().getCodigoProduto() == codigo){
+                estoque.remove(produtoEstoque);
+                break;
             }
         }
     }
