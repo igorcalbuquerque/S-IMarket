@@ -42,8 +42,9 @@ public class RepositorioVenda {
         double total = 0;
         String relatorio = "";
         for(Carrinho c: vendas){
-            if(c.getData().equals(dataInicial) || c.getData().equals(dataFinal) ||
-               c.getData().eDepois(dataInicial) || c.getData().eAntes(dataFinal)) {
+
+            if(c.getData().equals(dataInicial) || c.getData().eDepois(dataInicial) &&
+               c.getData().eAntes(dataFinal)||c.getData().equals(dataFinal)) {
 
                 relatorio += c.toString();
                 total += c.getValorTotal();
@@ -65,8 +66,8 @@ public class RepositorioVenda {
 
                 if(c.getCliente().getCpf().equals(cliente.getCpf())){
 
-                    if(c.getData().equals(dataInicial) || c.getData().equals(dataFinal) ||
-                       c.getData().eDepois(dataInicial) || c.getData().eAntes(dataFinal)) {
+                    if(c.getData().equals(dataInicial) || c.getData().eDepois(dataInicial) &&
+                       c.getData().eAntes(dataFinal)||c.getData().equals(dataFinal)) {
 
                         relatorio += c.toString();
                         total += c.getValorTotal();
@@ -91,8 +92,8 @@ public class RepositorioVenda {
 
             if(c.getUsuario().getCpf().equals(funcionario.getCpf())){
 
-                if(c.getData().equals(dataInicial) || c.getData().equals(dataFinal) ||
-                   c.getData().eDepois(dataInicial) || c.getData().eAntes(dataFinal)) {
+                if(c.getData().equals(dataInicial) || c.getData().eDepois(dataInicial) &&
+                   c.getData().eAntes(dataFinal)||c.getData().equals(dataFinal)) {
 
                     relatorio += c.toString();
                     total += c.getValorTotal();
@@ -145,8 +146,8 @@ public class RepositorioVenda {
 
                 if(produtoVenda.getProduto().getCodigoProduto() == produto.getCodigoProduto()){
 
-                    if(c.getData().equals(dataInicial) || c.getData().equals(dataFinal) ||
-                       c.getData().eDepois(dataInicial) || c.getData().eAntes(dataFinal)) {
+                    if(c.getData().equals(dataInicial) || c.getData().eDepois(dataInicial) &&
+                       c.getData().eAntes(dataFinal)||c.getData().equals(dataFinal)) {
 
                         relatorio += produtoVenda.toString();
                         total += produtoVenda.getTotal();
