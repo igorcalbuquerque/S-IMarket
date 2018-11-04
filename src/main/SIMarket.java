@@ -1121,7 +1121,7 @@ public class SIMarket {
         System.out.println("88 - SAIR");
         opcao = SolicitaDados.solicitaOpcao();
 
-        String codigo = "A";
+        String codigo;
         double quantidade;
         double valorPago;
 
@@ -1216,7 +1216,9 @@ public class SIMarket {
 
                 System.out.println("======== OBRIGADO PELA PREFERENCIA!!! =========");
                 System.out.printf("TROCO : RS %.2f\n",(valorPago-carrinho.getValorTotal()));
+
                 vendas.adicionarVenda(carrinho);
+                estoque.decrementar(carrinho);
 
                 subMenuCaixa();
                 break;

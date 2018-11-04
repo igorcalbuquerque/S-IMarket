@@ -20,9 +20,9 @@ public class Carrinho {
     private Funcionario usuario;
 
     public Carrinho(Funcionario user){
-        Calendar calendar = Calendar.getInstance();
+        Calendar c = Calendar.getInstance();
         this.cliente = null;
-        this.data = new Data(calendar.DAY_OF_MONTH,calendar.MONTH,calendar.YEAR);
+        this.data = new Data(c.get(Calendar.DAY_OF_MONTH),c.get(Calendar.MONTH)+1,c.get(Calendar.YEAR));
         this.codigo = getProximoCodigoDaVenda();
         this.carrinho = new ArrayList<ProdutoVenda>();
         this.valorTotal = 0;
