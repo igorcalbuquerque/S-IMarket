@@ -1,5 +1,12 @@
 package entidades;
 
+/**
+ * Validator used to check whether given string is
+ * no longer than the specified amount of characters.
+ *
+ * @author Saú Cesar
+ */
+
 public class Data {
 
     private int dia;
@@ -35,5 +42,43 @@ public class Data {
     public String toString(){
         String str = this.dia+"/"+this.mes+"/"+this.ano;
         return str;
+    }
+    public boolean eAntes(Data data){
+        if(this.ano <= data.getAno()){
+            return true;
+        }
+        if(this.ano > data.getAno()){
+            return false;
+        }
+        if (this.mes <= data.getMes()){
+            return true;
+        }
+        if(this.mes > data.getMes()){
+            return false;
+        }
+        if(this.dia <= data.getDia()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public boolean eDepois(Data data){
+        if(this.ano >= data.getAno()){
+            return true;
+        }
+        if(this.ano < data.getAno()){
+            return false;
+        }
+        if (this.mes >= data.getMes()){
+            return true;
+        }
+        if(this.mes < data.getMes()){
+            return false;
+        }
+        if(this.dia >= data.getDia()){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

@@ -8,8 +8,6 @@ package main;
 
 import dados.*;
 import entidades.*;
-import validacao.ValidaDados;
-
 import java.util.Scanner;
 
 public class SIMarket {
@@ -35,26 +33,19 @@ public class SIMarket {
         System.out.println("===========================================");
         System.out.println("===========================================");
 
-        boolean logado = login();
-        while (!logado){
-            logado= login();
-        }
+        login();
 
     }
-    public static boolean login() {
+    public static void login() {
+
         String login;
         String senha;
         Funcionario usuario;
 
         do{
 
-            Scanner entradaUser = new Scanner(System.in);
-            Scanner entradaSenha = new Scanner(System.in);
-
-            System.out.print("LOGIN: \t");
-            login = entradaUser.nextLine();
-            System.out.print("SENHA: \t");
-            senha = entradaSenha.nextLine();
+            login = SolicitaDados.solicitarString("O LOGIN");
+            senha = SolicitaDados.solicitarString("A SENHA");
 
             usuario = repositorioFuncionario.buscarPorLogin(login);
 
@@ -67,28 +58,21 @@ public class SIMarket {
             }else{
                 System.out.println("USUARIO INVALIDO!!!");
             }
-        }while ((usuario == null) || (usuario.getSenha().equals(senha)==false));
+        }while ((usuario == null) || !(usuario.getSenha().equals(senha)));
 
-        Funcionario user = repositorioFuncionario.buscarPorLogin(login);
-        if(user!=null){
-            if(user.getSenha().equals(senha)){
-                setUsuario(user);
-                if (usuario.isGerente())
-                {
-                    menu();
-                }
-                else
-                {
-                    menuAssociado();
-                }
-                return true;
-            }
+        if (usuario.isGerente()) {
+            menu();
         }
-        return false;
+        else {
+            menuAssociado();
+        }
+
+        setUsuario(usuario);
     }
     public static void menuAssociado() {
-        Scanner entradaOpcao = new Scanner(System.in);
+
         int opcao;
+
         do {
             System.out.println("===========================================");
             System.out.println("===========================================");
@@ -102,8 +86,7 @@ public class SIMarket {
             System.out.println("4 - MUDAR USUARIO ");
             System.out.println("88 - SAIR !!!");
 
-            System.out.print("Digite a Opção desejada: \t");
-            opcao = entradaOpcao.nextInt();
+            opcao = SolicitaDados.solicitaOpcao();
 
             switch (opcao) {
                 case 1:
@@ -116,18 +99,16 @@ public class SIMarket {
                     subMenuEstoque();
                     break;
                 case 4:
-
-                    while (!login()){
-                        login();
-                    }
+                    login();
                     break;
             }
 
         } while (opcao != 88);
     }
     public static void menu(){
-        Scanner entradaOpcao = new Scanner(System.in);
+
         int opcao;
+
         do{
             System.out.println("===========================================");
             System.out.println("===========================================");
@@ -141,11 +122,11 @@ public class SIMarket {
             System.out.println("4 - CLIENTES");
             System.out.println("5 - FUNCIONARIOS");
             System.out.println("6 - ESTOQUE ");
-            System.out.println("7 - FORNECEDORES");
+            System.out.println("7 - FORNECEDOR");
+            System.out.println("8 - RELATORIO DE VENDAS");
             System.out.println("88 - SAIR !!!");
 
-            System.out.print("Digite a Opção desejada: \t");
-            opcao = entradaOpcao.nextInt();
+            opcao = SolicitaDados.solicitaOpcao();
 
             switch (opcao){
                 case 1:
@@ -166,13 +147,24 @@ public class SIMarket {
                 case 6:
                     subMenuEstoque();
                     break;
+
+                case 7:
+
+                    subMenuFornecedor();
+                    break;
+
+                case 8:
+
+                    relatorioDeVendas();
+                    break;
             }
 
         }while (opcao != 88);
     }
     public static void subMenuEstoque(){
+
         int opcao;
-        Scanner entradaOpcao = new Scanner(System.in);
+
         do{
 
             System.out.println("===========================================");
@@ -187,52 +179,45 @@ public class SIMarket {
             System.out.println("4 - LISTAR NOTAS(POR NUMERO)");
             System.out.println("5 - LISTAR NOTAS(POR FORNECEDOR)");
             System.out.println("6 - RELATORIO DE ESTOQUE");
+            System.out.println("7 - EXCLUIR NOTA");
             System.out.println("88 - SAIR");
-            System.out.println("Insira a opcao desejada : \t");
-            opcao = entradaOpcao.nextInt();
 
-            int dia,mes,ano;
-            Scanner entradaData = new Scanner(System.in);
+            opcao = SolicitaDados.solicitaOpcao();
+
+
             Scanner entradaFornecedor = new Scanner(System.in);
             Scanner entradaNumero = new Scanner(System.in);
 
+            Data dataEmissao;
+            int codigoFornecedor;
+            Fornecedor fornecedor;
+            Data dataEntrada;
+
             switch (opcao){
+
                 case 1:
-
-                    int opcaoNota;
-                    Scanner entradaOpcaoNota = new Scanner(System.in);
-
-                    int numero;
-                    int serie;
-                    Data dataEmissao;
-                    int codigoFornecedor;
-                    Fornecedor fornecedor;
-
 
                     Scanner entradaSerie = new Scanner(System.in);
 
                     System.out.print("NUMERO DA NOTA : \t");
-                    numero = entradaNumero.nextInt();
+                    int numero = entradaNumero.nextInt();
+
                     System.out.print("SERIE : \t");
-                    serie = entradaSerie.nextInt();
-                    do{
-                        System.out.println("DATA DE EMISSAO");
-                        System.out.print("DIA : ");
-                        dia = entradaData.nextInt();
-                        System.out.print("MES : ");
-                        mes = entradaData.nextInt();
-                        System.out.print("ANO : ");
-                        ano = entradaData.nextInt();
-                        dataEmissao = new Data(dia,mes,ano);
-                        if(!ValidaDados.isData(dataEmissao)){
-                            System.out.println("DATA INVALIDA!!!");
-                        }
-                    }while (!ValidaDados.isData(dataEmissao));
+                    int serie = entradaSerie.nextInt();
+
+                    System.out.println("DATA DE EMISSAO");
+                    dataEmissao = SolicitaDados.solicitarData();
 
                     do{
                         System.out.print("CODIGO FORNECEDOR : \t");
                         codigoFornecedor = entradaFornecedor.nextInt();
+
                         fornecedor = fornecedores.buscarFornecedor(codigoFornecedor);
+
+                        if(fornecedor==null){
+                            System.out.println("CODIGO DE FORNECEDOR INVALIDO!!!");
+                        }
+
                     }while (fornecedor==null);
 
                     NotaFiscal nota = new NotaFiscal(numero,serie,dataEmissao,fornecedor);
@@ -242,77 +227,64 @@ public class SIMarket {
                     double valorCompra;
                     double quantidade;
 
-                    Scanner entradaCodigoProduto = new Scanner(System.in);
                     Scanner entradaQuantidade = new Scanner(System.in);
                     Scanner entradaValorCompra = new Scanner(System.in);
 
                     do{
-                        System.out.print("INSIRA O CODIGO DO PRODUTO : \t");
-                        codigoProduto = entradaCodigoProduto.nextInt();
+
+                        codigoProduto = SolicitaDados.solicitarInt("CODIGO DO PRODUTO");
+
                         produto = repositorioProduto.buscarProduto(codigoProduto);
 
                         if(produto!=null){
+
                           System.out.print("INSIRA O VALOR DE COMPRA : \t");
                           valorCompra = entradaValorCompra.nextDouble();
+
                           System.out.print("INSIRA QUANTIDADE : \t");
                           quantidade = entradaQuantidade.nextDouble();
+
                           nota.adicionarProduto(produto,valorCompra,quantidade);
                         }else{
                             System.out.println("CODIGO INVALIDO!!!");
                         }
-                        System.out.println("DIGITE (1)PARA CONTINUAR (88)PARA FECHAR NOTA");
-                        opcao = entradaOpcao.nextInt();
+
+                        System.out.println("DIGITE (1) PARA ADICIONAR PRODUTO (88)PARA FECHAR NOTA");
+                        opcao = SolicitaDados.solicitaOpcao();
+
                     }while(opcao != 88);
 
                     estoque.incrementar(nota);
                     notas.adicionarNotas(nota);
+
                     subMenuEstoque();
                     break;
+
                 case 2:
+
                     System.out.println("===========================================");
                     System.out.println("===== LISTAR NOTAS(POR DATA EMISSAO) ======");
                     System.out.println("===========================================");
 
-                    do{
-                        System.out.println("DATA DE EMISSAO");
-                        System.out.print("DIA : ");
-                        dia = entradaData.nextInt();
-                        System.out.print("MES : ");
-                        mes = entradaData.nextInt();
-                        System.out.print("ANO : ");
-                        ano = entradaData.nextInt();
-                        dataEmissao = new Data(dia,mes,ano);
-                        if(!ValidaDados.isData(dataEmissao)){
-                            System.out.println("DATA INVALIDA!!!");
-                        }
-                    }while (!ValidaDados.isData(dataEmissao));
+                    System.out.println("DATA DE EMISSAO");
+                    dataEmissao = SolicitaDados.solicitarData();
 
                     System.out.println(notas.listarNotasPorEmissao(dataEmissao));
                     break;
+
                 case 3:
                     System.out.println("===========================================");
                     System.out.println("===== LISTAR NOTAS(POR DATA ENTRADA) ======");
                     System.out.println("===========================================");
 
-                    Data dataEntrada;
-
-                    do{
-                        System.out.println("DATA DE ENTRADA");
-                        System.out.print("DIA : ");
-                        dia = entradaData.nextInt();
-                        System.out.print("MES : ");
-                        mes = entradaData.nextInt();
-                        System.out.print("ANO : ");
-                        ano = entradaData.nextInt();
-                        dataEntrada = new Data(dia,mes,ano);
-                        if(!ValidaDados.isData(dataEntrada)){
-                            System.out.println("DATA INVALIDA!!!");
-                        }
-                    }while (!ValidaDados.isData(dataEntrada));
+                    System.out.println("DATA DE ENTRADA");
+                    dataEntrada = SolicitaDados.solicitarData();
 
                     System.out.println(notas.listarNotasPorEntrada(dataEntrada));
+                    subMenuEstoque();
                     break;
                 case 4:
+
                     System.out.println("===========================================");
                     System.out.println("===== LISTAR NOTAS(POR NUMERO) ======");
                     System.out.println("===========================================");
@@ -321,21 +293,52 @@ public class SIMarket {
                     int num = entradaNumero.nextInt();
 
                     System.out.println(notas.listarNotasPorNumero(num));
-
+                    subMenuEstoque();
                     break;
+
                 case 5:
+
                     System.out.println("===========================================");
                     System.out.println("===== LISTAR NOTAS(POR FORNECEDOR) ======");
                     System.out.println("===========================================");
 
-                    System.out.println("Insira o codigo : ");
-                    codigoFornecedor = entradaFornecedor.nextInt();
+                    codigoFornecedor = SolicitaDados.solicitarInt("CODIGO DO FORNECEDOR");
 
                     System.out.println(notas.listarNotas(codigoFornecedor));
+
+                    subMenuEstoque();
                     break;
 
                 case 6:
                     System.out.println(estoque.listarEstoque());
+                    subMenuEstoque();
+                    break;
+
+                case 7:
+
+                    System.out.println("===========================================");
+                    System.out.println("========== EXCLUIR NOTA FISCAL ============");
+                    System.out.println("===========================================");
+
+                    numero = SolicitaDados.solicitarInt("NUMERO DA NOTA");
+                    codigoFornecedor = SolicitaDados.solicitarInt("CODIGO NO FORNECEDOR (DIGITE(88) PARA CANCELAR)");
+
+                    if(numero!=88){
+
+                        nota = notas.buscarNota(numero,codigoFornecedor);
+                        if (nota!=null){
+                            estoque.decrementar(nota);
+                        }
+                        notas.removerNota(numero,codigoFornecedor);
+
+                    }else{
+                        System.out.println("========= OPERACAO CANCELADA!! ============");
+                    }
+
+                    subMenuEstoque();
+                    break;
+                default:
+
                     subMenuEstoque();
                     break;
             }
@@ -362,14 +365,17 @@ public class SIMarket {
         opcao = entradaOpcao.nextInt();
 
         switch (opcao){
+
             case 1:
-                Scanner entradaDescricaoSecao = new Scanner(System.in);
-                Scanner entradaOpcaoCodigo = new Scanner(System.in);
-                System.out.print("\nDigite o nome da Seção que Deseja Cadastrar: \t");
-                String descricaoSecao = entradaDescricaoSecao.nextLine();
+                System.out.println("===========================================");
+                System.out.println("============ CADASTRAR SECAO===============");
+                System.out.println("===========================================");
+
+                String descricaoSecao = SolicitaDados.solicitaNome();
 
                 System.out.print("\nDeseja gerar codigo Automaticamente? (1)SIM (2)NAO \t");
-                int opcaoCodigo =  entradaOpcaoCodigo.nextInt();
+                int opcaoCodigo =  SolicitaDados.solicitaOpcao();
+
                 Secao novaSecao;
 
                 switch (opcaoCodigo){
@@ -379,34 +385,43 @@ public class SIMarket {
                         System.out.println(repositorioSecao.listarSecoes());
                         break;
                     case 2:
-                        Scanner entradaCodigo = new Scanner(System.in);
-                        System.out.print("\nDigite o Codigo da Seção que Deseja Cadastrar: \t");
-                        int codigo = entradaCodigo.nextInt();
+
+                        int codigo = SolicitaDados.solicitarInt("CODIGO DA SECAO");
+
                         novaSecao = new Secao(codigo, descricaoSecao);
                         repositorioSecao.addSecao(novaSecao);
                         System.out.println(repositorioSecao.listarSecoes());
+
+                        subMenuSecao();
                         break;
                 }
                 break;
+
             case 2:
-                Scanner entradaCodigo = new Scanner(System.in);
-                int codigo;
+
+                System.out.println("===========================================");
+                System.out.println("============ REMOVER SECAO ================");
+                System.out.println("===========================================");
+
                 System.out.print("\nDigite o Codigo da Seção a ser Removida : \t");
-                codigo = entradaCodigo.nextInt();
+                int codigo = SolicitaDados.solicitarInt("CODIGO DA SECAO");
                 repositorioSecao.removeSecao(codigo);
                 break;
+
             case 3:
-                System.out.println("=======SECOES CADASTRADAS=======");
+                System.out.println("=========== SECOES CADASTRADAS =============");
                 System.out.println(repositorioSecao.listarSecoes());
+
+                subMenuSecao();
                 break;
+
              default:
-                 menu();
+                 subMenuSecao();
                  break;
         }
 
     }
     public static void subMenuProduto(){
-        Scanner entradaOpcao = new Scanner(System.in);
 
         System.out.println("===========================================");
         System.out.println("===========================================");
@@ -420,16 +435,7 @@ public class SIMarket {
         System.out.println("4 - MODIFICAR PRODUTO");
         System.out.println("88 - SAIR !!!");
 
-        System.out.print("Digite sua opcao :  \t");
-        int opcao = entradaOpcao.nextInt();
-
-        Scanner entradaCodigo = new Scanner(System.in);
-        Scanner entradaCodigoBarra = new Scanner(System.in);
-        Scanner entradaDescricao = new Scanner(System.in);
-        Scanner entradaValorCompra = new Scanner(System.in);
-        Scanner entradaValorVenda = new Scanner(System.in);
-        Scanner entradaSecao = new Scanner(System.in);
-        Scanner entradaOpcaoModificao = new Scanner(System.in);
+        int opcao = SolicitaDados.solicitaOpcao();
 
         int codigoProduto;
         String codigoBarra;
@@ -443,122 +449,337 @@ public class SIMarket {
 
         switch (opcao){
             case 1:
-                Scanner opcaoDeCodigo = new Scanner(System.in);
 
                 System.out.println("Insira as informacoes Solicitadas !!!");
                 System.out.print("Gerar codigo Automatico? (1)SIM (2)NAO \t");
-                int opcaoCodigo = opcaoDeCodigo.nextInt();
+                int opcaoCodigo = SolicitaDados.solicitaOpcao();
 
                 switch (opcaoCodigo){
 
                     case 1:
-                        System.out.print("Codigo Barra :  \t");
-                        codigoBarra = entradaCodigoBarra.nextLine();
-                        System.out.print("Descricao :  \t");
-                        descricao = entradaDescricao.nextLine();
-                        System.out.print("Valor de Compra :  \t");
-                        valorCompra = entradaValorCompra.nextDouble();
-                        System.out.print("Valor de Venda :   \t");
-                        valorVenda = entradaValorVenda.nextDouble();
-                        System.out.print("Codigo da Secao :   \t");
-                        codigoSecao = entradaSecao.nextInt();
+
+                        codigoBarra = SolicitaDados.solicitarString("O CODIGO DE BARRA");
+                        descricao = SolicitaDados.solicitarString("A DESCRICAO");
+
+                        valorCompra = SolicitaDados.solicitarDouble("VALOR DE COMPRA");
+                        valorVenda = SolicitaDados.solicitarDouble("VALOR DE VENDA");
+
+                        codigoSecao = SolicitaDados.solicitarInt("CODIGO DA SECAO");
                         secao = repositorioSecao.buscarSecao(codigoSecao);
 
                         produto = new Produto(codigoBarra,descricao,valorCompra,valorVenda,secao);
+
                         repositorioProduto.adicionarProduto(produto);
                         estoque.adicionarProduto(produto);
+
                         break;
 
                     case 2:
 
-                        System.out.print("Codigo :  \t");
-                        codigoProduto = entradaCodigo.nextInt();
-                        System.out.print("Codigo Barra :  \t");
-                        codigoBarra = entradaCodigoBarra.nextLine();
-                        System.out.print("Descricao :  \t");
-                        descricao = entradaDescricao.nextLine();
-                        System.out.print("Valor de Compra :  \t");
-                        valorCompra = entradaValorCompra.nextDouble();
-                        System.out.print("Valor de Venda :   \t");
-                        valorVenda = entradaValorVenda.nextDouble();
-                        System.out.print("Codigo da Secao :   \t");
-                        codigoSecao = entradaSecao.nextInt();
-                        secao = repositorioSecao.buscarSecao(codigoSecao);
+                        codigoProduto = SolicitaDados.solicitarInt("CODIGO DO PRODUTO");
+                        codigoBarra = SolicitaDados.solicitarString("CODIGO DE BARRA");
+                        descricao =  SolicitaDados.solicitarString("A DESCRICAO");;
+                        valorCompra = SolicitaDados.solicitarDouble("VALOR COMPRA");
+                        valorVenda = SolicitaDados.solicitarDouble("VALOR VENDA");
+
+                        do{
+
+                            codigoSecao = SolicitaDados.solicitarInt("CODIGO DA SECAO");
+
+                            secao = repositorioSecao.buscarSecao(codigoSecao);
+                            if (secao==null){
+                                System.out.println("INSIRA UMA SECAO VALIDA");
+                            }
+
+                        }while (secao==null);
 
                         produto = new Produto(codigoProduto,codigoBarra,descricao,valorCompra,valorVenda,secao);
                         repositorioProduto.adicionarProduto(produto);
                         estoque.adicionarProduto(produto);
                         break;
                 }
+                subMenuProduto();
                 break;
 
             case 2:
 
-                System.out.print("Insira o Codigo do produto que deseja remover :  \t");
-                codigoProduto = entradaCodigo.nextInt();
+                codigoProduto = SolicitaDados.solicitarInt("CODIGO DO PRODUTO");
+
                 repositorioProduto.removerProduto(codigoProduto);
                 estoque.removerProduto(codigoProduto);
+
+                subMenuProduto();
                 break;
 
             case 3:
 
                 System.out.println(repositorioProduto.listarProdutos());
+
+                subMenuProduto();
                 break;
 
             case 4:
 
-                System.out.print("Insira o Codigo do produto que deseja Modificar :  \t");
-                codigoProduto = entradaCodigo.nextInt();
+                codigoProduto = SolicitaDados.solicitarInt("CODIGO DO PRODUTO");
                 produto = repositorioProduto.buscarProduto(codigoProduto);
 
-                System.out.println("Informacao Atual");
-                System.out.println(produto.toString());
+                if(produto!=null){
 
-                System.out.println("1 - MODIFICAR CODIGO ");
-                System.out.println("2 - MODIFICAR DESCRICAO");
-                System.out.println("3 - MODIFICAR VALOR COMPRA");
-                System.out.println("4 - MODIFICAR VALOR VENDA");
-                System.out.println("5 - MODIFICAR SECAO ");
-                System.out.println("88 - SAIR !!!");
-                opcaoModificacao = entradaOpcaoModificao.nextInt();
-                switch (opcaoModificacao){
-                    case 1:
-                        System.out.print("Insira o Novo Codigo :  \t");
-                        codigoProduto = entradaCodigo.nextInt();
-                        produto.setCodigoProduto(codigoProduto);
-                        break;
-                    case 2:
-                        System.out.print("Insira a Nova Descricao :  \t");
-                        descricao = entradaDescricao.nextLine();
-                        produto.setDescricao(descricao);
-                        break;
-                    case 3:
-                        System.out.print("Insira a Novo Valor de Compra :  \t");
-                        valorCompra = entradaValorCompra.nextDouble();
-                        produto.setValorCompra(valorCompra);
-                        break;
-                    case 4:
-                        System.out.print("Insira a Novo Valor de Venda :  \t");
-                        valorVenda= entradaValorCompra.nextDouble();
-                        produto.setValorVenda(valorVenda);
-                        break;
-                    case 5:
-                        System.out.print("Insira o Codigo da Nova Secao :  \t");
-                        codigoSecao= entradaSecao.nextInt();
-                        secao = repositorioSecao.buscarSecao(codigoSecao);
-                        produto.setSecao(secao);
-                        break;
-                    default:
-                        subMenuProduto();
-                        break;
+                    System.out.println("========== INFORMACAO ATUAL ============");
+                    System.out.println(produto.toString());
+
+                    System.out.println("1 - MODIFICAR CODIGO ");
+                    System.out.println("2 - MODIFICAR DESCRICAO");
+                    System.out.println("3 - MODIFICAR VALOR COMPRA");
+                    System.out.println("4 - MODIFICAR VALOR VENDA");
+                    System.out.println("5 - MODIFICAR SECAO ");
+                    System.out.println("88 - SAIR !!!");
+
+                    opcaoModificacao = SolicitaDados.solicitaOpcao();
+
+                    switch (opcaoModificacao){
+                        case 1:
+
+                            System.out.println("============== ALTERAR CODIGO ==============");
+
+                            codigoProduto = SolicitaDados.solicitarInt("NOVO CODIGO");
+                            if(repositorioProduto.buscarProduto(codigoProduto)==null){
+
+                                produto.setCodigoProduto(codigoProduto);
+                                System.out.println("=== INFORMACAO ATUALIZADA COM SUCESSO!!! ===");
+
+                            }else {
+                                System.out.println("=========== O CODIGO JA EXISTE!!! ==========");
+                            }
+
+                            subMenuProduto();
+                            break;
+
+                        case 2:
+
+                            System.out.println("============= ALTERAR DESCRICAO ============");
+
+                            descricao = SolicitaDados.solicitarString("A DESCRICAO");
+
+                            produto.setDescricao(descricao);
+                            System.out.println("=== INFORMACAO ATUALIZADA COM SUCESSO!!! ===");
+
+                            subMenuProduto();
+                            break;
+                        case 3:
+
+                            System.out.println("========== ALTERAR VALOR COMPRA ============");
+
+                            valorCompra = SolicitaDados.solicitarDouble("VALOR DE COMPRA");
+
+                            produto.setValorCompra(valorCompra);
+                            System.out.println("=== INFORMACAO ATUALIZADA COM SUCESSO!!! ===");
+
+                            subMenuProduto();
+                            break;
+
+                        case 4:
+
+                            System.out.println("=========== ALTERAR VALOR VENDA ============");
+
+                            valorVenda= SolicitaDados.solicitarDouble("VALOR DE VENDA");
+
+                            produto.setValorVenda(valorVenda);
+                            System.out.println("=== INFORMACAO ATUALIZADA COM SUCESSO!!! ===");
+
+                            subMenuProduto();
+                            break;
+                        case 5:
+
+                            System.out.println("============== ALTERAR SECAO ===============");
+
+                            codigoSecao= SolicitaDados.solicitarInt("CODIGO DA SECAO");
+
+                            secao = repositorioSecao.buscarSecao(codigoSecao);
+
+                            if (secao != null){
+                                produto.setSecao(secao);
+                                System.out.println("=== INFORMACAO ATUALIZADA COM SUCESSO!!! ===");
+                            }
+
+                            subMenuProduto();
+                            break;
+
+                        default:
+
+                            subMenuProduto();
+                            break;
+                    }
                 }
+
+                subMenuProduto();
                 break;
 
              default:
-                 menu();
+
+                 subMenuProduto();
                  break;
         }
 
+    }
+    public static void subMenuFornecedor(){
+
+        System.out.println("===========================================");
+        System.out.println("=== S & I Markets (MENU  FORNECEDORES) ====");
+        System.out.println("===========================================");
+
+        System.out.println("1 - CADASTRAR ");
+        System.out.println("2 - REMOVER POR CODIGO");
+        System.out.println("3 - REMOVER POR CNPJ");
+        System.out.println("4 - MODIFICAR ");
+        System.out.println("5 - LISTAR TODOS ");
+        System.out.println("88 - SAIR !!!");
+
+        int opcao = SolicitaDados.solicitaOpcao();
+
+        int codigo;
+        String nome;
+        String cnpj;
+        Endereco endereco;
+        Fornecedor fornecedor;
+
+        do{
+            switch (opcao){
+
+                case 1:
+
+                    System.out.println("=========== CADASTRAR FORNECEDOR ==========");
+
+                    codigo = SolicitaDados.solicitarInt("CODIGO");
+                    nome = SolicitaDados.solicitaNome();
+                    cnpj = SolicitaDados.solicitarString("O CNPJ");
+                    endereco = SolicitaDados.solicitaEndereco();
+
+                    fornecedor = new Fornecedor(codigo,nome,cnpj,endereco);
+                    fornecedores.adicionarFornecedor(fornecedor);
+                    subMenuFornecedor();
+                    break;
+
+                case 2:
+                    System.out.println("=========== REMOVER FORNECEDOR ==========");
+                    codigo = SolicitaDados.solicitarInt("CODIGO");
+
+                    fornecedores.removerFornecedor(codigo);
+
+                    subMenuFornecedor();
+                    break;
+
+                case 3:
+
+                    System.out.println("=========== REMOVER FORNECEDOR ==========");
+                    cnpj = SolicitaDados.solicitarString("O CNPJ");
+
+                    fornecedores.removerFornecedor(cnpj);
+
+                    subMenuFornecedor();
+                    break;
+
+                case 4:
+
+                    System.out.println("===========================================");
+                    System.out.println("=========== MODIFICAR FORNECEDOR ==========");
+                    System.out.println("===========================================");
+
+                    do{
+
+                        codigo = SolicitaDados.solicitarInt("CODIGO DO FORNECEDOR ");
+                        fornecedor = fornecedores.buscarFornecedor(codigo);
+                        if (fornecedor==null){
+                            System.out.println("====== INSIRA UM FORNECEDOR VALIDO ========");
+                        }
+
+                    }while(fornecedor==null);
+
+                    System.out.println("1 - MODIFICAR CODIGO ");
+                    System.out.println("2 - MODIFICAR NOME");
+                    System.out.println("3 - MODIFICAR CNPJ ");
+                    System.out.println("4 - MODIFICAR ENDERECO ");
+                    System.out.println("88 - SAIR !!!");
+
+                    opcao = SolicitaDados.solicitaOpcao();
+
+                    switch (opcao){
+
+                        case 1:
+
+                            System.out.println("=========== MODIFICAR CODIGO ==========");
+                            codigo = SolicitaDados.solicitarInt("NOVO CODIGO");
+
+                            Fornecedor f = fornecedores.buscarFornecedor(codigo);
+                            if(f == null){
+                                fornecedor.setCodigo(codigo);
+                                System.out.println("====== INFORMACAO ATUALIZADA!!! =======");
+                            }
+
+                            subMenuFornecedor();
+                            break;
+
+                        case 2:
+
+                            System.out.println("=========== MODIFICAR NOME ==========");
+                            nome = SolicitaDados.solicitarString("O NOVO NOME");
+
+                            fornecedor.setNome(nome);
+                            System.out.println("====== INFORMACAO ATUALIZADA!!! =======");
+
+                            subMenuFornecedor();
+                            break;
+
+                        case 3:
+
+                            System.out.println("=========== MODIFICAR CNPJ ============");
+                            cnpj = SolicitaDados.solicitarString("O NOVO CNPJ");
+
+                            Fornecedor forn = fornecedores.buscarFornecedor(cnpj);
+                            if(forn == null){
+                                fornecedor.setCnpj(cnpj);
+                                System.out.println("====== INFORMACAO ATUALIZADA!!! =======");
+                            }
+
+                            subMenuFornecedor();
+                            break;
+
+                        case 4:
+
+                            System.out.println("=========== MODIFICAR ENDERECO ============");
+
+                            endereco = SolicitaDados.solicitaEndereco();
+                            fornecedor.setEndereco(endereco);
+
+                            System.out.println("====== INFORMACAO ATUALIZADA!!! =======");
+
+                            subMenuFornecedor();
+                            break;
+
+                        default:
+
+                            subMenuFornecedor();
+                            break;
+                    }
+
+                    break;
+                case 5:
+
+                    System.out.println("========= LISTAR FORNECEDORES ==========");
+                    System.out.println(fornecedores.listarFornecedores());
+
+
+                    break;
+
+                default:
+
+                    subMenuFornecedor();
+                    break;
+            }
+
+        }while (opcao != 88);
+
+        menu();
     }
     public static void subMenuFuncionario(){
         System.out.println("===========================================");
@@ -573,115 +794,212 @@ public class SIMarket {
         System.out.println("4 - MODIFICAR FUNCIONARIO");
         System.out.println("88 - SAIR !!!");
 
-        Scanner entradaOpcao = new Scanner (System.in);
-
-        System.out.print("Digite sua opcao :  \t");
-        int opcao = entradaOpcao.nextInt();
-
-        Scanner entradaNomeFuncionario = new Scanner(System.in);
-        Scanner entradaCpfFuncionario = new Scanner(System.in);
-        Scanner entradargFuncionario = new Scanner(System.in);
-        Scanner entradaEndereco = new Scanner(System.in);
-        Scanner entradaLogin = new Scanner(System.in);
-        Scanner entradaSenha = new Scanner(System.in);
-        Scanner entradaConfirmaSenha = new Scanner(System.in);
+        int opcao = SolicitaDados.solicitaOpcao();
 
         String nome;
         String cpf;
         String rg;
+        Endereco endereco;
         String login;
         String senha;
-
-
-
-
 
         switch (opcao)
         {
 
             case 1:
-                System.out.print("Digite o Nome do Funcionário: \t");
-                nome = entradaNomeFuncionario.nextLine();
 
-                do {
-                    System.out.print("Digite o CPF do Funcionário: \t");
-                    cpf = entradaCpfFuncionario.nextLine();
-                    if (ValidaDados.isCPF(cpf) != true)
-                    {
-                        System.out.println("CPF INVÁLIDO!!! DIGITE NOVAMENTE!");
-                    }
-                }while (ValidaDados.isCPF(cpf) != true);
+                nome = SolicitaDados.solicitaNome();
+                cpf = SolicitaDados.solicitaCpf();
+                rg = SolicitaDados.solicitaRg();
+                endereco = SolicitaDados.solicitaEndereco();
+                login = SolicitaDados.solicitaLogin();
+                senha = SolicitaDados.solicitaSenha();
 
-                System.out.print("Digite o RG do Funcionário: \t");
-                rg = entradargFuncionario.nextLine();
-                System.out.print("Digite o nome da Rua: \t");
-                String rua = entradaEndereco.nextLine();
-                System.out.print("Digite o nome do Bairro: \t");
-                String bairro = entradaEndereco.nextLine();
-                System.out.print("Digite o número da casa: \t");
-                String numero = entradaEndereco.nextLine();
-                System.out.print("Digite o nome da Cidade: \t");
-                String cidade = entradaEndereco.nextLine();
-                System.out.print("Digite o número do CEP: \t");
-                String cep = entradaEndereco.nextLine();
-                System.out.print("Digite o nome da UF: \t");
-                String uf = entradaEndereco.nextLine();
-                System.out.print("Digite o Login (OPCIONAL): \t");
-                login = entradaLogin.nextLine();
-                System.out.print("Digite a Senha Desejada: \t");
-                senha = entradaSenha.nextLine();
-                System.out.print("Confirme a Senha Digitada: \t");
-                String confirmaSenha = entradaConfirmaSenha.nextLine();
+                Funcionario funcionario;
 
-                if (senha.equals(confirmaSenha))
-                {
-                    Endereco enderecoSalvar = new Endereco(rua, numero, bairro, cidade, cep, uf);
-                    Funcionario funcionario = new Funcionario(nome, rg, cpf, enderecoSalvar, false, senha);
-
-                    repositorioFuncionario.adicionarPessoa(funcionario);
+                if(login.equals("")){
+                    funcionario = new Funcionario(nome, rg, cpf, endereco, false, senha);
+                }else{
+                    funcionario = new Funcionario(nome, rg, cpf, endereco, false, login,senha);
                 }
-                else
-                {
-                    boolean confere = false;
-                    System.out.println("Senha Não confere!!!");
-                    while(confere == false)
-                    {
-                        System.out.print("Digite a Senha Desejada: \t");
-                        senha = entradaSenha.nextLine();
-                        System.out.print("Confirme a Senha Digitada: \t");
-                        confirmaSenha = entradaConfirmaSenha.nextLine();
 
-                        if (senha.equals(confirmaSenha))
-                        {
-                            Endereco enderecoSalvar = new Endereco(rua, numero, bairro, cidade, cep, uf);
-                            Funcionario funcionario = new Funcionario(nome, rg, cpf, enderecoSalvar, false, senha);
+                repositorioFuncionario.adicionarPessoa(funcionario);
 
-                            repositorioFuncionario.adicionarPessoa(funcionario);
-                            confere = true;
-                        }
-                    }
-
-                }
-                menu();
+                subMenuFuncionario();
                 break;
 
             case 2:
 
-                System.out.println("Digite o CPF do Funcionário a Ser Removido: \t");
-                String cpfFuncionario = entradaCpfFuncionario.nextLine();
+                System.out.println("==========================================");
+                System.out.println("=========== REMOVER FUNCIONÁRIO ==========");
+                System.out.println("==========================================");
+
+                String cpfFuncionario = SolicitaDados.solicitaCpf();
+
                 repositorioFuncionario.removerPessoaCpf(cpfFuncionario);
-                menu();
+
+                subMenuFuncionario();
                 break;
 
             case 3:
+
                 System.out.println("==========================================");
                 System.out.println("==========================================");
                 System.out.println("========== LISTA DE FUNCIONÁRIOS =========");
                 System.out.println("==========================================");
                 System.out.println("==========================================");
+
                 System.out.println(repositorioFuncionario.listarFucionarios());
+
+                subMenuFuncionario();
+                break;
+
+            case 4:
+
+                Funcionario func = null;
+                String cpfBuscado;
+
+                do{
+                    System.out.println("==========================================");
+                    System.out.println("=== MODIFICAR DADOS DE FUNCIONÁRIOS ======");
+                    System.out.println("==========================================");
+                    System.out.println("DIGITE 0 PARA SAIR)");
+                    cpfBuscado = SolicitaDados.solicitaCpf();
+
+                    if(cpfBuscado.equals("0")){
+                        break;
+                    }else{
+                        func = (Funcionario) repositorioFuncionario.buscarPessoaPorCpf(cpfBuscado);
+                        if(func == null){
+                            System.out.println("CPF BUSCADO NAO EXISTE!!!");
+                        }
+                    }
+
+                }while(func == null || !cpfBuscado.equals("0"));
+
+                if(func!=null){
+
+                    System.out.println("====================================================");
+                    System.out.println(" 1 - MODIFICAR NOME");
+                    System.out.println(" 2 - MODIFICAR CPF");
+                    System.out.println(" 3 - MODIFICAR RG");
+                    System.out.println(" 4 - MODIFICAR LOGIN");
+                    System.out.println(" 5 - MODIFICAR SENHA");
+                    System.out.println(" 6 - MODIFICAR ENDERECO");
+                    System.out.println(" 7 - PARA CANCELAR A QUALQUER MOMENTO");
+                    opcao = SolicitaDados.solicitaOpcao();
+                    System.out.println("====================================================");
+
+                    switch (opcao){
+
+                        case 1:
+
+                            nome = SolicitaDados.solicitaNome();
+
+                            if(!nome.equals("7")){
+
+                                func.setNome(nome);
+                                System.out.println("======= NOME MODIFICADO COM SUCESSO!!! =======");
+
+                            }else{
+
+                                System.out.println("=============== CANCELADO !!! ================");
+
+                            }
+
+                            subMenuFuncionario();
+                            break;
+
+                        case 2:
+
+                            cpf = SolicitaDados.solicitaCpf();
+
+                            if(!cpf.equals("7")){
+
+                                func.setCpf(cpf);
+                                System.out.println("======= CPF MODIFICADO COM SUCESSO!!! ========");
+
+                            }else{
+
+                                System.out.println("=============== CANCELADO !!! ================");
+
+                            }
+                            subMenuFuncionario();
+                            break;
+
+                        case 3:
+
+                            rg = SolicitaDados.solicitaNome();
+
+                            if(!rg.equals("7")){
+
+                                func.setRg(rg);
+                                System.out.println("======== RG MODIFICADO COM SUCESSO!!! ========");
+
+                            }else{
+
+                                System.out.println("=============== CANCELADO !!! ================");
+
+                            }
+                            subMenuFuncionario();
+                            break;
+
+                        case 4:
+
+                            System.out.println("================ OPCIONAL ====================");
+                            login = SolicitaDados.solicitaLogin();
+
+                            if(!login.equals("7")){
+
+                                func.setLogin(login);
+                                System.out.println("====== LOGIN MODIFICADO COM SUCESSO!!! =======");
+
+                            }else{
+
+                                System.out.println("=============== CANCELADO !!! ================");
+
+                            }
+                            subMenuFuncionario();
+                            break;
+
+                        case 5:
+
+                            senha = SolicitaDados.solicitaSenha();
+
+                            if(!senha.equals("7")){
+
+                                func.setSenha(senha);
+                                System.out.println("====== SENHA MODIFICADA COM SUCESSO!!! =======");
+
+                            }else{
+
+                                System.out.println("=============== CANCELADO !!! ================");
+
+                            }
+
+                            subMenuFuncionario();
+                            break;
+
+                        case 6:
+
+                            endereco = SolicitaDados.solicitaEndereco();
+                            func.setEndereco(endereco);
+
+                            System.out.println("==== ENDERECO MODIFICADA COM SUCESSO!!! ======");
+
+                            subMenuFuncionario();
+                            break;
+
+                        default:
+
+                            subMenuFuncionario();
+                            break;
+                    }
+                }
+            case 88:
                 menu();
                 break;
+
         }
 
 
@@ -689,6 +1007,7 @@ public class SIMarket {
 
     }
     public static void subMenuCliente(){
+
         System.out.println("===========================================");
         System.out.println("===========================================");
         System.out.println("==== S & I Markets (MENU CLIENTE) =========");
@@ -701,67 +1020,59 @@ public class SIMarket {
         System.out.println("4 - MODIFICAR CLIENTE");
         System.out.println("88 - SAIR !!!");
 
-        Scanner entradaOpcao = new Scanner (System.in);
+        int opcao = SolicitaDados.solicitaOpcao();
 
-        System.out.print("Digite sua opcao :  \t");
-        int opcao = entradaOpcao.nextInt();
-
-        Scanner entradaNomeCliente = new Scanner(System.in);
-        Scanner entradaCpfCliente = new Scanner(System.in);
-        Scanner entradargCliente = new Scanner(System.in);
-        Scanner entradaEndereco = new Scanner(System.in);
         Scanner entradaTelefone = new Scanner(System.in);
+        Scanner entradaEmail = new Scanner(System.in);
 
 
         String nome;
         String cpf;
         String rg;
         String telefone;
-
+        String email;
+        Endereco endereco;
+        Cliente cliente;
 
         switch (opcao)
         {
             case 1:
 
-                ValidaDados ValidaDados = new ValidaDados();
+                nome = SolicitaDados.solicitaNome();
 
-
-
-                    System.out.print("Digite o Nome do Cliente: \t");
-                    nome = entradaNomeCliente.nextLine();
                 do{
-                    System.out.print("Digite o CPF do Cliente: \t");
-                    cpf = entradaCpfCliente.nextLine();
-                    if (ValidaDados.isCPF(cpf) != true)
-                    {
-                        System.out.println("CPF INVÁLIDO!!! DIGITE NOVAMENTE!");
+                    cpf = SolicitaDados.solicitaCpf();
+
+                    cliente = (Cliente)repositorioCliente.buscarPessoaPorCpf(cpf);
+
+                    if(cliente!=null){
+                        System.out.println("====== O CPF INFORMADO JA EXISTE!!! =======");
                     }
-                }while (ValidaDados.isCPF(cpf) != true);
 
-                    System.out.print("Digite o RG do Cliente: \t");
-                    rg = entradargCliente.nextLine();
-                    System.out.print("Digite o nome da Rua: \t");
-                    String rua = entradaEndereco.nextLine();
-                    System.out.print("Digite o nome do Bairro: \t");
-                    String bairro = entradaEndereco.nextLine();
-                    System.out.print("Digite o número da casa: \t");
-                    String numero = entradaEndereco.nextLine();
-                    System.out.print("Digite o nome da Cidade: \t");
-                    String cidade = entradaEndereco.nextLine();
-                    System.out.print("Digite o número do CEP: \t");
-                    String cep = entradaEndereco.nextLine();
-                    System.out.print("Digite o nome da UF: \t");
-                    String uf = entradaEndereco.nextLine();
-                    System.out.print("Digite o Telefone: \t");
-                    telefone = entradaTelefone.nextLine();
-                    System.out.print("Digite o E-Mail: \t");
-                    String email = entradaEndereco.nextLine();
+                }while (cliente!=null);
 
-                    Endereco enderecoSalvar = new Endereco(rua, numero, bairro, cidade, cep, uf);
 
-                    Cliente cliente = new Cliente(nome, rg, cpf, enderecoSalvar, telefone, email);
-                    repositorioCliente.adicionarPessoa(cliente);
+                do{
+                    rg = SolicitaDados.solicitaRg();
 
+                    cliente = (Cliente)repositorioCliente.buscarPessoaPorRg(rg);
+
+                    if(cliente!=null){
+                        System.out.println("====== O RG INFORMADO JA EXISTE!!! =======");
+                    }
+
+                }while (cliente!=null);
+
+                endereco = SolicitaDados.solicitaEndereco();
+
+                System.out.println("Digite o Telefone: \t");
+                telefone = entradaTelefone.nextLine();
+
+                System.out.println("Digite o EMAIL: \t");
+                email = entradaEmail.nextLine();
+
+                cliente = new Cliente(nome,rg,cpf,endereco,telefone,email);
+                repositorioCliente.adicionarPessoa(cliente);
 
                 break;
 
@@ -770,28 +1081,32 @@ public class SIMarket {
 
             case 2:
 
-                System.out.println("Digite o CPF do Cliente a Ser Removido: \t");
-                String cpfCliente = entradaCpfCliente.nextLine();
+                System.out.println("==========================================");
+                System.out.println("=========== REMOVER CLIENTE ==============");
+                System.out.println("==========================================");
+
+                String cpfCliente = SolicitaDados.solicitaCpf();
+
                 repositorioCliente.removerPessoaCpf(cpfCliente);
-                menu();
+
+                subMenuCliente();
                 break;
 
             case 3:
-                System.out.println("==========================================");
+
                 System.out.println("==========================================");
                 System.out.println("========== LISTA DE CLIENTES =============");
                 System.out.println("==========================================");
-                System.out.println("==========================================");
+
                 System.out.println(repositorioCliente.listarClientes());
-                menu();
+
+                subMenuCliente();
                 break;
         }
 
-
-
-
     }
     public static void subMenuCaixa(){
+
         System.out.println("===========================================");
         System.out.println("===========================================");
         System.out.println("======= S & I Markets (MENU  VENDA) =======");
@@ -799,81 +1114,288 @@ public class SIMarket {
         System.out.println("===========================================");
 
         int opcao;
-        Scanner entradaOpcao = new Scanner(System.in);
 
         System.out.println("1 - REALIZAR VENDA");
         System.out.println("2 - CONSULTAR PRECO");
         System.out.println("3 - CANCELAR VENDA ");
         System.out.println("88 - SAIR");
-        System.out.println("Insira a opcao desejada : \t");
-        opcao = entradaOpcao.nextInt();
+        opcao = SolicitaDados.solicitaOpcao();
 
-        String codigo = "0";
+        String codigo = "A";
         double quantidade;
-        double valor;
-
-        Scanner entradaValor = new Scanner(System.in);
-        Scanner entradaCodigo = new Scanner(System.in);
-        Scanner entradaQuantidade = new Scanner(System.in);
+        double valorPago;
 
         switch (opcao){
+
             case 1:
+
                 Carrinho carrinho = new Carrinho(getUsuario());
+
                 do{
-                    System.out.println(" (0) para finalizar Venda (1) Modificar Quantidade (2) Remover Produto ");
-                    System.out.print("Codigo do produto ou Opcao desejada: \t");
-                    codigo = entradaCodigo.next();
+
+                    System.out.println(" (A) PARA FINALIZAR VENDA (B) MODIFICAR QUANTIDADE (C) REMOVER PRODUTO");
+                    System.out.println("(D)ATRIBUIR CLIENTE (E) REMOVER CLIENTE ");
+
+                    codigo = SolicitaDados.solicitarString("O CODIGO BARRA OU OPCAO DESEJADA");
+
                     switch (codigo.toCharArray()[0]){
-                        case '0':
+
+                        case 'A':
                             break;
-                        case '1':
-                            System.out.println("Modificacao de Quantidade");
-                            System.out.print("Insira o Codigo : \t");
-                            codigo = entradaQuantidade.next();
-                            System.out.print("Insira a quantidade : \t");
-                            quantidade = entradaQuantidade.nextDouble();
+
+                        case 'B':
+
+                            System.out.println("========= MODIFICAR QUANTIDADE ============");
+
+                            codigo = SolicitaDados.solicitarString("O CODIGO");
+
+                            quantidade = SolicitaDados.solicitarDouble(" QUANTIDADE ");
                             ProdutoVenda produtoVenda = carrinho.buscarProduto(codigo);
+
                             if(produtoVenda != null){
                                 produtoVenda.setQuantidade(quantidade);
                             }
-                            break;
-                        case '2':
-                            System.out.println("Remover Produto!!!");
-                            System.out.print("Insira o Codigo : \t");
-                            codigo = entradaQuantidade.next();
-                            carrinho.removerItem(codigo);
-                            break;
-                        default:
-                            Produto produto = repositorioProduto.buscarPorCodBarra(codigo);
-                            if (produto != null){
-                                System.out.print("Insira a quantidade : \t");
-                                quantidade = entradaQuantidade.nextDouble();
 
-                                carrinho.adicionarItem(produto,quantidade);
+                            break;
+
+                        case 'C':
+
+                            System.out.println("========== REMOVER PRODUTO ================");
+                            codigo = SolicitaDados.solicitarString("O CODIGO DO PRODUTO");
+                            carrinho.removerItem(codigo);
+
+                            break;
+
+                        case 'D':
+
+                            System.out.println("=========== ATRIBIUR CLIENTE ==============");
+                            String cpf = SolicitaDados.solicitaCpf();
+                            Cliente cliente = (Cliente) clientes.buscarPessoaPorCpf(cpf);
+                            if(cliente!=null){
+                                carrinho.atribuirCliente(cliente);
                             }
+
+                            break;
+
+                        case 'E':
+
+                            carrinho.removerCliente();
+                            System.out.println("=========== CLIENTE REMOVIDO ==============");
+
+                            break;
+
+                        default:
+
+                            Produto produto = repositorioProduto.buscarPorCodBarra(codigo);
+
+                            if (produto != null){
+
+                                quantidade = SolicitaDados.solicitarDouble("QUATIDADE");
+                                carrinho.adicionarItem(produto,quantidade);
+
+                            }
+
                             break;
                     }
+
                     System.out.println("===========================================");
                     System.out.println(carrinho.listarItens());
                     System.out.println("===========================================");
 
-                }while(!codigo.equals("0"));
+                }while(!codigo.equals("A"));
 
                 do {
-                    System.out.print("Insira o valor recebido : \t");
-                    valor = entradaValor.nextDouble();
-                    if(valor>=carrinho.getValorTotal()){
-                        System.out.println("Obrigado Pela Preferencia!!!");
-                        System.out.printf("Troco : RS %.2f\n",(valor-carrinho.getValorTotal()));
-                        vendas.adicionarVenda(carrinho);
+
+                    valorPago = SolicitaDados.solicitarDouble("VALOR RECEBIDO");
+
+                    if(valorPago<carrinho.getValorTotal()){
+                        System.out.println("======== VALOR INSUFICIENTE!!! ========");
                     }
-                }while(valor < carrinho.getValorTotal());
+
+                }while(valorPago < carrinho.getValorTotal());
+
+                System.out.println("======== OBRIGADO PELA PREFERENCIA!!! =========");
+                System.out.printf("TROCO : RS %.2f\n",(valorPago-carrinho.getValorTotal()));
+                vendas.adicionarVenda(carrinho);
+
                 subMenuCaixa();
                 break;
+            case 2:
+
+                System.out.println("===========================================");
+                System.out.println("============ CONSULTAR PRECO  =============");
+                System.out.println("===========================================");
+
+               do{
+
+                   codigo = SolicitaDados.solicitarString("O CODIGO DE BARRA(DIGITE (S) PARA SAIR)");
+                   if(codigo.equals("S") ){
+                       break;
+                   }else{
+
+                       Produto produto = repositorioProduto.buscarPorCodBarra(codigo);
+
+                       if(produto!=null){
+                           System.out.println(produto.toString());
+                       }
+                   }
+               }while (!codigo.equals("S"));
+
+                subMenuCaixa();
+                break;
+
+            case 3:
+
+                System.out.println("===========================================");
+                System.out.println("============= CANCELAR VENDA  =============");
+                System.out.println("===========================================");
+
+                int numero = SolicitaDados.solicitarInt("CODIGO DA VENDA");
+
+                vendas.removerVenda(numero);
+
+                Carrinho venda = vendas.buscarCarrinho(numero);
+
+                if(venda !=null){
+                    estoque.incrementar(venda);
+                }
+
+                subMenuCaixa();
+                break;
+
             case 88:
+
                 menu();
                 break;
         }
+    }
+    public static void relatorioDeVendas(){
+
+        System.out.println("===========================================");
+        System.out.println("========== RELATORIOS DE VENDA ============");
+        System.out.println("===========================================");
+
+        System.out.println("1 - VENDA POR PERIODO");
+        System.out.println("2 - VENDA POR FUNCIONARIO");
+        System.out.println("4 - VENDA POR PRODUTO");
+        System.out.println("5 - VENDA POR CLIENTE");
+        System.out.println("88 - SAIR !!!");
+
+        int opcao = SolicitaDados.solicitaOpcao();
+        int codigo;
+        Secao secao;
+        String cpf;
+        Produto produto;
+        Cliente cliente;
+        Funcionario funcionario;
+        Data dataInicial;
+        Data dataFinal;
+
+        switch (opcao){
+
+            case 1:
+
+                System.out.println("=========== VENDA POR PERIODO =============");
+
+                System.out.println("DATA INICIAL");
+                dataInicial = SolicitaDados.solicitarData();
+
+                System.out.println("DATA FINAL");
+                dataFinal = SolicitaDados.solicitarData();
+
+                System.out.println(vendas.relatorioVenda(dataInicial,dataFinal));
+
+                relatorioDeVendas();
+                break;
+
+            case 2:
+
+                System.out.println("========= VENDA POR FUNCIONARIO ===========");
+
+                cpf = SolicitaDados.solicitarString("O CPF DO FUNCIONARIO");
+                funcionario = (Funcionario) repositorioFuncionario.buscarPessoaPorCpf(cpf);
+
+                if(funcionario!=null){
+
+                    System.out.println("DATA INICIAL");
+                    dataInicial = SolicitaDados.solicitarData();
+
+                    System.out.println("DATA FINAL");
+                    dataFinal = SolicitaDados.solicitarData();
+
+                    System.out.println(vendas.relatorioVenda(funcionario,dataInicial,dataFinal));
+
+                }
+
+                relatorioDeVendas();
+                break;
+
+            case 3:
+                System.out.println("========= VENDA POR FUNCIONARIO ===========");
+
+                codigo = SolicitaDados.solicitarInt("CODIGO DA SECAO");
+                secao = repositorioSecao.buscarSecao(codigo);
+
+                if(secao!=null){
+
+                    System.out.println("DATA INICIAL");
+                    dataInicial = SolicitaDados.solicitarData();
+
+                    System.out.println("DATA FINAL");
+                    dataFinal = SolicitaDados.solicitarData();
+
+                    System.out.println(vendas.relatorioVenda(secao,dataInicial,dataFinal));
+
+                }
+
+                relatorioDeVendas();
+                break;
+
+            case 4:
+
+                System.out.println("============ VENDA POR PRODUTO =============");
+
+                codigo = SolicitaDados.solicitarInt("CODIGO DO PRODUTO");
+                produto = repositorioProduto.buscarProduto(codigo);
+
+                if(produto!=null){
+
+                    System.out.println("DATA INICIAL");
+                    dataInicial = SolicitaDados.solicitarData();
+
+                    System.out.println("DATA FINAL");
+                    dataFinal = SolicitaDados.solicitarData();
+
+                    System.out.println(vendas.relatorioVenda(produto,dataInicial,dataFinal));
+
+                }
+
+                relatorioDeVendas();
+                break;
+
+            case 5:
+
+                System.out.println("============= VENDA POR CLIENTE ==============");
+
+                cpf = SolicitaDados.solicitarString("O CPF DO CLIENTE");
+                cliente = (Cliente) repositorioCliente.buscarPessoaPorCpf(cpf);
+
+                if(cliente!=null){
+
+                    System.out.println("DATA INICIAL");
+                    dataInicial = SolicitaDados.solicitarData();
+
+                    System.out.println("DATA FINAL");
+                    dataFinal = SolicitaDados.solicitarData();
+
+                    System.out.println(vendas.relatorioVenda(cliente,dataInicial,dataFinal));
+
+                }
+
+                relatorioDeVendas();
+                break;
+        }
+
     }
     public static Funcionario getUsuario(){
         return usuario;
@@ -888,7 +1410,7 @@ public class SIMarket {
         Cliente cliente = new Cliente("BENEVENUTO DACIOLO FONSECA DOS SANTOS","0000000","196.861.118-59",endereco,"(87)9999-9999","");
         Secao secao = new Secao(1,"BEBIDAS");
         Produto produto = new Produto("7894900010015","COCA COLA 350ML",1.49,2.49,secao);
-        Fornecedor fornecedor = new Fornecedor(1,"DISTR. CESAR",endereco);
+        Fornecedor fornecedor = new Fornecedor(1,"DISTR. CESAR","123.123.124/0012",endereco);
         Funcionario funcionario = new Funcionario("ADMIN","0000001","07068093868",endereco,true,"ADMIN","1234");
         Funcionario associado = new Funcionario("Jair Messias Bolsonaro", "8579645", "45317828791", enderecoAssociado, false, "BOZO", "123456");
         NotaFiscal nota = new NotaFiscal(1,1,new Data(23,10,2018),fornecedor);

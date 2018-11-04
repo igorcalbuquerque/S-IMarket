@@ -7,9 +7,8 @@
 package dados;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
-import entidades.Carrinho;
+import entidades.*;
 
 public class RepositorioVenda {
     private ArrayList<Carrinho> vendas;
@@ -38,18 +37,131 @@ public class RepositorioVenda {
         }
         return null;
     }
-    public String relatorioVendaDia(int dia, int mes,int ano){
-        String diaSolicitado = dia+"-"+mes+"-"+ano;
+    public String relatorioVenda(Data dataInicial,Data dataFinal){
+
         double total = 0;
         String relatorio = "";
         for(Carrinho c: vendas){
-            String diaCarrinho = c.getData().DAY_OF_MONTH+"-"+c.getData().MONTH+"-"+c.getData().YEAR;
-            if(diaSolicitado.equals(diaCarrinho)){
+            if(c.getData().equals(dataInicial) || c.getData().equals(dataFinal) ||
+               c.getData().eDepois(dataInicial) || c.getData().eAntes(dataFinal)) {
+
                 relatorio += c.toString();
                 total += c.getValorTotal();
+
             }
         }
-        relatorio += "TOTAL DO DIA : RS "+total;
+        if(relatorio.equals("")){
+            return "VAZIO!!!";
+        }
+        relatorio += "\nTOTAL DO DIA : RS "+total;
         return relatorio;
     }
+    public String relatorioVenda(Cliente cliente,Data dataInicial,Data dataFinal){
+        double total = 0;
+        String relatorio = "";
+        for(Carrinho c: vendas){
+
+            if(c.getCliente()!=null){
+
+                if(c.getCliente().getCpf().equals(cliente.getCpf())){
+
+                    if(c.getData().equals(dataInicial) || c.getData().equals(dataFinal) ||
+                       c.getData().eDepois(dataInicial) || c.getData().eAntes(dataFinal)) {
+
+                        relatorio += c.toString();
+                        total += c.getValorTotal();
+
+                    }
+                }
+            }
+        }
+
+        if(relatorio.equals("")){
+            return "VAZIO!!!";
+        }
+        relatorio += "\nTOTAL DO DIA : RS "+total;
+        return relatorio;
+    }
+    public String relatorioVenda(Funcionario funcionario, Data dataInicial, Data dataFinal){
+
+        double total = 0;
+        String relatorio = "";
+
+        for(Carrinho c: vendas){
+
+            if(c.getUsuario().getCpf().equals(funcionario.getCpf())){
+
+                if(c.getData().equals(dataInicial) || c.getData().equals(dataFinal) ||
+                   c.getData().eDepois(dataInicial) || c.getData().eAntes(dataFinal)) {
+
+                    relatorio += c.toString();
+                    total += c.getValorTotal();
+
+                }
+            }
+        }
+
+        if(relatorio.equals("")){
+            return "VAZIO!!!";
+        }
+        relatorio += "\nTOTAL DO DIA : RS "+total;
+        return relatorio;
+    }
+    public String relatorioVenda(Secao secao, Data dataInicial, Data dataFinal){
+
+        double total = 0;
+        String relatorio = "";
+
+        for(Carrinho c: vendas){
+
+            for(ProdutoVenda produtoVenda:c.getCarrinho()){
+
+                if(produtoVenda.getProduto().getSecao().getCodigo() == secao.getCodigo()){
+
+                    if(c.getData().equals(dataInicial) || c.getData().equals(dataFinal) ||
+                            c.getData().eDepois(dataInicial) || c.getData().eAntes(dataFinal)) {
+
+                        relatorio += produtoVenda.toString();
+                        total += produtoVenda.getTotal();
+                    }
+                }
+            }
+        }
+
+        if(relatorio.equals("")){
+            return "VAZIO!!!";
+        }
+        relatorio += "\nTOTAL DO DIA : RS "+total;
+        return relatorio;
+    }
+    public String relatorioVenda(Produto produto, Data dataInicial, Data dataFinal){
+
+        double total = 0;
+        String relatorio = "";
+
+        for(Carrinho c: vendas){
+
+            for(ProdutoVenda produtoVenda:c.getCarrinho()){
+
+                if(produtoVenda.getProduto().getCodigoProduto() == produto.getCodigoProduto()){
+
+                    if(c.getData().equals(dataInicial) || c.getData().equals(dataFinal) ||
+                       c.getData().eDepois(dataInicial) || c.getData().eAntes(dataFinal)) {
+
+                        relatorio += produtoVenda.toString();
+                        total += produtoVenda.getTotal();
+
+                    }
+                }
+            }
+        }
+
+        if(relatorio.equals("")){
+            return "VAZIO!!!";
+        }
+        relatorio += "\nTOTAL DO DIA : RS "+total;
+        return relatorio;
+
+    }
+
 }

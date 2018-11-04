@@ -68,10 +68,13 @@ public class EstoqueProduto {
         return null;
     }
     public ProdutoEstoque buscarProduto(String codigo){
+
         for(ProdutoEstoque produtoEstoque: estoque){
+
             if (produtoEstoque.getProduto().getCodigoBarra().equals(codigo)){
                 return produtoEstoque;
             }
+
         }
         return null;
     }
@@ -82,22 +85,61 @@ public class EstoqueProduto {
         }
         return lista;
     }
-    public void incrementar(NotaFiscal nota){
-        for(ProdutoNotaFiscal produtoNota:nota.getNota()){
+    public void incrementar(Carrinho venda){
+
+        for(ProdutoVenda produtoVenda:venda.getCarrinho()){
+
             for(ProdutoEstoque produtoEstoque:this.estoque){
+
+                if(produtoVenda.getProduto().getCodigoProduto() == produtoEstoque.getProduto().getCodigoProduto()){
+                    produtoEstoque.incrementar(produtoVenda.getQuantidade());
+                }
+
+            }
+
+        }
+
+    }
+
+    public void incrementar(NotaFiscal nota){
+
+        for(ProdutoNotaFiscal produtoNota:nota.getNota()){
+
+            for(ProdutoEstoque produtoEstoque:this.estoque){
+
                 if(produtoNota.getProduto().getCodigoProduto() == produtoEstoque.getProduto().getCodigoProduto()){
                     produtoEstoque.incrementar(produtoNota.getQuantidade());
                 }
+
             }
+
         }
+
     }
+    public void decrementar(NotaFiscal nota){
+        for(ProdutoNotaFiscal produtoNota:nota.getNota()){
+
+            for(ProdutoEstoque produtoEstoque:this.estoque){
+
+                if(produtoNota.getProduto().getCodigoProduto() == produtoEstoque.getProduto().getCodigoProduto()){
+                    produtoEstoque.decrementar(produtoNota.getQuantidade());
+                }
+
+            }
+
+        }
+
+    }
+
+
     public void removerProduto(int codigo){
 
-        for(ProdutoEstoque produtoEstoque:this.estoque){
-            if(produtoEstoque.getProduto().getCodigoProduto() == codigo){
-                estoque.remove(produtoEstoque);
-                break;
-            }
+        ProdutoEstoque produto = this.buscarProduto(codigo);
+
+        if(produto!=null){
+            estoque.remove(produto);
+        }else{
+            System.out.println("PRODUTO NAO EXITE!!!");
         }
     }
 

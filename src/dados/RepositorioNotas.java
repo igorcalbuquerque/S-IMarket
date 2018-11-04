@@ -7,6 +7,7 @@
 package dados;
 
 import entidades.Data;
+import entidades.Fornecedor;
 import entidades.NotaFiscal;
 import java.util.ArrayList;
 
@@ -24,6 +25,15 @@ public class RepositorioNotas {
             lista+=nota.toStringBasico();
         }
         return lista;
+    }
+    public void removerNota(int numero,int fornecedor){
+        NotaFiscal nota = this.buscarNota(numero,fornecedor);
+
+        if(nota!=null){
+            this.notas.remove(nota);
+        }else{
+            System.out.println("======= A NOTA SOLICITADA NAO EXISTE!!! =========");
+        }
     }
     public String listarNotasPorEntrada(Data data){
 

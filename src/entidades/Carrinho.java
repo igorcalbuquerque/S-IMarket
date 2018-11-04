@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Carrinho {
-    private Calendar data;
+
+    private Data data;
     private Cliente cliente;
     private static int codigoDaVenda = 0;
     private int codigo;
@@ -19,8 +20,9 @@ public class Carrinho {
     private Funcionario usuario;
 
     public Carrinho(Funcionario user){
+        Calendar calendar = Calendar.getInstance();
         this.cliente = null;
-        this.data = Calendar.getInstance();
+        this.data = new Data(calendar.DAY_OF_MONTH,calendar.MONTH,calendar.YEAR);
         this.codigo = getProximoCodigoDaVenda();
         this.carrinho = new ArrayList<ProdutoVenda>();
         this.valorTotal = 0;
@@ -46,11 +48,12 @@ public class Carrinho {
                 break;
             }
         }
+        getValorTotal();
     }
     public int getCodigo(){
         return codigo;
     }
-    public Calendar getData(){
+    public Data getData(){
         return  data;
     }
     private String toStringProdutosVenda(){
@@ -91,10 +94,10 @@ public class Carrinho {
                     "\n"+"Total do Carrinho : RS "+getValorTotal();
         }
         else{
-            return data.toString()+"\n"+"CODIGO DA VENDA:"+getCodigo()+toStringProdutosVenda();
+            return data.toString()+"\n"+"CODIGO DA VENDA:"+getCodigo()+"\n"+"Total do Carrinho : RS "+toStringProdutosVenda();
         }
     }
-    public ArrayList<ProdutoVenda> getCarrinho(){
-        return carrinho;
-    }
+    public Cliente getCliente(){return this.cliente;}
+    public Funcionario getUsuario(){return this.usuario;}
+    public ArrayList<ProdutoVenda> getCarrinho(){return this.carrinho;}
 }

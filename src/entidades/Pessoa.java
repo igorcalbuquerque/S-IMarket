@@ -39,9 +39,9 @@ public abstract class Pessoa {
     {
         this.cpf = cpf;
     }
-
     public Endereco getEndereco()
     {
         return endereco;
     }
+    public void setEndereco(Endereco end){this.endereco = end;}
 }

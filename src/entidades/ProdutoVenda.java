@@ -20,13 +20,13 @@ public class ProdutoVenda extends ProdutoEstoque{
         quantidade = quant;
     }
     public double getTotal(){
-        return quantidade*getProduto().getValorVenda();
+        return quantidade*getValorVenda();
     }
     public double getValorCompra(){return this.valorCompra;}
     public double getValorVenda(){return this.valorVenda;}
     @Override
     public String toString(){
         return "Codigo Barra: "+produto.getCodigoBarra()+" Descricao : "+produto.getDescricao()+" Quantidade: "+getQuantidade()+
-               " Preco : "+produto.getValorVenda()+" Total : RS "+getTotal()+"\n";
+               " Preco : "+getValorVenda()+" Total : RS "+getTotal()+"\n";
     }
 }

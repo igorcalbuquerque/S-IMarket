@@ -66,6 +66,19 @@ public class ValidaDados {
         return(CPF.substring(0, 3) + "." + CPF.substring(3, 6) + "." +
                 CPF.substring(6, 9) + "-" + CPF.substring(9, 11));
     }
+    public static boolean isRg(String rg){
+        char[] caracteres = rg.toCharArray();
+        char[] invalidos = {'!','@','#','*','%','&','(',')',
+                '<',',','>',';',':','/','?','[','{',']','}'};
+        for(char c:caracteres){
+            for(char i:invalidos){
+                if(c==i){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
     public static boolean isName(String name){
 
         char[] caracteres = name.toCharArray();

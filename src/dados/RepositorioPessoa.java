@@ -36,6 +36,7 @@ public abstract class RepositorioPessoa {
         return null;
     }
     public void removerPessoaPorRg(String rg){
+
         Pessoa pessoa = buscarPessoaPorRg(rg);
         if(pessoa != null){
             pessoas.remove(pessoa);
@@ -43,15 +44,18 @@ public abstract class RepositorioPessoa {
         else{
             System.out.println("Nao Existe o Cadastro Buscado!!!");
         }
+
     }
     public void removerPessoaCpf(String cpf){
+
         Pessoa pessoa = buscarPessoaPorCpf(cpf);
         if(pessoa != null){
             pessoas.remove(pessoa);
-            System.out.println("Pessoa Removida Com Sucesso!!!");
+            System.out.println("Removido Com Sucesso!!!");
         }
         else{
             System.out.println("Nao Existe o Cadastro Buscado!!!");
         }
+
     }
 }

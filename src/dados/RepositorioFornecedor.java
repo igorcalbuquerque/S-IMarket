@@ -32,6 +32,18 @@ public class RepositorioFornecedor {
         return null;
     }
     public void adicionarFornecedor(Fornecedor fornecedor){
+        Fornecedor f = buscarFornecedor(fornecedor.getCodigo());
+        if(f != null){
+            System.out.println("O CODIGO INFORMADO JA EXISTE!!!");
+        }else{
+            f = buscarFornecedor(fornecedor.getCnpj());
+            if (f!=null){
+                System.out.println("O CNPJ INFORMADO JA EXISTE!!!");
+            }
+            else{
+                fornecedores.add(fornecedor);
+            }
+        }
         fornecedores.add(fornecedor);
     }
     public void removerFornecedor(int codigo){
@@ -52,7 +64,7 @@ public class RepositorioFornecedor {
             System.out.println("Fornecedor nao encontrado!!!");
         }
     }
-    public String listarFornecedor(){
+    public String listarFornecedores(){
         String lista = "";
         for(Fornecedor fornecedor:this.fornecedores){
             lista+=fornecedor.toString();
