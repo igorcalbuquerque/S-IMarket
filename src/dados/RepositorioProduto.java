@@ -30,8 +30,6 @@ public class RepositorioProduto {
                 produtos.add(produto);
             }
         }
-
-        produtos.add(produto);
     }
     public void removerProduto(int codigo){
         Produto produto = buscarProduto(codigo);
@@ -56,13 +54,12 @@ public class RepositorioProduto {
                 return produto;
             }
         }
-        System.out.println("Produto nao encontrado!!!");
         return null;
     }
     public String listarProdutos(){
         String lista = "";
         for(Produto produto: produtos){
-            lista += produto.toString();
+            lista += produto.toString()+"\n";
         }
         return lista;
     }
