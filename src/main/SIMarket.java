@@ -533,6 +533,7 @@ public class SIMarket {
                     System.out.println("3 - MODIFICAR VALOR COMPRA");
                     System.out.println("4 - MODIFICAR VALOR VENDA");
                     System.out.println("5 - MODIFICAR SECAO ");
+                    System.out.println("6 - MODIFICAR CODIGO BARRA ");
                     System.out.println("88 - SAIR !!!");
 
                     opcaoModificacao = SolicitaDados.solicitaOpcao();
@@ -605,9 +606,28 @@ public class SIMarket {
                             subMenuProduto();
                             break;
 
-                        default:
+                        case 6:
+
+                            System.out.println("============ ALTERAR CODIGO BARRA =============");
+
+                            codigoBarra= SolicitaDados.solicitarString("O CODIGO DE BARRA");
+
+                            produto = repositorioProduto.buscarPorCodBarra(codigoBarra);
+
+                            if (produto != null){
+                                produto.setCodigoBarra(codigoBarra);
+                                System.out.println("=== INFORMACAO ATUALIZADA COM SUCESSO!!! ===");
+                            }else{
+                                System.out.println("=== CODIGO INFORMADO JA EXISTE!!! ===");
+                            }
 
                             subMenuProduto();
+                            break;
+
+
+                        default:
+
+                            menu();
                             break;
                     }
                 }
@@ -617,7 +637,7 @@ public class SIMarket {
 
              default:
 
-                 subMenuProduto();
+                 menu();
                  break;
         }
 
@@ -1305,7 +1325,9 @@ public class SIMarket {
                 System.out.println("DATA FINAL");
                 dataFinal = SolicitaDados.solicitarData();
 
+                System.out.println("===========================================");
                 System.out.println(vendas.relatorioVenda(dataInicial,dataFinal));
+                System.out.println("===========================================");
 
                 relatorioDeVendas();
                 break;
@@ -1325,7 +1347,12 @@ public class SIMarket {
                     System.out.println("DATA FINAL");
                     dataFinal = SolicitaDados.solicitarData();
 
+                    System.out.println("===========================================");
                     System.out.println(vendas.relatorioVenda(funcionario,dataInicial,dataFinal));
+                    System.out.println("===========================================");
+
+                }else{
+                    System.out.println("========= FUNCIONARIO NAO ENCOTRADO ===========");
 
                 }
 
@@ -1333,7 +1360,7 @@ public class SIMarket {
                 break;
 
             case 3:
-                System.out.println("========= VENDA POR FUNCIONARIO ===========");
+                System.out.println("========= VENDA POR SECAO ===========");
 
                 codigo = SolicitaDados.solicitarInt("CODIGO DA SECAO");
                 secao = repositorioSecao.buscarSecao(codigo);
@@ -1346,7 +1373,12 @@ public class SIMarket {
                     System.out.println("DATA FINAL");
                     dataFinal = SolicitaDados.solicitarData();
 
+                    System.out.println("===========================================");
                     System.out.println(vendas.relatorioVenda(secao,dataInicial,dataFinal));
+                    System.out.println("===========================================");
+
+                }else{
+                    System.out.println("========= SECAO NAO ENCONTRADA ===========");
 
                 }
 
@@ -1368,10 +1400,13 @@ public class SIMarket {
                     System.out.println("DATA FINAL");
                     dataFinal = SolicitaDados.solicitarData();
 
+                    System.out.println("===========================================");
                     System.out.println(vendas.relatorioVenda(produto,dataInicial,dataFinal));
+                    System.out.println("===========================================");
 
+                }else{
+                    System.out.println("============ PRODUTO  NAO ENCONTRADO =============");
                 }
-
                 relatorioDeVendas();
                 break;
 
@@ -1390,8 +1425,12 @@ public class SIMarket {
                     System.out.println("DATA FINAL");
                     dataFinal = SolicitaDados.solicitarData();
 
+                    System.out.println("===========================================");
                     System.out.println(vendas.relatorioVenda(cliente,dataInicial,dataFinal));
+                    System.out.println("===========================================");
 
+                }else{
+                    System.out.println("============= CLIENTE NAO ENCONTRADO !!! ==============");
                 }
 
                 relatorioDeVendas();
@@ -1410,7 +1449,7 @@ public class SIMarket {
         Endereco endereco = new Endereco("RUA MELO PEIXOTO","12","BOA VISTA","GARANHUNS","55293-190","PE");
         Endereco enderecoAssociado = new Endereco("RUA SÂO JOSÉ","375","CENTRO","GARANHUNS","55293-340","PE");
         Cliente cliente = new Cliente("BENEVENUTO DACIOLO FONSECA DOS SANTOS","0000000","196.861.118-59",endereco,"(87)9999-9999","");
-        Secao secao = new Secao(1,"BEBIDAS");
+        Secao secao = new Secao("BEBIDAS");
         Produto produto = new Produto("7894900010015","COCA COLA 350ML",1.49,2.49,secao);
         Fornecedor fornecedor = new Fornecedor(1,"DISTR. CESAR","123.123.124/0012",endereco);
         Funcionario funcionario = new Funcionario("ADMIN","0000001","07068093868",endereco,true,"ADMIN","1234");
@@ -1428,4 +1467,5 @@ public class SIMarket {
         repositorioProduto.adicionarProduto(produto);
         repositorioSecao.addSecao(secao);
     }
+
 }

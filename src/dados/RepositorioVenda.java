@@ -89,7 +89,6 @@ public class RepositorioVenda {
         String relatorio = "";
 
         for(Carrinho c: vendas){
-
             if(c.getUsuario().getCpf().equals(funcionario.getCpf())){
 
                 if(c.getData().equals(dataInicial) || c.getData().eDepois(dataInicial) &&
