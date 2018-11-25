@@ -7,7 +7,7 @@
 
 package dados;
 
-import entidades.*;
+import negocio.entidades.*;
 import java.util.ArrayList;
 
 public class EstoqueProduto {

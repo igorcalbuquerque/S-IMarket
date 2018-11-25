@@ -6,7 +6,7 @@
  */
 package dados;
 
-import entidades.Secao;
+import negocio.entidades.Secao;
 import java.util.ArrayList;
 
 public class RepositorioSecao {

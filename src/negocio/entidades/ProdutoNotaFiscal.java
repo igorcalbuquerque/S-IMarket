@@ -4,7 +4,7 @@
  *
  * @author Saú Cesar
  */
-package entidades;
+package negocio.entidades;
 
 public class ProdutoNotaFiscal extends ProdutoEstoque {
 

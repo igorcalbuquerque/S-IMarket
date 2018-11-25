@@ -5,9 +5,9 @@
  * @author Saú Cesar
  */
 
-package entidades;
+package negocio.entidades;
 
-import validacao.ValidaDados;
+import negocio.validacao.ValidaDados;
 import java.util.Scanner;
 
 public class SolicitaDados {

@@ -7,7 +7,7 @@
 package dados;
 
 import java.util.ArrayList;
-import entidades.Pessoa;
+import negocio.entidades.Pessoa;
 
 public abstract class RepositorioPessoa {
 

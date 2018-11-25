@@ -8,7 +8,7 @@ package dados;
 
 import java.util.ArrayList;
 
-import entidades.*;
+import negocio.entidades.*;
 
 public class RepositorioVenda {
     private ArrayList<Carrinho> vendas;

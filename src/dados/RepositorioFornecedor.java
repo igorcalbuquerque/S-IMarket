@@ -7,7 +7,7 @@
 
 package dados;
 
-import entidades.Fornecedor;
+import negocio.entidades.Fornecedor;
 import java.util.ArrayList;
 
 public class RepositorioFornecedor {

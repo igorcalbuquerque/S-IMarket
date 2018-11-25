@@ -7,8 +7,8 @@
 
 package dados;
 
-import entidades.Funcionario;
-import entidades.Pessoa;
+import negocio.entidades.Funcionario;
+import negocio.entidades.Pessoa;
 
 public class RepositorioFuncionario extends RepositorioPessoa {
 

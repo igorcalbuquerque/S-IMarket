@@ -6,9 +6,8 @@
  */
 package dados;
 
-import entidades.Data;
-import entidades.Fornecedor;
-import entidades.NotaFiscal;
+import negocio.entidades.Data;
+import negocio.entidades.NotaFiscal;
 import java.util.ArrayList;
 
 public class RepositorioNotas {

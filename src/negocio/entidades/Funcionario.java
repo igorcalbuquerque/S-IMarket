@@ -3,7 +3,7 @@
  *
  * @author Igor Albuquerque
  */
-package entidades;
+package negocio.entidades;
 
 public class Funcionario extends Pessoa {
 

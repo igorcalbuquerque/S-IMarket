@@ -1,8 +1,8 @@
-package validacao;
+package negocio.validacao;
 
 import java.util.InputMismatchException;
 
-import entidades.Data;
+import negocio.entidades.Data;
 
 public class ValidaDados {
 

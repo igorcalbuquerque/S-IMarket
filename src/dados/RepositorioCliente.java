@@ -6,7 +6,7 @@
  */
 package dados;
 
-import entidades.*;
+import negocio.entidades.*;
 
 public class RepositorioCliente extends RepositorioPessoa {
     public RepositorioCliente(){

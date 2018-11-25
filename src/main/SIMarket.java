@@ -7,7 +7,7 @@
 package main;
 
 import dados.*;
-import entidades.*;
+import negocio.entidades.*;
 import java.util.Scanner;
 
 public class SIMarket {

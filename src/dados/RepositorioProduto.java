@@ -6,7 +6,7 @@
  */
 package dados;
 
-import entidades.Produto;
+import negocio.entidades.Produto;
 import java.util.ArrayList;
 
 public class RepositorioProduto {

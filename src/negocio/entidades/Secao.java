@@ -5,7 +5,7 @@
  * @author Saú Cesar
  */
 
-package entidades;
+package negocio.entidades;
 
 public class Secao {
 

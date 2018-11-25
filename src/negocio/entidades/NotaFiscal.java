@@ -3,7 +3,7 @@
  *
  * @author Saú Cesar
  */
-package entidades;
+package negocio.entidades;
 
 import java.util.Calendar;
 import java.util.ArrayList;
