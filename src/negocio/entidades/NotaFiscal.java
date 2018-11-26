@@ -9,17 +9,21 @@ import java.util.Calendar;
 import java.util.ArrayList;
 
 public class NotaFiscal {
+
     private int numero;
     private int serie;
     private Data dataEmissao;
-    private Calendar dataEntrada;
+    private Data dataEntrada;
+    private Data dataPagamento;
     private Fornecedor fornecedor;
     private ArrayList<ProdutoNotaFiscal> nota;
-    public NotaFiscal(int numero, int serie,Data dataEmissao,Fornecedor fornecedor){
+
+    public NotaFiscal(int numero, int serie,Data dataEmissao,Data dataPagamento,Fornecedor fornecedor){
         this.numero = numero;
         this.serie = serie;
         this.dataEmissao = dataEmissao;
-        this.dataEntrada = Calendar.getInstance();
+        this.dataEntrada = new Data();
+        this.dataPagamento = dataPagamento;
         this.fornecedor = fornecedor;
         this.nota = new ArrayList<ProdutoNotaFiscal>();
     }
@@ -31,8 +35,6 @@ public class NotaFiscal {
         ProdutoNotaFiscal produtoVenda = buscarProduto(codigo);
         if(produtoVenda !=null){
             nota.remove(produtoVenda);
-        }else{
-            System.out.println("Produto nao contido nesta nota!!!");
         }
     }
     private ProdutoNotaFiscal buscarProduto(int codigo){
@@ -60,7 +62,7 @@ public class NotaFiscal {
     public ArrayList<ProdutoNotaFiscal> getNota(){return this.nota;}
     public Data getDataEmissao(){return this.dataEmissao;}
     public void setDataEmissao(Data data){this.dataEmissao = data;}
-    public Calendar getDataEntrada(){return this.dataEntrada;}
+    public Data getDataEntrada(){return this.dataEntrada;}
     public double getTotal(){
         double total = 0;
         for(ProdutoNotaFiscal produto:this.nota){
@@ -70,20 +72,22 @@ public class NotaFiscal {
     }
     @Override
     public String toString(){
-        String str = "Numero : "+getNumero()+"Serie : "+getSerie()+"\nData de Emissao :"+getDataEmissao()+"\n"+
-               fornecedor.toString();
+        String str = "Numero : " + getNumero() + "Serie : "+getSerie() + "\nData de Emissao : " + getDataEmissao() +
+                     "\nData de Entrada : " + dataEntrada.toString() + "\nVencimento: " + dataPagamento.toString() +
+                     "\n" + fornecedor.toString();
+
         double total = 0;
 
         for(ProdutoNotaFiscal produto:this.nota){
             str += produto.toString();
             total += produto.getTotal();
         }
-        str += "\nTOTAL DA NOTA : "+total;
+        str += "\nTOTAL DA NOTA : " + total;
         return str;
     }
     public String toStringBasico(){
-        return "Numero : "+getNumero()+"Serie : "+getSerie()+"\nData de Emissao :"+getDataEmissao().toString()+
-                "Data de Entrada : "+getDataEntrada().DAY_OF_MONTH+" - "+getDataEntrada().MONTH+" - "+
-                getDataEntrada().YEAR+"\nTotal da Nota :"+getTotal()+"\n";
+        return "Numero: "+getNumero() + " Serie: "+getSerie() + "\nData de Emissao :" + getDataEmissao().toString()+
+               " Data de Entrada : " + dataEntrada.toString() + " Vencimento: "+dataPagamento.toString() + "\n" +
+                fornecedor.informacoesBasicas() + "Total da Nota :"+getTotal()+"\n";
     }
 }

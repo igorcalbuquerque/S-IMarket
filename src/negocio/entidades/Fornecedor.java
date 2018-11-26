@@ -31,6 +31,9 @@ public class Fornecedor {
     public void setEndereco(Endereco endereco){this.endereco = endereco;}
     @Override
     public String toString(){
-        return "Codigo : "+getCodigo()+"\nNome : "+getNome()+"\nCNPJ : "+getCnpj()+"\n"+endereco.toString();
+        return "Codigo : "+getCodigo()+" Nome : "+getNome()+" CNPJ : "+getCnpj()+"\n"+endereco.toString();
+    }
+    public String informacoesBasicas(){
+        return "Codigo : "+getCodigo()+" Nome : "+getNome() + "\n";
     }
 }

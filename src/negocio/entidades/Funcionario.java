@@ -8,11 +8,13 @@ package negocio.entidades;
 public class Funcionario extends Pessoa {
 
     private boolean gerente;
+    private double salario;
     private String login;
     private String senha;
 
     public Funcionario(String nome, String rg,String cpf, Endereco endereco, boolean gerente, String login, String senha){
         super(nome, rg,cpf, endereco);
+
         setLogin(login);
         setCargo(gerente);
         setSenha(senha);
@@ -23,6 +25,8 @@ public class Funcionario extends Pessoa {
         setCargo(gerente);
         setSenha(senha);
     }
+    public double getSalario(){return this.salario;}
+    public void setSalario(double salario){this.salario = salario;}
     public boolean isGerente()
     {
         return gerente;
@@ -49,7 +53,7 @@ public class Funcionario extends Pessoa {
     public String toString() {
 
         String str = "NOME: " + getNome() + "\nRG : " + getRg()+"\nCPF: " + getCpf()  +
-                     "\nCARGO: " + getCargo() + "\n" +getEndereco().toString();
+                     "\nCARGO: " + getCargo() + "\nSALARIO: R$ "+getSalario() + "\n"+ getEndereco().toString();
         return str;
     }
 }
