@@ -23,8 +23,6 @@ public class Funcionario extends Pessoa {
         setCargo(gerente);
         setSenha(senha);
     }
-    public String getRg(){return this.rg;}
-    public void setRg(String rg){this.rg = rg;}
     public boolean isGerente()
     {
         return gerente;
@@ -43,25 +41,16 @@ public class Funcionario extends Pessoa {
     }
     public String getLogin(){return this.login;}
     public void setLogin(String login){this.login = login;}
-    private String getCargo()
-    {
-        if (gerente)
-        {
-            return "Gerente";
-        }
-        else
-        {
-            return "Associado";
-        }
+    private String getCargo() {
+        if (gerente) { return "Gerente"; }
+        else { return "Associado"; }
     }
 
     @Override
-    public String toString()
-    {
-        return "Nome: " + getNome() + "\n" +
-                "RG : "+getRg()+"\n" +
-                "CPF: " + getCpf()  + "\n" +
-                "CARGO: " + getCargo() + "\n"
-                +getEndereco().toString();
+    public String toString() {
+
+        String str = "NOME: " + getNome() + "\nRG : " + getRg()+"\nCPF: " + getCpf()  +
+                     "\nCARGO: " + getCargo() + "\n" +getEndereco().toString();
+        return str;
     }
 }
