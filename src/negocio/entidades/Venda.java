@@ -9,7 +9,7 @@ package negocio.entidades;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class Carrinho {
+public class Venda {
 
     private Data data;
     private Cliente cliente;
@@ -19,10 +19,9 @@ public class Carrinho {
     private double valorTotal;
     private Funcionario usuario;
 
-    public Carrinho(Funcionario user){
-        Calendar c = Calendar.getInstance();
+    public Venda(Funcionario user){
         this.cliente = null;
-        this.data = new Data(c.get(Calendar.DAY_OF_MONTH),c.get(Calendar.MONTH)+1,c.get(Calendar.YEAR));
+        this.data = new Data();
         this.codigo = getProximoCodigoDaVenda();
         this.carrinho = new ArrayList<ProdutoVenda>();
         this.valorTotal = 0;

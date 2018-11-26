@@ -1,5 +1,7 @@
 package negocio.entidades;
 
+import java.util.Calendar;
+
 /**
  *
  *
@@ -20,6 +22,12 @@ public class Data {
             a+=2000;
         }
         this.ano = a;
+    }
+    public Data(){
+        Calendar c = Calendar.getInstance();
+        this.dia = c.get(Calendar.DAY_OF_MONTH);
+        this.mes = c.get(Calendar.MONTH)+1;
+        this.ano = c.get(Calendar.YEAR);
     }
     public int getDia(){return this.dia;}
     public void setDia(int d){this.dia = d;}
