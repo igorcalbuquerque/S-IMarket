@@ -7,7 +7,6 @@
 package negocio.entidades;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class Venda {
 
@@ -88,13 +87,14 @@ public class Venda {
     }
     @Override
     public String toString(){
-        if(cliente != null){
-            return data.toString()+"\n"+cliente.toString()+"CODIGO DA VENDA:"+getCodigo()+toStringProdutosVenda()+
-                    "\n"+"Total do Carrinho : RS "+getValorTotal();
-        }
-        else{
-            return data.toString()+"\n"+"CODIGO DA VENDA:"+getCodigo()+"\n"+"Total do Carrinho : RS "+toStringProdutosVenda();
-        }
+        String str = "DATA DA VENDA: " + data.toString() + "\nCLIENTE : ";
+
+        if(cliente != null){ str += cliente.getNome()+" CPF: "+cliente.getCpf()+"\n"; }
+        else{ str += "N/A"; }
+
+        str += "CODIGO DA VENDA: "+getCodigo() + "\n"+toStringProdutosVenda()+ "\nTotal do Carrinho : R$ " + getValorTotal();
+
+        return str;
     }
     public Cliente getCliente(){return this.cliente;}
     public Funcionario getUsuario(){return this.usuario;}

@@ -6,7 +6,13 @@ import negocio.entidades.Data;
 
 public class ValidaDados {
 
-    public static boolean isCPF(String CPF) {
+    private static ValidaDados validaDados = null;
+
+    public static ValidaDados getInstance(){
+        if(validaDados == null){ validaDados = new ValidaDados();}
+        return validaDados;
+    }
+    public boolean isCPF(String CPF) {
 
         if (CPF.equals("00000000000") ||
                 CPF.equals("11111111111") ||
@@ -61,12 +67,7 @@ public class ValidaDados {
             return(false);
         }
     }
-
-    public static String imprimeCPF(String CPF) {
-        return(CPF.substring(0, 3) + "." + CPF.substring(3, 6) + "." +
-                CPF.substring(6, 9) + "-" + CPF.substring(9, 11));
-    }
-    public static boolean isRg(String rg){
+    public boolean isRg(String rg){
         char[] caracteres = rg.toCharArray();
         char[] invalidos = {'!','@','#','*','%','&','(',')',
                 '<',',','>',';',':','/','?','[','{',']','}'};
@@ -79,7 +80,7 @@ public class ValidaDados {
         }
         return true;
     }
-    public static boolean isName(String name){
+    public boolean isName(String name){
 
         char[] caracteres = name.toCharArray();
         char[] invalidos = {'1','!','2','@','3','#','4','*','5','%','6','7','&','8','9','(','0',')',
@@ -95,7 +96,7 @@ public class ValidaDados {
 
         return true;
     }
-    public static boolean isData(Data data){
+    public boolean isData(Data data){
         if(data == null){
             return false;
         }

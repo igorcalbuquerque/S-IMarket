@@ -5,8 +5,10 @@
  * @author Saú Cesar
  */
 
-package negocio.entidades;
+package main;
 
+import negocio.entidades.Data;
+import negocio.entidades.Endereco;
 import negocio.validacao.ValidaDados;
 import java.util.Scanner;
 
