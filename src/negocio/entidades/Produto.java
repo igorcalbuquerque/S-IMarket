@@ -72,7 +72,10 @@ public class    Produto {
     {
         this.secao = secao;
     }
-
+    public boolean equals(Produto produto){
+        if(produto != null && this.codigoProduto == produto.getCodigoProduto()){ return true; }
+        else { return false; }
+    }
     @Override
     public String toString(){
         return "Código Interno: "+getCodigoProduto()+"\nCódigo Barra: "+getCodigoBarra()+"\nDescrição: "+getDescricao()+

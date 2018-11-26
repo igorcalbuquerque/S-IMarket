@@ -6,7 +6,9 @@
  */
 package negocio.entidades;
 
-public class ProdutoVenda extends ProdutoEstoque{
+import negocio.entidades.abstratas.ProdutoAbstrato;
+
+public class ProdutoVenda extends ProdutoAbstrato {
 
     private double valorCompra;
     private double valorVenda;
@@ -16,17 +18,12 @@ public class ProdutoVenda extends ProdutoEstoque{
         this.valorCompra = produto.getValorCompra();
         this.valorVenda = produto.getValorVenda();
     }
-    public void setQuantidade(double quant){
-        quantidade = quant;
-    }
-    public double getTotal(){
-        return quantidade*getValorVenda();
-    }
+    public double getTotal(){ return this.getQuantidade()*getValorVenda(); }
     public double getValorCompra(){return this.valorCompra;}
     public double getValorVenda(){return this.valorVenda;}
     @Override
     public String toString(){
-        return "Codigo Barra: "+produto.getCodigoBarra()+" Descricao : "+produto.getDescricao()+" Quantidade: "+getQuantidade()+
-               " Preco : "+getValorVenda()+" Total : RS "+getTotal()+"\n";
+        return "Codigo Barra: " + getProduto().getCodigoBarra() + " Descricao : " + getProduto().getDescricao() +
+               " Quantidade: "+getQuantidade() + " Preco : "+getValorVenda() + " Total : RS "+getTotal()+"\n";
     }
 }

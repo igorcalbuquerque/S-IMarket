@@ -13,8 +13,7 @@ public class Secao {
     private int codigo;
     private String descricao;
 
-    public Secao(int codigo, String descricao)
-    {
+    public Secao(int codigo, String descricao) {
         setCodigo(codigo);
         setDescricao(descricao);
     }
