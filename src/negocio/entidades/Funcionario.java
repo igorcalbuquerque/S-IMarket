@@ -45,7 +45,6 @@ public class Funcionario extends Pessoa {
         if (gerente) { return "Gerente"; }
         else { return "Associado"; }
     }
-
     @Override
     public String toString() {
 

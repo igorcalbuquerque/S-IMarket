@@ -16,7 +16,6 @@ public class Cliente extends Pessoa {
         setEmail(email);
         setTelefone(telefone);
     }
-
     public String getTelefone()
     {
         return telefone;
@@ -33,14 +32,10 @@ public class Cliente extends Pessoa {
     {
         this.email = email;
     }
-
-    public String toString()
-    {
-        return "NOME: " + getNome() + "\n" +
-                "CPF: " + getCpf() + "\n" +
-                "RG: " + getRg() + "\n" +
-                "TELEFONE: " + getTelefone() + "\n"+
-                "E-MAIL: "+ getEmail() + "\n" +
-                "ENDEREÇO: " + getEndereco();
+    @Override
+    public String toString() {
+        String str = "NOME: " + getNome() + "\nCPF: " + getCpf() + "\nRG: " + getRg() + "\nTELEFONE: " + getTelefone() +
+                     "\nE-MAIL: "+ getEmail() + "\nENDEREÇO: " + getEndereco().toString();
+        return str;
     }
 }
