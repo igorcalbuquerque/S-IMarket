@@ -1,0 +1,13 @@
+package dados.interfaces;
+
+import negocio.entidades.Pessoa;
+
+public interface IRepositorioPessoa {
+
+    void adicionarPessoa(Pessoa pessoa);
+    String buscarPorNome(String nome);
+    Pessoa buscarPessoaPorRg(String rg );
+    Pessoa buscarPessoaPorCpf(String cpf );
+    void removerPessoaPorRg(String rg);
+    void removerPessoaCpf(String cpf);
+}

@@ -7,28 +7,35 @@
 
 package dados;
 
+import dados.interfaces.IRepositorioFuncionario;
 import negocio.entidades.Funcionario;
 import negocio.entidades.Pessoa;
 
-public class RepositorioFuncionario extends RepositorioPessoa {
+public class RepositorioFuncionario extends RepositorioPessoa implements IRepositorioFuncionario {
 
     public RepositorioFuncionario(){
         super();
     }
-    public String listarFucionarios(){
-        String lista = "";
-        for(Pessoa funcionario:pessoas){
-            lista += "==========================================\n";
-            lista+= ((Funcionario)funcionario).toString();
-        }
-        return  lista;
-    }
+
     public Funcionario buscarPorLogin(String login){
-        for(Pessoa funcionario:this.pessoas){
+        for(Pessoa funcionario:this.getPessoas()){
             if(((Funcionario)funcionario).getLogin().equals(login) || ((Funcionario)funcionario).getCpf().equals(login)){
                 return (Funcionario)funcionario;
             }
         }
         return null;
+    }
+
+    public String relatorioGastos(){
+        String str = "";
+        double total = 0;
+        for(Pessoa funcionario: this.getPessoas()){
+            str += "NOME: " + funcionario.getNome() + " CPF: "+funcionario.getCpf() +
+                   "SALARIO: R$: " + ((Funcionario)funcionario).getSalario();
+        }
+
+        str += "TOTAL: R$ " + total;
+
+        return str;
     }
 }
