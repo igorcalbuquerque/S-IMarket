@@ -25,6 +25,6 @@ public abstract class ProdutoAbstrato {
     }
     @Override
     public String toString(){
-        return produto.toString() + "Quantidade : " + quantidade + "\n";
+        return "CODIGO: " + produto.getCodigoProduto() + " DESCRICAO: "+produto.getDescricao() + " Quantidade : " + quantidade + "\n";
     }
 }
