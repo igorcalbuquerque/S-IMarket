@@ -9,7 +9,7 @@ package dados;
 
 import dados.interfaces.IRepositorioFuncionario;
 import negocio.entidades.Funcionario;
-import negocio.entidades.Pessoa;
+import negocio.entidades.abstratas.Pessoa;
 
 public class RepositorioFuncionario extends RepositorioPessoa implements IRepositorioFuncionario {
 

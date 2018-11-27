@@ -1,6 +1,6 @@
 package dados.interfaces;
 
-import negocio.entidades.Pessoa;
+import negocio.entidades.abstratas.Pessoa;
 
 public interface IRepositorioPessoa {
 

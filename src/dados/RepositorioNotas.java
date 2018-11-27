@@ -6,96 +6,75 @@
  */
 package dados;
 
+import dados.interfaces.IRepositorioNotas;
 import negocio.entidades.Data;
+import negocio.entidades.Fornecedor;
 import negocio.entidades.NotaFiscal;
 import java.util.ArrayList;
 
-public class RepositorioNotas {
-    private ArrayList<NotaFiscal> notas;
-    public RepositorioNotas(){
-        this.notas = new ArrayList<NotaFiscal>();
-    }
-    public void adicionarNotas(NotaFiscal nota){
-        this.notas.add(nota);
-    }
-    public String listarNotas(){
-        String lista = "";
-        for(NotaFiscal nota:this.notas){
-            lista+=nota.toStringBasico();
-        }
-        return lista;
-    }
-    public void removerNota(int numero,int fornecedor){
-        NotaFiscal nota = this.buscarNota(numero,fornecedor);
+public class RepositorioNotas implements IRepositorioNotas {
 
-        if(nota!=null){
-            this.notas.remove(nota);
-        }else{
-            System.out.println("======= A NOTA SOLICITADA NAO EXISTE!!! =========");
+    private ArrayList<NotaFiscal> notas;
+
+    public RepositorioNotas(){ this.notas = new ArrayList<NotaFiscal>(); }
+    public void adicionarNotas(NotaFiscal nota){ this.notas.add(nota); }
+    @Override
+    public String toString(){
+        String str = "";
+
+        for(NotaFiscal nota:this.notas){
+            str += nota.toStringBasico();
         }
+        return str;
+    }
+    public void removerNota(int numero,Fornecedor fornecedor){
+        NotaFiscal nota = this.buscarNota(numero,fornecedor);
+        this.notas.remove(nota);
     }
     public String listarNotasPorEntrada(Data data){
-
-        String lista = "";
+        String str = "";
 
         for(NotaFiscal nota: this.notas){
-            Data dataEntradaNota = new Data(nota.getDataEntrada().DAY_OF_MONTH,nota.getDataEntrada().MONTH,nota.getDataEntrada().YEAR);
-            if(data.equals(dataEntradaNota)){
-                lista+=nota.toStringBasico();
+            if(data.equals(nota.getDataEntrada())){
+                str += nota.toStringBasico();
             }
         }
-        return lista;
+
+        return str;
     }
     public String listarNotasPorEmissao(Data data){
-
-        String lista = "";
+        String str = "";
 
         for(NotaFiscal nota: this.notas){
-            Data dataEmissao = new Data(nota.getDataEmissao().getDia(),nota.getDataEmissao().getMes(),nota.getDataEmissao().getAno());
-            if(data.equals(dataEmissao)){
-                lista+=nota.toStringBasico();
+            if(data.equals(nota.getDataEmissao())){
+                str += nota.toStringBasico();
             }
         }
-        return lista;
+        return str;
     }
     public String listarNotasPorNumero(int numero){
-        String lista = "";
+        String str = "";
+
         for(NotaFiscal nota:notas){
             if(nota.getNumero() == numero){
-                lista += nota.toStringBasico();
+                str += nota.toStringBasico();
             }
         }
-        return lista;
+        return str;
     }
-    public String listarNotas(int codigoFornecedor){
-        String lista = "";
+    public String listarNotasPorFornecedor(Fornecedor fornecedor){
+        String str = "";
+
         for(NotaFiscal nota:notas){
-            if(nota.getFornecedor().getCodigo() == codigoFornecedor){
-                lista += nota.toStringBasico();
+            if(nota.getFornecedor().equals(fornecedor)){
+                str += nota.toStringBasico();
             }
         }
-        return lista;
+        return str;
     }
-    public String listarNotas(String cnpj){
-        String lista = "";
-        for(NotaFiscal nota:notas){
-            if(nota.getFornecedor().getCnpj().equals(cnpj)){
-                lista += nota.toStringBasico();
-            }
-        }
-        return lista;
-    }
-    public NotaFiscal buscarNota(int numero,int codigoFornecedor){
+    public NotaFiscal buscarNota(int numero,Fornecedor fornecedor){
         for(NotaFiscal nota:this.notas){
-            if (nota.getNumero() == numero && nota.getFornecedor().getCodigo() == codigoFornecedor){
-                return nota;
-            }
-        }
-        return null;
-    }
-    public NotaFiscal buscarNota(int numero,String cnpj){
-        for(NotaFiscal nota:this.notas){
-            if (nota.getNumero() == numero && nota.getFornecedor().getCnpj() == cnpj){
+            if (nota.getNumero() == numero && nota.getFornecedor().equals(fornecedor)){
                 return nota;
             }
         }

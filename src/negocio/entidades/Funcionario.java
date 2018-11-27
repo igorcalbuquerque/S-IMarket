@@ -5,6 +5,8 @@
  */
 package negocio.entidades;
 
+import negocio.entidades.abstratas.Pessoa;
+
 public class Funcionario extends Pessoa {
 
     private boolean gerente;

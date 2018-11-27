@@ -6,6 +6,8 @@
  */
 package negocio.entidades;
 
+import negocio.entidades.abstratas.Pessoa;
+
 public class Cliente extends Pessoa {
 
     private String telefone;

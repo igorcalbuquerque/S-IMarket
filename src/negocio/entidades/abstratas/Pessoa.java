@@ -4,7 +4,9 @@
  *
  * @author Igor Albuquerque
  */
-package negocio.entidades;
+package negocio.entidades.abstratas;
+
+import negocio.entidades.Endereco;
 
 public abstract class Pessoa {
 
