@@ -7,14 +7,15 @@
 
 package dados;
 
+import dados.interfaces.IRepositorioFornecedor;
 import negocio.entidades.Fornecedor;
 import java.util.ArrayList;
 
-public class RepositorioFornecedor {
+public class RepositorioFornecedor implements IRepositorioFornecedor {
+
     private ArrayList<Fornecedor> fornecedores;
-    public RepositorioFornecedor(){
-        this.fornecedores = new ArrayList<Fornecedor>();
-    }
+
+    public RepositorioFornecedor(){ this.fornecedores = new ArrayList<Fornecedor>(); }
     public Fornecedor buscarFornecedor(int codigo){
         for(Fornecedor fornecedor:this.fornecedores){
             if(fornecedor.getCodigo() == codigo){
@@ -31,44 +32,21 @@ public class RepositorioFornecedor {
         }
         return null;
     }
-    public void adicionarFornecedor(Fornecedor fornecedor){
-        Fornecedor f = buscarFornecedor(fornecedor.getCodigo());
-        if(f != null){
-            System.out.println("O CODIGO INFORMADO JA EXISTE!!!");
-        }else{
-            f = buscarFornecedor(fornecedor.getCnpj());
-            if (f!=null){
-                System.out.println("O CNPJ INFORMADO JA EXISTE!!!");
-            }
-            else{
-                fornecedores.add(fornecedor);
-            }
-        }
-        fornecedores.add(fornecedor);
-    }
+    public void adicionarFornecedor(Fornecedor fornecedor){ fornecedores.add(fornecedor); }
     public void removerFornecedor(int codigo){
         Fornecedor fornecedor = buscarFornecedor(codigo);
-        if(fornecedor!= null){
-            fornecedores.remove(fornecedor);
-        }
-        else{
-            System.out.println("Fornecedor nao encontrado!!!");
-        }
+        if(fornecedor!= null){ fornecedores.remove(fornecedor); }
     }
     public void removerFornecedor(String cnpj){
         Fornecedor fornecedor = buscarFornecedor(cnpj);
-        if(fornecedor!= null){
-            fornecedores.remove(fornecedor);
-        }
-        else{
-            System.out.println("Fornecedor nao encontrado!!!");
-        }
+        if(fornecedor!= null){ fornecedores.remove(fornecedor); }
     }
-    public String listarFornecedores(){
-        String lista = "";
+    @Override
+    public String toString(){
+        String str = "";
         for(Fornecedor fornecedor:this.fornecedores){
-            lista+=fornecedor.toString();
+            str += fornecedor.toString();
         }
-        return lista;
+        return str;
     }
 }

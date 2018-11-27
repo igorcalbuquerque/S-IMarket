@@ -29,6 +29,10 @@ public class Fornecedor {
     public void setCnpj(String cnpj){this.cnpj = cnpj;}
     public Endereco getEndereco(){return this.endereco;}
     public void setEndereco(Endereco endereco){this.endereco = endereco;}
+    public boolean equals(Fornecedor fornecedor){
+        if(fornecedor != null && this.codigo == fornecedor.getCodigo()){ return true; }
+        else{ return false; }
+    }
     @Override
     public String toString(){
         return "Codigo : "+getCodigo()+" Nome : "+getNome()+" CNPJ : "+getCnpj()+"\n"+endereco.toString();
