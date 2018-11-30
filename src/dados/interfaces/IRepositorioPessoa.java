@@ -9,5 +9,5 @@ public interface IRepositorioPessoa {
     Pessoa buscarPessoaPorRg(String rg );
     Pessoa buscarPessoaPorCpf(String cpf );
     void removerPessoaPorRg(String rg);
-    void removerPessoaCpf(String cpf);
+    void removerPessoaPorCpf(String cpf);
 }

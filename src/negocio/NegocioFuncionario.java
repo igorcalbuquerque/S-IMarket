@@ -19,29 +19,35 @@ public class NegocioFuncionario implements INegocioFuncionario {
         else{ funcionarios.adicionarPessoa(funcionario);}
     }
     @Override
-    public Funcionario buscarPessoaPorCpf(String cpf) throws FuncionarioNaoEncontradoException {
+    public Funcionario buscarPessoaPorCpf(String cpf) throws CpfNaoEncontrado {
         Pessoa funcionario = funcionarios.buscarPessoaPorCpf(cpf);
-        if(funcionario == null){ throw new FuncionarioNaoEncontradoException();}
-        else{ return (Funcionario) funcionario;}
+        if(funcionario == null){ throw new CpfNaoEncontrado();}
+        else{ return (Funcionario)funcionario;}
     }
 
     @Override
-    public Funcionario buscarPessoaPorRg(String cpf) throws FuncionarioNaoEncontradoException {
-        return null;
+    public Funcionario buscarPessoaPorRg(String rg) throws RgNaoEncontrado {
+        Pessoa funcionario = funcionarios.buscarPessoaPorRg(rg);
+        if(funcionario == null){ throw new RgNaoEncontrado();}
+        else{ return (Funcionario)funcionario;}
     }
 
     @Override
     public String buscarPorNome(String nome) throws FuncionarioNaoEncontradoException {
-        return null;
+        String str = funcionarios.buscarPorNome(nome);
+        if(str.equals("")){ throw new FuncionarioNaoEncontradoException(); }
+        else{return str;}
     }
 
     @Override
-    public void removerPessoaPorRg(String rg) throws FuncionarioNaoEncontradoException {
-
+    public void removerPessoaPorRg(String rg) throws RgNaoEncontrado {
+        if(funcionarios.buscarPessoaPorRg(rg) == null){ throw new RgNaoEncontrado(); }
+        else{ funcionarios.removerPessoaPorRg(rg);}
     }
 
     @Override
-    public void removerPessoaPorCpf(String cpf) throws FuncionarioNaoEncontradoException {
-
+    public void removerPessoaPorCpf(String cpf) throws CpfNaoEncontrado {
+        if(funcionarios.buscarPessoaPorCpf(cpf) == null){ throw new CpfNaoEncontrado(); }
+        else{ funcionarios.removerPessoaPorCpf(cpf);}
     }
 }

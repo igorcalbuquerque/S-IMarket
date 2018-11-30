@@ -9,7 +9,6 @@ package negocio.entidades;
 public class    Produto {
 
     private static int codigoAutomatico = 0;
-    private boolean ativo;
     private int codigoProduto;
     private String codigoBarra;
     private String descricao;
@@ -18,7 +17,6 @@ public class    Produto {
     private Secao secao;
 
     public Produto(int codigo,String codigoBarra,String descricao, double valorCompra, double valorVenda, Secao secao){
-        setAtivo(true);
         setCodigoProduto(codigo);
         setCodigoBarra(codigoBarra);
         setDescricao(descricao);
@@ -29,7 +27,6 @@ public class    Produto {
 
     public Produto(String codigoBarra,String descricao,double valorCompra ,double valorVenda, Secao secao){
         codigoAutomatico++;
-        setAtivo(true);
         setCodigoBarra(codigoBarra);
         setCodigoProduto(codigoAutomatico);
         setDescricao(descricao);
@@ -37,8 +34,6 @@ public class    Produto {
         setValorVenda(valorVenda);
         setSecao(secao);
     }
-    public boolean getAtivo(){return this.ativo;}
-    public void setAtivo(boolean status){this.ativo = status;}
     public int getCodigoProduto(){return codigoProduto;}
     public void setCodigoProduto(int novoCodigo){
         codigoProduto = novoCodigo;
@@ -81,13 +76,9 @@ public class    Produto {
         if(produto != null && this.codigoProduto == produto.getCodigoProduto()){ return true; }
         else { return false; }
     }
-    private String getStatus(){
-        if(ativo){ return "ATIVO"; }
-        else{ return "INATIVO"; }
-    }
     @Override
     public String toString(){
-        return "STATUS: "+getStatus() + "\nCódigo Interno: " + getCodigoProduto()+"\nCódigo Barra: " + getCodigoBarra() +
+        return "Código Interno: " + getCodigoProduto()+"\nCódigo Barra: " + getCodigoBarra() +
                "\nDescrição: "+getDescricao() + "\nValor Compra: "+getValorCompra()+"\nValor Venda: " + getValorVenda() +
                "\nSeção: "+getSecao().getDescricao()+"\n";
     }

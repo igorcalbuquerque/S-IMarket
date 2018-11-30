@@ -54,7 +54,7 @@ public class RepositorioPessoa implements IRepositorioPessoa {
             pessoas.remove(pessoa);
         }
     }
-    public void removerPessoaCpf(String cpf){
+    public void removerPessoaPorCpf(String cpf){
         Pessoa pessoa = buscarPessoaPorCpf(cpf);
         if(pessoa != null){
             pessoas.remove(pessoa);
