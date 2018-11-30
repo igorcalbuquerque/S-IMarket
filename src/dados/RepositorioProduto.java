@@ -16,9 +16,10 @@ public class RepositorioProduto implements IRepositorioProduto {
 
     public RepositorioProduto(){ this.produtos = new ArrayList<Produto>(); }
     public void adicionarProduto(Produto produto){ produtos.add(produto); }
-    public void removerProduto(int codigo){
+    public Produto removerProduto(int codigo){
         Produto produto = buscarProduto(codigo);
         produtos.remove(produto);
+        return produto;
     }
     public Produto buscarProduto(int codigo){
         Produto produto = null;
