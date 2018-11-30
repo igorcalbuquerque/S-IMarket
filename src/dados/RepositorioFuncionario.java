@@ -19,7 +19,7 @@ public class RepositorioFuncionario extends RepositorioPessoa {
         String lista = "";
         for(Pessoa funcionario:pessoas){
             lista += "==========================================\n";
-            lista+= ((Pessoa)funcionario).toString();
+            lista+= ((Funcionario)funcionario).toString();
         }
         return  lista;
     }

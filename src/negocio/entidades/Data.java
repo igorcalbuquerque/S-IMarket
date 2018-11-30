@@ -1,5 +1,7 @@
 package negocio.entidades;
 
+import java.util.Calendar;
+
 /**
  *
  *
@@ -20,6 +22,12 @@ public class Data {
             a+=2000;
         }
         this.ano = a;
+    }
+    public Data(){
+        Calendar c = Calendar.getInstance();
+        this.dia = c.get(Calendar.DAY_OF_MONTH);
+        this.mes = c.get(Calendar.MONTH)+1;
+        this.ano = c.get(Calendar.YEAR);
     }
     public int getDia(){return this.dia;}
     public void setDia(int d){this.dia = d;}
@@ -44,38 +52,38 @@ public class Data {
         return str;
     }
     public boolean eAntes(Data data){
-        if(this.ano <= data.getAno()){
+        if(this.ano < data.getAno()){
             return true;
         }
         if(this.ano > data.getAno()){
             return false;
         }
-        if (this.mes <= data.getMes()){
+        if (this.mes < data.getMes()){
             return true;
         }
         if(this.mes > data.getMes()){
             return false;
         }
-        if(this.dia <= data.getDia()){
+        if(this.dia < data.getDia()){
             return true;
         }else{
             return false;
         }
     }
     public boolean eDepois(Data data){
-        if(this.ano >= data.getAno()){
+        if(this.ano > data.getAno()){
             return true;
         }
         if(this.ano < data.getAno()){
             return false;
         }
-        if (this.mes >= data.getMes()){
+        if (this.mes > data.getMes()){
             return true;
         }
         if(this.mes < data.getMes()){
             return false;
         }
-        if(this.dia >= data.getDia()){
+        if(this.dia > data.getDia()){
             return true;
         }else{
             return false;

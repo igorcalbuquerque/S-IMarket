@@ -13,16 +13,16 @@ public class Endereco {
     private String bairro;
     private String cidade;
     private String cep;
-    private String uf;
+    private String estado;
 
-    public Endereco(String rua,String numero, String bairro, String cidade, String cep, String uf)
+    public Endereco(String rua,String numero, String bairro, String cidade, String cep, String estado)
     {
         setRua(rua);
         setNumero(numero);
         setBairro(bairro);
         setCidade(cidade);
         setCep(cep);
-        setUf(uf);
+        setEstado(estado);
     }
 
     public String getRua()
@@ -53,20 +53,17 @@ public class Endereco {
     public void setCep(String cep) {
         this.cep = cep;
     }
-    public String getUf() {
-        return uf;
+    public String getEstado() {
+        return estado;
     }
-    public void setUf(String uf) {
-        this.uf = uf;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     @Override
     public String toString(){
-        return "Rua: " + getRua() + "\n" +
-                "Numero: "+getNumero()+ "\n"+
-                "Bairro: " + getBairro() + "\n" +
-                "Cidade: " + getCidade() + "\n" +
-                "CEP: " + getCep() + "\n" +
-                "UF: "  + getUf()+"\n";
+        String str = "Rua: " + getRua() + "\nNumero: "+getNumero()+ "\nBairro: " + getBairro() + "\nCidade: " + getCidade() +
+                     "\nCEP: " + getCep() + "\nESTADO: "  + getEstado()+"\n";
+        return str;
     }
 }

@@ -8,47 +8,41 @@ package dados;
 
 import java.util.ArrayList;
 
+import dados.interfaces.IRepositorioVendas;
+import negocio.entidades.Venda;
+
 import negocio.entidades.*;
 
-public class RepositorioVenda {
-    private ArrayList<Carrinho> vendas;
+public class RepositorioVenda implements IRepositorioVendas {
 
-    public RepositorioVenda(){
-        this.vendas = new ArrayList<Carrinho>();
-    }
-    public void adicionarVenda(Carrinho carrinho){
-        vendas.add(carrinho);
-    }
+    private ArrayList<Venda> vendas;
+
+    public RepositorioVenda(){ this.vendas = new ArrayList<Venda>(); }
+    public void adicionarVenda(Venda venda){ vendas.add(venda); }
     public void removerVenda(int codigo){
-        Carrinho carrinho = buscarCarrinho(codigo);
-        if(carrinho != null){
-            vendas.remove(carrinho);
-            System.out.println("A COMPRA FOI REMOVIDA!!!");
-        }
-        else{
-            System.out.println("A COMPRA BUSCADA NAO EXISTE!!!");
-        }
+        Venda venda = buscarVenda(codigo);
+        vendas.remove(venda);
     }
-    public Carrinho buscarCarrinho(int codigo){
-        for(Carrinho c: vendas){
-            if(c.getCodigo() == codigo ){
-                return c;
+    public Venda buscarVenda(int codigo){
+        Venda venda = null;
+        for(Venda v: vendas){
+            if(v.getCodigo() == codigo ){
+                venda = v;
+                break;
             }
         }
-        return null;
+        return venda;
     }
     public String relatorioVenda(Data dataInicial,Data dataFinal){
-
         double total = 0;
         String relatorio = "";
-        for(Carrinho c: vendas){
 
-            if(c.getData().equals(dataInicial) || c.getData().eDepois(dataInicial) &&
-               c.getData().eAntes(dataFinal)||c.getData().equals(dataFinal)) {
+        for(Venda v: vendas){
+            if(v.getData().equals(dataInicial) || v.getData().eDepois(dataInicial) &&
+               v.getData().eAntes(dataFinal) || v.getData().equals(dataFinal)) {
 
-                relatorio += c.toString();
-                total += c.getValorTotal();
-
+                relatorio += v.toString();
+                total += v.getValorTotal();
             }
         }
         if(relatorio.equals("")){
@@ -60,18 +54,14 @@ public class RepositorioVenda {
     public String relatorioVenda(Cliente cliente,Data dataInicial,Data dataFinal){
         double total = 0;
         String relatorio = "";
-        for(Carrinho c: vendas){
+        for(Venda v: vendas){
+            if(v.getCliente()!=null){
+                if(v.getCliente().equals(cliente)){
+                    if(v.getData().equals(dataInicial) || v.getData().eDepois(dataInicial) &&
+                       v.getData().eAntes(dataFinal) || v.getData().equals(dataFinal)) {
 
-            if(c.getCliente()!=null){
-
-                if(c.getCliente().getCpf().equals(cliente.getCpf())){
-
-                    if(c.getData().equals(dataInicial) || c.getData().eDepois(dataInicial) &&
-                       c.getData().eAntes(dataFinal)||c.getData().equals(dataFinal)) {
-
-                        relatorio += c.toString();
-                        total += c.getValorTotal();
-
+                        relatorio += v.toString();
+                        total += v.getValorTotal();
                     }
                 }
             }
@@ -88,15 +78,13 @@ public class RepositorioVenda {
         double total = 0;
         String relatorio = "";
 
-        for(Carrinho c: vendas){
-            if(c.getUsuario().getCpf().equals(funcionario.getCpf())){
+        for(Venda v: vendas){
+            if(v.getUsuario().equals(funcionario)){
+                if(v.getData().equals(dataInicial) || v.getData().eDepois(dataInicial) &&
+                   v.getData().eAntes(dataFinal) || v.getData().equals(dataFinal)) {
 
-                if(c.getData().equals(dataInicial) || c.getData().eDepois(dataInicial) &&
-                   c.getData().eAntes(dataFinal)||c.getData().equals(dataFinal)) {
-
-                    relatorio += c.toString();
-                    total += c.getValorTotal();
-
+                    relatorio += v.toString();
+                    total += v.getValorTotal();
                 }
             }
         }
@@ -112,14 +100,11 @@ public class RepositorioVenda {
         double total = 0;
         String relatorio = "";
 
-        for(Carrinho c: vendas){
-
-            for(ProdutoVenda produtoVenda:c.getCarrinho()){
-
-                if(produtoVenda.getProduto().getSecao().getCodigo() == secao.getCodigo()){
-
-                    if(c.getData().equals(dataInicial) || c.getData().equals(dataFinal) ||
-                            c.getData().eDepois(dataInicial) || c.getData().eAntes(dataFinal)) {
+        for(Venda v: vendas){
+            for(ProdutoVenda produtoVenda:v.getCarrinho()){
+                if(produtoVenda.getProduto().getSecao().equals(secao)){
+                    if(v.getData().equals(dataInicial) || v.getData().equals(dataFinal) ||
+                            v.getData().eDepois(dataInicial) || v.getData().eAntes(dataFinal)) {
 
                         relatorio += produtoVenda.toString();
                         total += produtoVenda.getTotal();
@@ -139,18 +124,14 @@ public class RepositorioVenda {
         double total = 0;
         String relatorio = "";
 
-        for(Carrinho c: vendas){
-
-            for(ProdutoVenda produtoVenda:c.getCarrinho()){
-
+        for(Venda v: vendas){
+            for(ProdutoVenda produtoVenda:v.getCarrinho()){
                 if(produtoVenda.getProduto().getCodigoProduto() == produto.getCodigoProduto()){
-
-                    if(c.getData().equals(dataInicial) || c.getData().eDepois(dataInicial) &&
-                       c.getData().eAntes(dataFinal)||c.getData().equals(dataFinal)) {
+                    if(v.getData().equals(dataInicial) || v.getData().eDepois(dataInicial) &&
+                       v.getData().eAntes(dataFinal) || v.getData().equals(dataFinal)) {
 
                         relatorio += produtoVenda.toString();
                         total += produtoVenda.getTotal();
-
                     }
                 }
             }
@@ -163,5 +144,4 @@ public class RepositorioVenda {
         return relatorio;
 
     }
-
 }

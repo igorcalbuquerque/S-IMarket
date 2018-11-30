@@ -5,12 +5,16 @@
  * @author Saú Cesar
  */
 
-package negocio.entidades;
+package main;
 
+import negocio.entidades.Data;
+import negocio.entidades.Endereco;
 import negocio.validacao.ValidaDados;
 import java.util.Scanner;
 
 public class SolicitaDados {
+
+    private static ValidaDados validaDados = ValidaDados.getInstance();
 
     public static String solicitaRg(){
 
@@ -20,10 +24,10 @@ public class SolicitaDados {
         do{
             System.out.print("Digite o RG: \t");
             rg = entradaRg.next();
-            if(!ValidaDados.isRg(rg)){
+            if(!validaDados.isRg(rg)){
                 System.out.print("INSIRA UM RG VALIDO!!!");
             }
-        }while (!ValidaDados.isRg(rg));
+        }while (!validaDados.isRg(rg));
 
         return rg;
     }
@@ -35,11 +39,11 @@ public class SolicitaDados {
         do {
             System.out.print("Digite o CPF : \t");
             cpf = entradaCpf.next();
-            if (!ValidaDados.isCPF(cpf))
+            if (!validaDados.isCPF(cpf))
             {
                 System.out.println("CPF INVÁLIDO!!! DIGITE NOVAMENTE!");
             }
-        }while (!ValidaDados.isCPF(cpf));
+        }while (!validaDados.isCPF(cpf));
 
         return cpf;
     }
@@ -51,10 +55,10 @@ public class SolicitaDados {
 
             System.out.print("Digite o Nome: \t");
             nome = entradaNome.nextLine();
-            if(!ValidaDados.isName(nome)){
+            if(!validaDados.isName(nome)){
                 System.out.println("INSIRA UM NOME VALIDO!!!");
             }
-        }while(!ValidaDados.isName(nome));
+        }while(!validaDados.isName(nome));
         return nome;
     }
     public static Endereco solicitaEndereco(){
@@ -133,11 +137,11 @@ public class SolicitaDados {
 
             data = new Data(dia,mes,ano);
 
-            if(!ValidaDados.isData(data)){
+            if(!validaDados.isData(data)){
                 System.out.println("INSIRA UMA DATA VALIDA!!!");
             }
 
-        }while (!ValidaDados.isData(data));
+        }while (!validaDados.isData(data));
 
         return data;
     }

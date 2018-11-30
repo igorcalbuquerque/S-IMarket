@@ -7,17 +7,30 @@
 package dados;
 
 import java.util.ArrayList;
-import negocio.entidades.Pessoa;
 
-public abstract class RepositorioPessoa {
+import dados.interfaces.IRepositorioPessoa;
+import negocio.entidades.abstratas.Pessoa;
 
-    protected ArrayList<Pessoa> pessoas;
+public class RepositorioPessoa implements IRepositorioPessoa {
 
+    private ArrayList<Pessoa> pessoas;
+
+    public ArrayList<Pessoa> getPessoas(){return pessoas;}
     public RepositorioPessoa(){
         this.pessoas = new ArrayList<Pessoa>();
     }
     public void adicionarPessoa(Pessoa pessoa){
         pessoas.add(pessoa);
+    }
+    public String buscarPorNome(String nome){
+        String str = "";
+
+        for(Pessoa pessoa:this.pessoas){
+            if(pessoa.getNome().contains(nome)){
+                str += pessoa.toString();
+            }
+        }
+        return str;
     }
     public Pessoa buscarPessoaPorRg(String rg ){
         for(Pessoa pessoa: pessoas){
@@ -36,26 +49,26 @@ public abstract class RepositorioPessoa {
         return null;
     }
     public void removerPessoaPorRg(String rg){
-
         Pessoa pessoa = buscarPessoaPorRg(rg);
         if(pessoa != null){
             pessoas.remove(pessoa);
         }
-        else{
-            System.out.println("Nao Existe o Cadastro Buscado!!!");
-        }
-
     }
     public void removerPessoaCpf(String cpf){
-
         Pessoa pessoa = buscarPessoaPorCpf(cpf);
         if(pessoa != null){
             pessoas.remove(pessoa);
-            System.out.println("Removido Com Sucesso!!!");
         }
-        else{
-            System.out.println("Nao Existe o Cadastro Buscado!!!");
+    }
+    @Override
+    public String toString(){
+        String str = "";
+        for(Pessoa pessoa:this.pessoas){
+            str += "==========================================\n";
+            str += pessoa.toString();
         }
+        str += "==========================================\n";
 
+        return str;
     }
 }

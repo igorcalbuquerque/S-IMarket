@@ -7,12 +7,16 @@
 package negocio.entidades;
 
 public class Fornecedor {
+
+    private static int codidoAutomatico = 0;
     private int codigo;
     private String nome;
     private String cnpj;
     private Endereco endereco;
-    public Fornecedor(int codigo,String nome,String cnpj,Endereco endereco){
-        setCodigo(codigo);
+
+    public Fornecedor(String nome,String cnpj,Endereco endereco){
+        codidoAutomatico++;
+        setCodigo(codidoAutomatico);
         setCnpj(cnpj);
         setNome(nome);
         this.endereco = endereco;
@@ -25,8 +29,15 @@ public class Fornecedor {
     public void setCnpj(String cnpj){this.cnpj = cnpj;}
     public Endereco getEndereco(){return this.endereco;}
     public void setEndereco(Endereco endereco){this.endereco = endereco;}
+    public boolean equals(Fornecedor fornecedor){
+        if(fornecedor != null && this.codigo == fornecedor.getCodigo()){ return true; }
+        else{ return false; }
+    }
     @Override
     public String toString(){
-        return "Codigo : "+getCodigo()+"\nNome : "+getNome()+"\nCNPJ : "+getCnpj()+"\n"+endereco.toString();
+        return "Codigo : "+getCodigo()+" Nome : "+getNome()+" CNPJ : "+getCnpj()+"\n"+endereco.toString();
+    }
+    public String informacoesBasicas(){
+        return "Codigo : "+getCodigo()+" Nome : "+getNome() + "\n";
     }
 }

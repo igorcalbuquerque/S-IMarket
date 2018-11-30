@@ -6,61 +6,46 @@
  */
 package dados;
 
+import dados.interfaces.IRepositorioProduto;
 import negocio.entidades.Produto;
 import java.util.ArrayList;
 
-public class RepositorioProduto {
+public class RepositorioProduto implements IRepositorioProduto {
 
     private ArrayList<Produto> produtos;
 
-    public RepositorioProduto(){
-
-        this.produtos = new ArrayList<Produto>();
-    }
-    public void adicionarProduto(Produto produto){
-        Produto p = this.buscarProduto(produto.getCodigoProduto());
-        if (p != null){
-            System.out.println("O CODIGO INFORMADO JA EXISTE!!!");
-        }else{
-            p = this.buscarPorCodBarra(produto.getCodigoBarra());
-            if (p!=null){
-                System.out.println("O CODIGO INFORMADO JA EXISTE!!!");
-            }
-            else{
-                produtos.add(produto);
-            }
-        }
-    }
+    public RepositorioProduto(){ this.produtos = new ArrayList<Produto>(); }
+    public void adicionarProduto(Produto produto){ produtos.add(produto); }
     public void removerProduto(int codigo){
         Produto produto = buscarProduto(codigo);
-        if(produto!= null){
-            produtos.remove(produto);
-        }
-        else{
-            System.out.println("O Produto buscado nao existe!!!");
-        }
+        produtos.remove(produto);
     }
     public Produto buscarProduto(int codigo){
+        Produto produto = null;
         for(Produto p: produtos){
             if(p.getCodigoProduto() == codigo){
-                return p;
+                produto = p;
+                break;
             }
         }
-        return null;
+        return produto;
     }
-    public Produto buscarPorCodBarra(String codigo){
-        for(Produto produto : this.produtos){
-            if(produto.getCodigoBarra().equals(codigo)){
-                return produto;
+    public Produto buscarProduto(String codigoBarra){
+        Produto produto = null;
+        for(Produto p: produtos){
+            if(p.getCodigoBarra().equals(codigoBarra)){
+                produto = p;
+                break;
             }
         }
-        return null;
+        return produto;
     }
-    public String listarProdutos(){
-        String lista = "";
+    @Override
+    public String toString(){
+        String str = "";
         for(Produto produto: produtos){
-            lista += produto.toString()+"\n";
+            str += produto.toString();
         }
-        return lista;
+        return str;
     }
 }

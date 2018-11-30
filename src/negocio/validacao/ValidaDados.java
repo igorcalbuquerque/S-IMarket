@@ -6,7 +6,13 @@ import negocio.entidades.Data;
 
 public class ValidaDados {
 
-    public static boolean isCPF(String CPF) {
+    private static ValidaDados validaDados = null;
+
+    public static ValidaDados getInstance(){
+        if(validaDados == null){ validaDados = new ValidaDados();}
+        return validaDados;
+    }
+    public boolean isCPF(String CPF) {
 
         if (CPF.equals("00000000000") ||
                 CPF.equals("11111111111") ||
@@ -27,16 +33,13 @@ public class ValidaDados {
             peso = 10;
             for (i=0; i<9; i++) {
 
-
-
                 num = (int)(CPF.charAt(i) - 48);
                 sm = sm + (num * peso);
                 peso = peso - 1;
             }
 
             r = 11 - (sm % 11);
-            if ((r == 10) || (r == 11))
-                dig10 = '0';
+            if ((r == 10) || (r == 11)) dig10 = '0';
             else dig10 = (char)(r + 48);
 
 
@@ -49,37 +52,27 @@ public class ValidaDados {
             }
 
             r = 11 - (sm % 11);
-            if ((r == 10) || (r == 11))
-                dig11 = '0';
+            if ((r == 10) || (r == 11)) dig11 = '0';
             else dig11 = (char)(r + 48);
 
-
-            if ((dig10 == CPF.charAt(9)) && (dig11 == CPF.charAt(10)))
-                return(true);
+            if ((dig10 == CPF.charAt(9)) && (dig11 == CPF.charAt(10))) return(true);
             else return(false);
-        } catch (InputMismatchException erro) {
-            return(false);
-        }
+        } catch (InputMismatchException erro) { return(false); }
     }
-
-    public static String imprimeCPF(String CPF) {
-        return(CPF.substring(0, 3) + "." + CPF.substring(3, 6) + "." +
-                CPF.substring(6, 9) + "-" + CPF.substring(9, 11));
-    }
-    public static boolean isRg(String rg){
+    public boolean isRg(String rg){
         char[] caracteres = rg.toCharArray();
-        char[] invalidos = {'!','@','#','*','%','&','(',')',
-                '<',',','>',';',':','/','?','[','{',']','}'};
+        char[] invalidos = {'!','@','#','*','%','&','(',')', '<',',','>',';',':','/','?','[','{',']','}'};
         for(char c:caracteres){
             for(char i:invalidos){
-                if(c==i){
+                if(c == i){
                     return false;
                 }
             }
         }
+
         return true;
     }
-    public static boolean isName(String name){
+    public boolean isName(String name){
 
         char[] caracteres = name.toCharArray();
         char[] invalidos = {'1','!','2','@','3','#','4','*','5','%','6','7','&','8','9','(','0',')',
@@ -95,14 +88,11 @@ public class ValidaDados {
 
         return true;
     }
-    public static boolean isData(Data data){
+    public boolean isData(Data data){
         if(data == null){
             return false;
         }
-        if(data.getDia() > 0 && data.getDia()<=31 && data.getMes() > 0 && data.getMes() < 12 && data.getAno() > 0) {
-            return true;
-        }else {
-            return false;
-        }
+        if(data.getDia() > 0 && data.getDia()<=31 && data.getMes() > 0 && data.getMes() < 12 && data.getAno() > 0) { return true; }
+        else { return false; }
     }
 }
