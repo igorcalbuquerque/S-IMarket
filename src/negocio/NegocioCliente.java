@@ -2,24 +2,15 @@ package negocio;
 
 import dados.RepositorioPessoa;
 import dados.interfaces.IRepositorioPessoa;
-import negocio.entidades.Cliente;
 import negocio.entidades.abstratas.Pessoa;
-import negocio.excessoes.*;
-import negocio.interfaces.INegocioCliente;
+import negocio.excessoes.ClienteNaoEncontradoException;
 
-public class NegocioCliente implements INegocioCliente {
+public class NegocioCliente {
 
     private IRepositorioPessoa clientes;
 
     public NegocioCliente(){ this.clientes = new RepositorioPessoa();}
-    @Override
-    public void adicionarCliente(Cliente cliente) throws CpfJaExisteException,RgJaExisteException{
-        if(clientes.buscarPessoaPorCpf(cliente.getCpf()) != null){ throw new CpfJaExisteException(cliente.getCpf()); }
-        else if(clientes.buscarPessoaPorRg(cliente.getRg()) != null){ throw new RgJaExisteException(cliente.getRg()); }
-        else{ clientes.adicionarPessoa(cliente);}
-    }
-    @Override
-    public Pessoa buscarPessoaPorCpf(String cpf) throws ClienteNaoEncontradoException{
+    public Pessoa buscarPessoaPorCpf(String cpf) throws Exception{
         Pessoa cliente  = clientes.buscarPessoaPorCpf(cpf);
         if(cliente == null){
             throw new ClienteNaoEncontradoException();
@@ -27,14 +18,12 @@ public class NegocioCliente implements INegocioCliente {
             return cliente;
         }
     }
-    @Override
-    public Pessoa buscarPessoaPorRg(String cpf) throws ClienteNaoEncontradoException{
+    public Pessoa buscarPessoaPorRg(String cpf) throws Exception{
         Pessoa cliente  = clientes.buscarPessoaPorRg(cpf);
         if(cliente == null){ throw new ClienteNaoEncontradoException(); }
         else{ return cliente; }
     }
-    @Override
-    public String buscarPorNome(String nome) throws ClienteNaoEncontradoException{
+    public String buscarPorNome(String nome) throws Exception{
         String str = clientes.buscarPorNome(nome);
         if (str.equals("")){
             throw new ClienteNaoEncontradoException();
@@ -42,14 +31,12 @@ public class NegocioCliente implements INegocioCliente {
             return str;
         }
     }
-    @Override
-    public void removerPessoaPorRg(String rg) throws ClienteNaoEncontradoException{
+    public void removerPessoaPorRg(String rg) throws Exception{
         Pessoa cliente = clientes.buscarPessoaPorRg(rg);
         if(cliente == null){ throw new ClienteNaoEncontradoException(); }
         else { clientes.removerPessoaPorRg(rg);}
     }
-    @Override
-    public void removerPessoaPorCpf(String cpf) throws ClienteNaoEncontradoException{
+    public void removerPessoaPorCpf(String cpf) throws Exception{
         Pessoa cliente = clientes.buscarPessoaPorCpf(cpf);
         if(cliente == null){ throw new ClienteNaoEncontradoException(); }
         else { clientes.removerPessoaPorRg(cpf);}
