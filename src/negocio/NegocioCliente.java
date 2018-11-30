@@ -2,14 +2,20 @@ package negocio;
 
 import dados.RepositorioPessoa;
 import dados.interfaces.IRepositorioPessoa;
+import negocio.entidades.Cliente;
 import negocio.entidades.abstratas.Pessoa;
-import negocio.excessoes.ClienteNaoEncontradoException;
+import negocio.excessoes.*;
 
 public class NegocioCliente {
 
     private IRepositorioPessoa clientes;
 
     public NegocioCliente(){ this.clientes = new RepositorioPessoa();}
+    public void adicionarCliente(Cliente cliente) throws Exception{
+        if(clientes.buscarPessoaPorCpf(cliente.getCpf()) != null){ throw new CpfJaExisteException(cliente.getCpf()); }
+        else if(clientes.buscarPessoaPorRg(cliente.getRg()) != null){ throw new RgJaExisteException(cliente.getRg()); }
+        else{ clientes.adicionarPessoa(cliente);}
+    }
     public Pessoa buscarPessoaPorCpf(String cpf) throws Exception{
         Pessoa cliente  = clientes.buscarPessoaPorCpf(cpf);
         if(cliente == null){
