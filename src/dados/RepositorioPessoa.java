@@ -9,7 +9,6 @@ package dados;
 import java.util.ArrayList;
 
 import dados.interfaces.IRepositorioPessoa;
-import negocio.entidades.Funcionario;
 import negocio.entidades.abstratas.Pessoa;
 
 public class RepositorioPessoa implements IRepositorioPessoa {
