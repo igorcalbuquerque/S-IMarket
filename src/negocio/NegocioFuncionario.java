@@ -1,6 +1,7 @@
 package negocio;
 
 import dados.RepositorioPessoa;
+import dados.interfaces.IRepositorioPessoa;
 import negocio.entidades.Funcionario;
 import negocio.entidades.abstratas.Pessoa;
 import negocio.excessoes.*;
@@ -8,7 +9,7 @@ import negocio.interfaces.INegocioFuncionario;
 
 public class NegocioFuncionario implements INegocioFuncionario {
 
-    private RepositorioPessoa funcionarios;
+    private IRepositorioPessoa funcionarios;
 
     public NegocioFuncionario(){this.funcionarios = new RepositorioPessoa();}
 
