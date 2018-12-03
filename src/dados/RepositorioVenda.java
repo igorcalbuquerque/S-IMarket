@@ -8,12 +8,12 @@ package dados;
 
 import java.util.ArrayList;
 
-import dados.interfaces.IRepositorioVendas;
+import dados.interfaces.IRepositorioVenda;
 import negocio.entidades.Venda;
 
 import negocio.entidades.*;
 
-public class RepositorioVenda implements IRepositorioVendas {
+public class RepositorioVenda implements IRepositorioVenda {
 
     private ArrayList<Venda> vendas;
 

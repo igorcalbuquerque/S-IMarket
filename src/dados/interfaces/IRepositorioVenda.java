@@ -2,7 +2,7 @@ package dados.interfaces;
 
 import negocio.entidades.*;
 
-public interface IRepositorioVendas {
+public interface IRepositorioVenda {
 
     void adicionarVenda(Venda venda);
     void removerVenda(int codigo);
