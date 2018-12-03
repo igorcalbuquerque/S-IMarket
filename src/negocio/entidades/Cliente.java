@@ -40,4 +40,13 @@ public class Cliente extends Pessoa {
                      "\nE-MAIL: "+ getEmail() + "\nENDEREÇO: " + getEndereco().toString();
         return str;
     }
+    @Override
+    public double getDesconto(){
+        double desconto = 0;
+        if(this.getTotalComprado() > 200 ){
+            desconto = 10;
+            this.zerarTotalComprado();
+        }
+        return desconto;
+    }
 }

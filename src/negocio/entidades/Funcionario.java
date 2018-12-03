@@ -52,8 +52,16 @@ public class Funcionario extends Pessoa {
         else { return "Associado"; }
     }
     @Override
+    public double getDesconto(){
+        double desconto = 0;
+        if(this.getTotalComprado() > 200 ){
+            desconto = 20;
+            this.zerarTotalComprado();
+        }
+        return desconto;
+    }
+    @Override
     public String toString() {
-
         String str = "NOME: " + getNome() + "\nRG : " + getRg()+"\nCPF: " + getCpf()  +
                      "\nCARGO: " + getCargo() + "\nSALARIO: R$ "+getSalario() + "\n"+ getEndereco().toString();
         return str;
