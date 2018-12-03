@@ -6,8 +6,7 @@ import negocio.entidades.Data;
 
 public class ValidaDados {
 
-    private static ValidaDados validaDados = null;
-
+    private static ValidaDados validaDados;
     public static ValidaDados getInstance(){
         if(validaDados == null){ validaDados = new ValidaDados();}
         return validaDados;

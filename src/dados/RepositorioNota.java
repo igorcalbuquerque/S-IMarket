@@ -6,18 +6,18 @@
  */
 package dados;
 
-import dados.interfaces.IRepositorioNotas;
+import dados.interfaces.IRepositorioNota;
 import negocio.entidades.Data;
 import negocio.entidades.Fornecedor;
 import negocio.entidades.NotaFiscal;
 import java.util.ArrayList;
 
-public class RepositorioNotas implements IRepositorioNotas {
+public class RepositorioNota implements IRepositorioNota {
 
     private ArrayList<NotaFiscal> notas;
 
-    public RepositorioNotas(){ this.notas = new ArrayList<NotaFiscal>(); }
-    public void adicionarNotas(NotaFiscal nota){ this.notas.add(nota); }
+    public RepositorioNota(){ this.notas = new ArrayList<NotaFiscal>(); }
+    public void adicionarNotas(NotaFiscal nota) { this.notas.add(nota); }
     @Override
     public String toString(){
         String str = "";
@@ -62,22 +62,26 @@ public class RepositorioNotas implements IRepositorioNotas {
         }
         return str;
     }
-    public String listarNotasPorFornecedor(Fornecedor fornecedor){
+    public String listarNotasPorFornecedor(Fornecedor fornecedor,Data dataInicial, Data dataFinal){
         String str = "";
 
         for(NotaFiscal nota:notas){
             if(nota.getFornecedor().equals(fornecedor)){
-                str += nota.toStringBasico();
+                if(nota.getDataEntrada().eDepois(dataInicial) ){
+                    str += nota.toStringBasico();
+                }
             }
         }
         return str;
     }
     public NotaFiscal buscarNota(int numero,Fornecedor fornecedor){
+        NotaFiscal notaFiscal = null;
         for(NotaFiscal nota:this.notas){
             if (nota.getNumero() == numero && nota.getFornecedor().equals(fornecedor)){
-                return nota;
+                notaFiscal = nota;
+                break;
             }
         }
-        return null;
+        return notaFiscal;
     }
 }
