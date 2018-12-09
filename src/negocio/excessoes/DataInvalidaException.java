@@ -1,7 +1,7 @@
 package negocio.excessoes;
 
 public class DataInvalidaException extends Exception{
-    public DataInvalidaException(){
-        super("INFORME UMA DATA VALIDA!!!");
+    public DataInvalidaException(String str){
+        super("A DATA "+str+"NAO E VALIDA!!!");
     }
 }

@@ -45,10 +45,9 @@ public class RepositorioVenda implements IRepositorioVenda {
                 total += v.getValorTotal();
             }
         }
-        if(relatorio.equals("")){
-            return "VAZIO!!!";
+        if(!relatorio.equals("")){
+            relatorio += "\nTOTAL DO PERIODO : RS "+total;
         }
-        relatorio += "\nTOTAL DO DIA : RS "+total;
         return relatorio;
     }
     public String relatorioVenda(Cliente cliente,Data dataInicial,Data dataFinal){
@@ -66,11 +65,9 @@ public class RepositorioVenda implements IRepositorioVenda {
                 }
             }
         }
-
-        if(relatorio.equals("")){
-            return "VAZIO!!!";
+        if(!relatorio.equals("")){
+            relatorio += "\nTOTAL DO PERIODO : RS "+total;
         }
-        relatorio += "\nTOTAL DO DIA : RS "+total;
         return relatorio;
     }
     public String relatorioVenda(Funcionario funcionario, Data dataInicial, Data dataFinal){
@@ -88,11 +85,9 @@ public class RepositorioVenda implements IRepositorioVenda {
                 }
             }
         }
-
-        if(relatorio.equals("")){
-            return "VAZIO!!!";
+        if(!relatorio.equals("")){
+            relatorio += "\nTOTAL DO PERIODO : RS "+total;
         }
-        relatorio += "\nTOTAL DO DIA : RS "+total;
         return relatorio;
     }
     public String relatorioVenda(Secao secao, Data dataInicial, Data dataFinal){
@@ -112,11 +107,9 @@ public class RepositorioVenda implements IRepositorioVenda {
                 }
             }
         }
-
-        if(relatorio.equals("")){
-            return "VAZIO!!!";
+        if(!relatorio.equals("")){
+            relatorio += "\nTOTAL DO PERIODO : RS "+total;
         }
-        relatorio += "\nTOTAL DO DIA : RS "+total;
         return relatorio;
     }
     public String relatorioVenda(Produto produto, Data dataInicial, Data dataFinal){
@@ -136,12 +129,9 @@ public class RepositorioVenda implements IRepositorioVenda {
                 }
             }
         }
-
-        if(relatorio.equals("")){
-            return "VAZIO!!!";
+        if(!relatorio.equals("")){
+            relatorio += "\nTOTAL DO PERIODO : RS "+total;
         }
-        relatorio += "\nTOTAL DO DIA : RS "+total;
         return relatorio;
-
     }
 }
