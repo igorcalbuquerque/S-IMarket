@@ -2,19 +2,18 @@ package negocio;
 
 import dados.RepositorioPessoa;
 import dados.interfaces.IRepositorioPessoa;
-import negocio.entidades.Cliente;
 import negocio.entidades.abstratas.Pessoa;
 import negocio.excessoes.*;
-import negocio.interfaces.INegocioCliente;
+import negocio.interfaces.INegocioPessoa;
 
-public class NegocioCliente implements INegocioCliente {
+public class NegocioCliente implements INegocioPessoa {
 
     private IRepositorioPessoa clientes;
 
     public NegocioCliente(){ this.clientes = new RepositorioPessoa();}
 
     @Override
-    public void adicionarCliente(Cliente cliente) throws CpfJaExisteException, RgJaExisteException {
+    public void adicionarPessoa(Pessoa cliente) throws CpfJaExisteException, RgJaExisteException {
         if(clientes.buscarPessoaPorCpf(cliente.getCpf()) != null){ throw new CpfJaExisteException(cliente.getCpf()); }
         else if(clientes.buscarPessoaPorRg(cliente.getRg()) != null){ throw new RgJaExisteException(cliente.getRg());}
         else clientes.adicionarPessoa(cliente);
@@ -32,9 +31,9 @@ public class NegocioCliente implements INegocioCliente {
         else{ return cliente; }
     }
     @Override
-    public String buscarPorNome(String nome) throws ClienteNaoEncontradoException{
+    public String buscarPorNome(String nome) throws PessoaNaoEncotradaException{
         String str = clientes.buscarPorNome(nome);
-        if (str.equals("")){ throw new ClienteNaoEncontradoException(); }
+        if (str.equals("")){ throw new PessoaNaoEncotradaException(); }
         else{ return str; }
     }
     @Override
