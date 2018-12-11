@@ -151,7 +151,7 @@ public class Fachada implements IFachadaAssociado, IFachadaGerente {
     }
     @Override
     public void adicionarFuncionario(String nome, String rg, String cpf, Endereco endereco, boolean gerente, String senha)
-            throws CpfJaExisteException, RgJaExisteException{
+            throws CpfJaExisteException, RgJaExisteException {
         Funcionario funcionario = new Funcionario(nome,rg,cpf,endereco,gerente,senha);
         negocioFuncionario.adicionarPessoa(funcionario);
     }
