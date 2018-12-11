@@ -47,4 +47,6 @@ public class NegocioFuncionario implements INegocioPessoa {
         if(funcionarios.buscarPessoaPorCpf(cpf) == null){ throw new CpfNaoEncontrado(); }
         else{ funcionarios.removerPessoaPorCpf(cpf);}
     }
+    public void promoverFuncionario(Funcionario funcionario){funcionario.setCargo(true);}
+    public void rebaixarFuncionario(Funcionario funcionario){funcionario.setCargo(false);}
 }

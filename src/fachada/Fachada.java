@@ -1,6 +1,7 @@
 package fachada;
 
 import fachada.interfaces.IFachadaAssociado;
+import fachada.interfaces.IFachadaGerente;
 import negocio.*;
 import negocio.entidades.*;
 import negocio.entidades.abstratas.Pessoa;
@@ -8,7 +9,7 @@ import negocio.excessoes.*;
 import negocio.interfaces.*;
 import negocio.NegocioSecao;
 
-public class Fachada implements IFachadaAssociado {
+public class Fachada implements IFachadaAssociado, IFachadaGerente {
 
     private INegocioPessoa negocioCliente;
     private INegocioPessoa negocioFuncionario;
@@ -66,7 +67,8 @@ public class Fachada implements IFachadaAssociado {
 
     }
     @Override
-    public void removerNota(int numero, int codigoFornecedor) throws NenhumaNotaEcontradaException,FornecedorNaoEncontradoException {
+    public void removerNota(int numero, int codigoFornecedor)
+            throws NenhumaNotaEcontradaException,FornecedorNaoEncontradoException {
         negocioNotaFiscal.removerNota(numero,negocioFornecedor.buscarFornecedor(codigoFornecedor));
     }
     @Override
@@ -87,7 +89,8 @@ public class Fachada implements IFachadaAssociado {
         return negocioNotaFiscal.listarNotasPorFornecedor(fornecedor,dataInicial,dataFinal);
     }
     @Override
-    public NotaFiscal buscarNota(int numero, int codigoFornecedor) throws NotaNaoEncontradaException, FornecedorNaoEncontradoException {
+    public NotaFiscal buscarNota(int numero, int codigoFornecedor)
+            throws NotaNaoEncontradaException, FornecedorNaoEncontradoException {
         return negocioNotaFiscal.buscarNota(numero,negocioFornecedor.buscarFornecedor(codigoFornecedor));
     }
     @Override
@@ -139,5 +142,37 @@ public class Fachada implements IFachadaAssociado {
     @Override
     public String relatorioVenda(Produto produto, Data dataInicial, Data dataFinal) throws DataInvalidaException, RelatorioVazioException {
         return negocioVenda.relatorioVenda(produto,dataInicial,dataFinal);
+    }
+    @Override
+    public void adicionarFuncionario(String nome, String rg, String cpf, Endereco endereco, boolean gerente, String login, String senha)
+            throws CpfJaExisteException, RgJaExisteException {
+        Funcionario funcionario = new Funcionario(nome,rg,cpf,endereco,gerente,login,senha);
+        negocioFuncionario.adicionarPessoa(funcionario);
+    }
+    @Override
+    public void adicionarFuncionario(String nome, String rg, String cpf, Endereco endereco, boolean gerente, String senha)
+            throws CpfJaExisteException, RgJaExisteException {
+        Funcionario funcionario = new Funcionario(nome,rg,cpf,endereco,gerente,senha);
+        negocioFuncionario.adicionarPessoa(funcionario);
+    }
+    @Override
+    public Pessoa buscarFuncionarioPorCpf(String cpf) throws CpfNaoEncontrado {
+        return negocioFuncionario.buscarPessoaPorCpf(cpf);
+    }
+    @Override
+    public Pessoa buscarFuncionarioPorRg(String rg) throws RgNaoEncontrado {
+        return negocioFuncionario.buscarPessoaPorRg(rg);
+    }
+    @Override
+    public String buscarFuncionarioPorNome(String nome) throws PessoaNaoEncotradaException {
+        return negocioFuncionario.buscarPorNome(nome);
+    }
+    @Override
+    public void removerFuncionarioPorRg(String rg) throws RgNaoEncontrado {
+        negocioFuncionario.removerPessoaPorRg(rg);
+    }
+    @Override
+    public void removerFuncionarioPorCpf(String cpf) throws CpfNaoEncontrado {
+        negocioFuncionario.removerPessoaPorCpf(cpf);
     }
 }
