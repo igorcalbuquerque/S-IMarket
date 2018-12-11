@@ -29,7 +29,7 @@ public class NegocioNotaFiscal implements INegocioNotaFiscal {
     @Override
     public String listarNotasPorEntrada(Data data) throws NenhumaNotaEcontradaException,DataInvalidaException {
         ValidaDados validaDados = ValidaDados.getInstance();
-        if(!validaDados.isData(data)){ throw new DataInvalidaException(); }
+        if(!validaDados.isData(data)){ throw new DataInvalidaException(data.toString()); }
         String str = repositorioNota.listarNotasPorEntrada(data);
 
         if(str.equals("")){ throw new NenhumaNotaEcontradaException();}
@@ -38,7 +38,7 @@ public class NegocioNotaFiscal implements INegocioNotaFiscal {
     @Override
     public String listarNotasPorEmissao(Data data) throws NenhumaNotaEcontradaException,DataInvalidaException {
         ValidaDados validaDados = ValidaDados.getInstance();
-        if(!validaDados.isData(data)){ throw new DataInvalidaException(); }
+        if(!validaDados.isData(data)){ throw new DataInvalidaException(data.toString()); }
         String str = repositorioNota.listarNotasPorEmissao(data);
 
         if(str.equals("")){ throw new NenhumaNotaEcontradaException();}
@@ -54,7 +54,8 @@ public class NegocioNotaFiscal implements INegocioNotaFiscal {
     public String listarNotasPorFornecedor(Fornecedor fornecedor, Data dataInicial, Data dataFinal)
     throws NenhumaNotaEcontradaException,DataInvalidaException {
         ValidaDados validaDados = ValidaDados.getInstance();
-        if(!validaDados.isData(dataInicial) && !validaDados.isData(dataFinal)){ throw new DataInvalidaException();}
+        if(!validaDados.isData(dataInicial)){ throw new DataInvalidaException(dataInicial.toString());}
+        if(!validaDados.isData(dataFinal)){ throw new DataInvalidaException(dataFinal.toString());}
 
         String str = repositorioNota.listarNotasPorFornecedor(fornecedor,dataInicial,dataFinal);
 

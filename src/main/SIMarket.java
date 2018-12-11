@@ -12,8 +12,6 @@ import java.util.Scanner;
 
 public class SIMarket {
 
-
-
     public static void main(String[] args){
 
         System.out.println("Foi,  POrra!");
