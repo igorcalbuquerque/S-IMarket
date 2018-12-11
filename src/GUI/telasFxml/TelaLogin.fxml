@@ -4,11 +4,10 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.telasFxml.">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.telasFxml.ControlerTelaLogin">
    <children>
-      <TextField layoutX="157.0" layoutY="138.0" prefHeight="25.0" prefWidth="253.0" promptText="Insira seu Login ou CPF" />
-      <TextField layoutX="157.0" layoutY="188.0" prefHeight="25.0" prefWidth="253.0" promptText="Insira sua Senha" />
+      <TextField fx:id="entradaLogin" layoutX="157.0" layoutY="138.0" prefHeight="25.0" prefWidth="253.0" promptText="Insira seu Login ou CPF" />
+      <TextField fx:id="entradaSenha" layoutX="157.0" layoutY="188.0" onAction="#logar" prefHeight="25.0" prefWidth="253.0" promptText="Insira sua Senha" />
       <Button fx:id="botaoLogin" layoutX="248.0" layoutY="266.0" mnemonicParsing="false" text="Login" />
    </children>
 </AnchorPane>
