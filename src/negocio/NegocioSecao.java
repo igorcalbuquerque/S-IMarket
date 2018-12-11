@@ -1,4 +1,4 @@
-package negocio.validacao;
+package negocio;
 
 import dados.RepositorioSecao;
 import dados.interfaces.IRepositorioSecao;

@@ -6,7 +6,7 @@ import negocio.entidades.*;
 import negocio.entidades.abstratas.Pessoa;
 import negocio.excessoes.*;
 import negocio.interfaces.*;
-import negocio.validacao.NegocioSecao;
+import negocio.NegocioSecao;
 
 public class Fachada implements IFachadaAssociado {
 
