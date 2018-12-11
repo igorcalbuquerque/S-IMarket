@@ -5,22 +5,24 @@ import negocio.entidades.abstratas.Pessoa;
 import negocio.excessoes.*;
 
 public interface IFachadaAssociado {
-    void adicionarCliente(String nome, String rg, String cpf, Endereco endereco) throws CpfJaExisteException, RgJaExisteException;
+    void adicionarCliente(String nome, String rg, String cpf, Endereco endereco,String telefone, String email)
+            throws CpfJaExisteException, RgJaExisteException;
     Pessoa buscarClientePorCpf(String cpf) throws CpfNaoEncontrado;
-    Pessoa buscarcClientePorRg(String cpf) throws RgNaoEncontrado;
+    Pessoa buscarcClientePorRg(String rg) throws RgNaoEncontrado;
     String buscarClientePorNome(String nome) throws PessoaNaoEncotradaException;
     void removerClientePorRg(String rg) throws RgNaoEncontrado;
     void removerClientePorCpf(String cpf) throws CpfNaoEncontrado;
-    void adicionarNotas(int numero, int serie, Data dataEmissao, Data dataPagamento, Fornecedor fornecedor) throws NotaJaExisteException;
-    void removerNota(int numero, int codigoFornecedor) throws NenhumaNotaEcontradaException;
+    void adicionarNotas(int numero, int serie, Data dataEmissao, Data dataPagamento, Fornecedor fornecedor)
+            throws NotaJaExisteException;
+    void removerNota(int numero, int codigoFornecedor) throws NenhumaNotaEcontradaException,FornecedorNaoEncontradoException;
     String listarNotasPorEntrada(Data data) throws NenhumaNotaEcontradaException,DataInvalidaException;
     String listarNotasPorEmissao(Data data) throws NenhumaNotaEcontradaException,DataInvalidaException;
     String listarNotasPorNumero(int numero) throws NenhumaNotaEcontradaException;
     String listarNotasPorFornecedor(Fornecedor fornecedor, Data dataInicial, Data dataFinal)
-           throws NenhumaNotaEcontradaException,DataInvalidaException;
-    NotaFiscal buscarNota(int numero, int codigoFornecedor) throws NotaNaoEncontradaException;
+            throws NenhumaNotaEcontradaException,DataInvalidaException;
+    NotaFiscal buscarNota(int numero, int codigoFornecedor) throws NotaNaoEncontradaException, FornecedorNaoEncontradoException;
     void adicionarProduto(int codigo,String codigoBarra,String descricao, double valorCompra, double valorVenda, int codigoSecao)
-           throws CodigoJaExisteException;
+            throws CodigoJaExisteException, SecaoNaoEncontradaException;
     Produto buscarProdutoPorCodigo(int codigo) throws ProdutoNaoEncontradoException;
     Produto buscarProdutoPorCodigoDeBarras(String codigo) throws ProdutoNaoEncontradoException;
     void removerProdutoPorCodigoInterno(int codigo) throws ProdutoNaoEncontradoException;

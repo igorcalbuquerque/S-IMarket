@@ -30,14 +30,6 @@ public class RepositorioSecao implements IRepositorioSecao {
         }
         return secao;
     }
-    @Override
-    public String toString(){
-        String str = "";
-        for(Secao s:secoes){
-            str += s.toString();
-        }
-        return str;
-    }
     public String buscarPorDescricao(String descricao){
         String str = "";
 
@@ -48,4 +40,13 @@ public class RepositorioSecao implements IRepositorioSecao {
         }
         return str;
     }
+    @Override
+    public String toString(){
+        String str = "";
+        for(Secao s:secoes){
+            str += s.toString();
+        }
+        return str;
+    }
+
 }
