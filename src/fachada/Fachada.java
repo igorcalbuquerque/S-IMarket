@@ -33,6 +33,9 @@ public class Fachada implements IFachadaAssociado, IFachadaGerente {
         if (fachada == null){fachada = new Fachada();}
         return fachada;
     }
+    public boolean login(String login,String senha) throws UsuarioOuSenhaInvalidoException, FuncionarioNaoEncontradoException {
+        return ((INegocioFuncionario)negocioFuncionario).login(login,senha);
+    }
     @Override
     public void adicionarCliente(String nome, String rg, String cpf, Endereco endereco,String telefone, String email)
             throws CpfJaExisteException, RgJaExisteException {
@@ -174,5 +177,15 @@ public class Fachada implements IFachadaAssociado, IFachadaGerente {
     @Override
     public void removerFuncionarioPorCpf(String cpf) throws CpfNaoEncontrado {
         negocioFuncionario.removerPessoaPorCpf(cpf);
+    }
+    @Override
+    public void promoverFuncionario(String cpf) throws CpfNaoEncontrado {
+        Funcionario funcionario = (Funcionario)negocioFuncionario.buscarPessoaPorCpf(cpf);
+        funcionario.setCargo(true);
+    }
+    @Override
+    public void rebaixarFuncionario(String cpf) throws CpfNaoEncontrado {
+        Funcionario funcionario = (Funcionario)negocioFuncionario.buscarPessoaPorCpf(cpf);
+        funcionario.setCargo(false);
     }
 }

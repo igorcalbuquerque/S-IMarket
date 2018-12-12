@@ -5,6 +5,7 @@ import negocio.entidades.abstratas.Pessoa;
 import negocio.excessoes.*;
 
 public interface IFachadaAssociado {
+    boolean login(String login,String senha) throws UsuarioOuSenhaInvalidoException, FuncionarioNaoEncontradoException;
     void adicionarCliente(String nome, String rg, String cpf, Endereco endereco,String telefone, String email)
             throws CpfJaExisteException, RgJaExisteException;
     Pessoa buscarClientePorCpf(String cpf) throws CpfNaoEncontrado;

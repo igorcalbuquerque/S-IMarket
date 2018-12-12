@@ -1,6 +1,7 @@
 package fachada.interfaces;
 
 import negocio.entidades.Endereco;
+import negocio.entidades.Funcionario;
 import negocio.entidades.abstratas.Pessoa;
 import negocio.excessoes.*;
 
@@ -14,4 +15,6 @@ public interface IFachadaGerente {
     String buscarFuncionarioPorNome(String nome) throws PessoaNaoEncotradaException;
     void removerFuncionarioPorRg(String rg) throws RgNaoEncontrado;
     void removerFuncionarioPorCpf(String cpf) throws CpfNaoEncontrado;
+    void promoverFuncionario( String cpf) throws CpfNaoEncontrado;
+    void rebaixarFuncionario(String cpf) throws CpfNaoEncontrado;
 }

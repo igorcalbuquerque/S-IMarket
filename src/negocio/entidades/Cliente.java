@@ -44,7 +44,7 @@ public class Cliente extends Pessoa {
     public double getDesconto(){
         double desconto = 0;
         if(this.getTotalComprado() > 200 ){
-            desconto = 10;
+            desconto = 0.10;//equivale a 10% de desconto
             this.zerarTotalComprado();
         }
         return desconto;

@@ -4,15 +4,23 @@ import dados.RepositorioPessoa;
 import dados.interfaces.IRepositorioPessoa;
 import negocio.entidades.Funcionario;
 import negocio.entidades.abstratas.Pessoa;
+import negocio.entidades.interfaces.IAutenticavel;
 import negocio.excessoes.*;
+import negocio.interfaces.INegocioFuncionario;
 import negocio.interfaces.INegocioPessoa;
 
-public class NegocioFuncionario implements INegocioPessoa {
+public class NegocioFuncionario implements INegocioPessoa, INegocioFuncionario {
 
     private IRepositorioPessoa funcionarios;
 
     public NegocioFuncionario(){this.funcionarios = new RepositorioPessoa();}
-
+    @Override
+    public boolean login(String login, String senha) throws UsuarioOuSenhaInvalidoException,FuncionarioNaoEncontradoException{
+        IAutenticavel funcionario = (Funcionario)this.funcionarios.buscarPessoaPorCpf(login);
+        if(funcionario == null){throw new FuncionarioNaoEncontradoException(); }
+        else if(!funcionario.logar(login,senha)){ throw new UsuarioOuSenhaInvalidoException(); }
+        else{return true;}
+    }
     @Override
     public void adicionarPessoa(Pessoa funcionario) throws CpfJaExisteException, RgJaExisteException {
         if(funcionarios.buscarPessoaPorCpf(funcionario.getCpf()) != null){ throw new CpfJaExisteException(funcionario.getCpf()); }
@@ -47,6 +55,8 @@ public class NegocioFuncionario implements INegocioPessoa {
         if(funcionarios.buscarPessoaPorCpf(cpf) == null){ throw new CpfNaoEncontrado(); }
         else{ funcionarios.removerPessoaPorCpf(cpf);}
     }
+    @Override
     public void promoverFuncionario(Funcionario funcionario){funcionario.setCargo(true);}
+    @Override
     public void rebaixarFuncionario(Funcionario funcionario){funcionario.setCargo(false);}
 }

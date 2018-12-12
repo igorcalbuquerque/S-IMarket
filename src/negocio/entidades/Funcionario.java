@@ -6,8 +6,9 @@
 package negocio.entidades;
 
 import negocio.entidades.abstratas.Pessoa;
+import negocio.entidades.interfaces.IAutenticavel;
 
-public class Funcionario extends Pessoa {
+public class Funcionario extends Pessoa implements IAutenticavel {
 
     private boolean gerente;
     private double salario;
@@ -55,7 +56,7 @@ public class Funcionario extends Pessoa {
     public double getDesconto(){
         double desconto = 0;
         if(this.getTotalComprado() > 200 ){
-            desconto = 20;
+            desconto = 0.20;// equivale a 20% de desconto
             this.zerarTotalComprado();
         }
         return desconto;
@@ -65,5 +66,11 @@ public class Funcionario extends Pessoa {
         String str = "NOME: " + getNome() + "\nRG : " + getRg()+"\nCPF: " + getCpf()  +
                      "\nCARGO: " + getCargo() + "\nSALARIO: R$ "+getSalario() + "\n"+ getEndereco().toString();
         return str;
+    }
+
+    @Override
+    public boolean logar(String login, String senha) {
+        if(this.login.equals(login) || this.login.equals(this.getCpf()) && this.senha.equals(senha)){return true;}
+        else{ return false; }
     }
 }
