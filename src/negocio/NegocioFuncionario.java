@@ -15,10 +15,9 @@ public class NegocioFuncionario implements INegocioPessoa, INegocioFuncionario {
 
     public NegocioFuncionario(){this.funcionarios = new RepositorioPessoa();}
     @Override
-    public boolean login(String login, String senha) throws UsuarioOuSenhaInvalidoException,FuncionarioNaoEncontradoException{
+    public boolean login(String login, String senha) throws UsuarioOuSenhaInvalidoException{
         IAutenticavel funcionario = (Funcionario)this.funcionarios.buscarPessoaPorCpf(login);
-        if(funcionario == null){throw new FuncionarioNaoEncontradoException(); }
-        else if(!funcionario.logar(login,senha)){ throw new UsuarioOuSenhaInvalidoException(); }
+        if(!funcionario.logar(login,senha)){ throw new UsuarioOuSenhaInvalidoException(); }
         else{return true;}
     }
     @Override

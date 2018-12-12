@@ -33,7 +33,7 @@ public class Fachada implements IFachadaAssociado, IFachadaGerente {
         if (fachada == null){fachada = new Fachada();}
         return fachada;
     }
-    public boolean login(String login,String senha) throws UsuarioOuSenhaInvalidoException, FuncionarioNaoEncontradoException {
+    public boolean login(String login,String senha) throws UsuarioOuSenhaInvalidoException {
         return ((INegocioFuncionario)negocioFuncionario).login(login,senha);
     }
     @Override
@@ -159,25 +159,15 @@ public class Fachada implements IFachadaAssociado, IFachadaGerente {
         negocioFuncionario.adicionarPessoa(funcionario);
     }
     @Override
-    public Pessoa buscarFuncionarioPorCpf(String cpf) throws CpfNaoEncontrado {
-        return negocioFuncionario.buscarPessoaPorCpf(cpf);
-    }
+    public Pessoa buscarFuncionarioPorCpf(String cpf) throws CpfNaoEncontrado { return negocioFuncionario.buscarPessoaPorCpf(cpf); }
     @Override
-    public Pessoa buscarFuncionarioPorRg(String rg) throws RgNaoEncontrado {
-        return negocioFuncionario.buscarPessoaPorRg(rg);
-    }
+    public Pessoa buscarFuncionarioPorRg(String rg) throws RgNaoEncontrado {return negocioFuncionario.buscarPessoaPorRg(rg); }
     @Override
-    public String buscarFuncionarioPorNome(String nome) throws PessoaNaoEncotradaException {
-        return negocioFuncionario.buscarPorNome(nome);
-    }
+    public String buscarFuncionarioPorNome(String nome) throws PessoaNaoEncotradaException {return negocioFuncionario.buscarPorNome(nome); }
     @Override
-    public void removerFuncionarioPorRg(String rg) throws RgNaoEncontrado {
-        negocioFuncionario.removerPessoaPorRg(rg);
-    }
+    public void removerFuncionarioPorRg(String rg) throws RgNaoEncontrado {negocioFuncionario.removerPessoaPorRg(rg);}
     @Override
-    public void removerFuncionarioPorCpf(String cpf) throws CpfNaoEncontrado {
-        negocioFuncionario.removerPessoaPorCpf(cpf);
-    }
+    public void removerFuncionarioPorCpf(String cpf) throws CpfNaoEncontrado {negocioFuncionario.removerPessoaPorCpf(cpf); }
     @Override
     public void promoverFuncionario(String cpf) throws CpfNaoEncontrado {
         Funcionario funcionario = (Funcionario)negocioFuncionario.buscarPessoaPorCpf(cpf);
