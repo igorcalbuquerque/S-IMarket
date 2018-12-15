@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="421.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ControlerFornecedor">
+   <children>
+      <Pane prefHeight="504.0" prefWidth="468.0">
+         <children>
+            <Label layoutX="22.0" layoutY="55.0" text="ID:" />
+            <TextField fx:id="txtId" layoutX="22.0" layoutY="71.0" prefHeight="26.0" prefWidth="73.0" />
+            <Label layoutX="163.0" layoutY="14.0" text="Fornecedor">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="24.0" layoutY="103.0" text="Nome:" />
+            <TextField fx:id="txtNome" layoutX="23.0" layoutY="120.0" prefHeight="26.0" prefWidth="430.0" />
+            <Label layoutX="104.0" layoutY="55.0" text="CNPJ:" />
+            <TextField fx:id="txtCnpj" layoutX="103.0" layoutY="71.0" prefHeight="26.0" prefWidth="349.0" />
+            <Label layoutX="23.0" layoutY="151.0" text="Rua:" />
+            <Label layoutX="23.0" layoutY="248.0" text="Bairro:" />
+            <Label layoutX="121.0" layoutY="200.0" text="Cidade:" />
+            <Label layoutX="21.0" layoutY="297.0" text="Estado:" />
+            <Label layoutX="24.0" layoutY="200.0" text="Numero:" />
+            <Label layoutX="248.0" layoutY="248.0" text="CEP:" />
+            <TextField fx:id="txtRua" layoutX="24.0" layoutY="167.0" prefHeight="26.0" prefWidth="430.0" />
+            <TextField fx:id="txtNumero" layoutX="24.0" layoutY="216.0" prefHeight="26.0" prefWidth="84.0" />
+            <TextField fx:id="txtCidade" layoutX="121.0" layoutY="216.0" prefHeight="26.0" prefWidth="330.0" />
+            <TextField fx:id="txtBairro" layoutX="23.0" layoutY="266.0" prefHeight="26.0" prefWidth="216.0" />
+            <TextField fx:id="txtCep" layoutX="248.0" layoutY="266.0" prefHeight="26.0" prefWidth="201.0" />
+            <TextField fx:id="txtEstado" layoutX="23.0" layoutY="318.0" prefHeight="26.0" prefWidth="216.0" />
+            <Button fx:id="btnSalvar" layoutX="21.0" layoutY="366.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="154.0" text="Salvar" />
+            <Button fx:id="btnSair" layoutX="278.0" layoutY="366.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="154.0" text="Sair" />
+         </children></Pane>
+   </children>
+</AnchorPane>
