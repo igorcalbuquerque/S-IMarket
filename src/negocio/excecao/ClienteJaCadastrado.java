@@ -1,4 +1,4 @@
-package negocio.excessoes;
+package negocio.excecao;
 
 public class ClienteJaCadastrado extends Exception {
     public ClienteJaCadastrado(){

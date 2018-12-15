@@ -3,9 +3,9 @@ package negocio;
 import dados.RepositorioFornecedor;
 import dados.interfaces.IRepositorioFornecedor;
 import negocio.entidades.Fornecedor;
-import negocio.excessoes.CnpjJaExisteException;
-import negocio.excessoes.CodigoJaExisteException;
-import negocio.excessoes.FornecedorNaoEncontradoException;
+import negocio.excecao.CnpjJaExisteException;
+import negocio.excecao.CodigoJaExisteException;
+import negocio.excecao.FornecedorNaoEncontradoException;
 import negocio.interfaces.INegocioFornecedor;
 
 public class NegocioFornecedor implements INegocioFornecedor {

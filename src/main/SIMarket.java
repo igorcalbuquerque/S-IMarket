@@ -26,7 +26,7 @@ public class SIMarket  extends Application{
     }
     @Override
     public void start(Stage primaryStage) throws Exception {
-        parent = FXMLLoader.load(getClass().getClassLoader().getResource("GUI/telasFxml/TelaLogin.fxml"));
+        parent = FXMLLoader.load(getClass().getClassLoader().getResource("../GUI/TelaLogin.fxml"));
         Scene scene = new Scene(parent);
 
         primaryStage.setScene(scene);

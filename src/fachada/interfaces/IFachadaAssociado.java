@@ -2,7 +2,7 @@ package fachada.interfaces;
 
 import negocio.entidades.*;
 import negocio.entidades.abstratas.Pessoa;
-import negocio.excessoes.*;
+import negocio.excecao.*;
 
 public interface IFachadaAssociado {
     boolean login(String login,String senha) throws UsuarioOuSenhaInvalidoException;

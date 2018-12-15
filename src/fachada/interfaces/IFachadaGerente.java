@@ -1,9 +1,8 @@
 package fachada.interfaces;
 
 import negocio.entidades.Endereco;
-import negocio.entidades.Funcionario;
 import negocio.entidades.abstratas.Pessoa;
-import negocio.excessoes.*;
+import negocio.excecao.*;
 
 public interface IFachadaGerente {
     void adicionarFuncionario(String nome, String rg, String cpf, Endereco endereco, boolean gerente, String login, String senha)

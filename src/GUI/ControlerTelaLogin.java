@@ -1,16 +1,15 @@
-package GUI.telasFxml;
+package GUI;
 
 import fachada.Fachada;
 import fachada.interfaces.IFachadaAssociado;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.*;
-import negocio.excessoes.UsuarioOuSenhaInvalidoException;
 
 public class ControlerTelaLogin {
 
     @FXML
-    private Button botaoLogin;
+    private Button btnLogin;
     @FXML
     private TextField entradaLogin;
     @FXML

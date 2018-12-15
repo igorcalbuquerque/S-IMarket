@@ -1,4 +1,4 @@
-package negocio.excessoes;
+package negocio.excecao;
 
 public class DataInvalidaException extends Exception{
     public DataInvalidaException(String str){

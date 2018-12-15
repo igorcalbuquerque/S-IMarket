@@ -3,9 +3,9 @@ package negocio;
 import dados.RepositorioVenda;
 import dados.interfaces.IRepositorioVenda;
 import negocio.entidades.*;
-import negocio.excessoes.DataInvalidaException;
-import negocio.excessoes.RelatorioVazioException;
-import negocio.excessoes.VendaNaoEncotradaException;
+import negocio.excecao.DataInvalidaException;
+import negocio.excecao.RelatorioVazioException;
+import negocio.excecao.VendaNaoEncotradaException;
 import negocio.interfaces.INegocioVenda;
 import negocio.validacao.ValidaDados;
 

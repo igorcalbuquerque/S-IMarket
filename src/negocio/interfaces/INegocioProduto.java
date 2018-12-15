@@ -1,7 +1,7 @@
 package negocio.interfaces;
 
 import negocio.entidades.Produto;
-import negocio.excessoes.*;
+import negocio.excecao.*;
 
 public interface INegocioProduto {
     void adicionarProduto(Produto produto) throws CodigoJaExisteException;

@@ -1,4 +1,4 @@
-package negocio.excessoes;
+package negocio.excecao;
 
 public class RelatorioVazioException extends Exception {
     public RelatorioVazioException(){

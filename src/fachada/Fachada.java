@@ -5,7 +5,7 @@ import fachada.interfaces.IFachadaGerente;
 import negocio.*;
 import negocio.entidades.*;
 import negocio.entidades.abstratas.Pessoa;
-import negocio.excessoes.*;
+import negocio.excecao.*;
 import negocio.interfaces.*;
 import negocio.NegocioSecao;
 

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="telaLogin" prefHeight="283.0" prefWidth="329.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.telasFxml.ControlerTelaLogin">
+<AnchorPane fx:id="telaLogin" prefHeight="283.0" prefWidth="329.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ControlerTelaLogin">
    <children>
       <TextField fx:id="entradaLogin" layoutX="33.0" layoutY="126.0" prefHeight="25.0" prefWidth="253.0" promptText="Insira seu Login ou CPF" />
       <Button fx:id="btnLogin" layoutX="133.0" layoutY="234.0" mnemonicParsing="false" onAction="#logar" text="Login" />

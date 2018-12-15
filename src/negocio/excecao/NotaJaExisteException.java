@@ -1,4 +1,4 @@
-package negocio.excessoes;
+package negocio.excecao;
 
 import negocio.entidades.NotaFiscal;
 

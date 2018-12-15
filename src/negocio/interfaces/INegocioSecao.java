@@ -1,8 +1,8 @@
 package negocio.interfaces;
 
 import negocio.entidades.Secao;
-import negocio.excessoes.CodigoJaExisteException;
-import negocio.excessoes.SecaoNaoEncontradaException;
+import negocio.excecao.CodigoJaExisteException;
+import negocio.excecao.SecaoNaoEncontradaException;
 
 public interface INegocioSecao {
     void addSecao(Secao secao) throws CodigoJaExisteException;

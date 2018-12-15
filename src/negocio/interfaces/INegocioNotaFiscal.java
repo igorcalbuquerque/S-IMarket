@@ -3,7 +3,7 @@ package negocio.interfaces;
 import negocio.entidades.Data;
 import negocio.entidades.Fornecedor;
 import negocio.entidades.NotaFiscal;
-import negocio.excessoes.*;
+import negocio.excecao.*;
 
 public interface INegocioNotaFiscal {
     void adicionarNotas(NotaFiscal nota) throws NotaJaExisteException;

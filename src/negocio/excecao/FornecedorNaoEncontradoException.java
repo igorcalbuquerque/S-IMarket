@@ -1,4 +1,4 @@
-package negocio.excessoes;
+package negocio.excecao;
 
 public class FornecedorNaoEncontradoException extends Exception {
     public FornecedorNaoEncontradoException(){

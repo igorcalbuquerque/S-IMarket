@@ -5,7 +5,7 @@ import dados.interfaces.IRepositorioNota;
 import negocio.entidades.Data;
 import negocio.entidades.Fornecedor;
 import negocio.entidades.NotaFiscal;
-import negocio.excessoes.*;
+import negocio.excecao.*;
 import negocio.interfaces.INegocioNotaFiscal;
 import negocio.validacao.ValidaDados;
 

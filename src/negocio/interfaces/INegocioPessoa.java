@@ -1,7 +1,7 @@
 package negocio.interfaces;
 
 import negocio.entidades.abstratas.Pessoa;
-import negocio.excessoes.*;
+import negocio.excecao.*;
 
 public interface INegocioPessoa {
     void adicionarPessoa(Pessoa pessoa) throws CpfJaExisteException, RgJaExisteException;

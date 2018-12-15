@@ -1,9 +1,9 @@
 package negocio.interfaces;
 
 import negocio.entidades.*;
-import negocio.excessoes.DataInvalidaException;
-import negocio.excessoes.RelatorioVazioException;
-import negocio.excessoes.VendaNaoEncotradaException;
+import negocio.excecao.DataInvalidaException;
+import negocio.excecao.RelatorioVazioException;
+import negocio.excecao.VendaNaoEncotradaException;
 
 public interface INegocioVenda {
     void adicionarVenda(Venda venda);

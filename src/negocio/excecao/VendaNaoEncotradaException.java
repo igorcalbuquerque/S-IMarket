@@ -1,4 +1,4 @@
-package negocio.excessoes;
+package negocio.excecao;
 
 public class VendaNaoEncotradaException extends Exception{
     public VendaNaoEncotradaException(int numero){

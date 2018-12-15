@@ -1,4 +1,4 @@
-package negocio.excessoes;
+package negocio.excecao;
 
 public class PessoaNaoEncotradaException extends Exception {
     public PessoaNaoEncotradaException(){

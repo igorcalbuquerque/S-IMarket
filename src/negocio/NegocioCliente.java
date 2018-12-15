@@ -3,7 +3,7 @@ package negocio;
 import dados.RepositorioPessoa;
 import dados.interfaces.IRepositorioPessoa;
 import negocio.entidades.abstratas.Pessoa;
-import negocio.excessoes.*;
+import negocio.excecao.*;
 import negocio.interfaces.INegocioPessoa;
 
 public class NegocioCliente implements INegocioPessoa {

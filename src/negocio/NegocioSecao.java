@@ -3,8 +3,8 @@ package negocio;
 import dados.RepositorioSecao;
 import dados.interfaces.IRepositorioSecao;
 import negocio.entidades.Secao;
-import negocio.excessoes.CodigoJaExisteException;
-import negocio.excessoes.SecaoNaoEncontradaException;
+import negocio.excecao.CodigoJaExisteException;
+import negocio.excecao.SecaoNaoEncontradaException;
 import negocio.interfaces.INegocioSecao;
 
 public class NegocioSecao implements INegocioSecao {

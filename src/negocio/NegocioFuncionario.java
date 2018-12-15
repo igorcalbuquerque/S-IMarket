@@ -5,7 +5,7 @@ import dados.interfaces.IRepositorioPessoa;
 import negocio.entidades.Funcionario;
 import negocio.entidades.abstratas.Pessoa;
 import negocio.entidades.interfaces.IAutenticavel;
-import negocio.excessoes.*;
+import negocio.excecao.*;
 import negocio.interfaces.INegocioFuncionario;
 import negocio.interfaces.INegocioPessoa;
 

@@ -1,4 +1,4 @@
-package negocio.excessoes;
+package negocio.excecao;
 
 public class CodigoJaExisteException extends Exception {
     public CodigoJaExisteException(String codigoBarra){

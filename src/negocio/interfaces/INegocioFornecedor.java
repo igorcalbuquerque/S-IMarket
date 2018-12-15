@@ -1,9 +1,9 @@
 package negocio.interfaces;
 
 import negocio.entidades.Fornecedor;
-import negocio.excessoes.CnpjJaExisteException;
-import negocio.excessoes.CodigoJaExisteException;
-import negocio.excessoes.FornecedorNaoEncontradoException;
+import negocio.excecao.CnpjJaExisteException;
+import negocio.excecao.CodigoJaExisteException;
+import negocio.excecao.FornecedorNaoEncontradoException;
 
 public interface INegocioFornecedor {
     Fornecedor buscarFornecedor(int codigo) throws FornecedorNaoEncontradoException;

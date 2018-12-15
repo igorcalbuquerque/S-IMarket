@@ -1,7 +1,6 @@
-package negocio.excessoes;
+package negocio.excecao;
 
 import negocio.entidades.Fornecedor;
-import negocio.entidades.NotaFiscal;
 
 public class NotaNaoEncontradaException extends Exception {
     public NotaNaoEncontradaException(int numero, Fornecedor fornecedor){
