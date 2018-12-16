@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="TelaPrincipal" prefHeight="317.0" prefWidth="458.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ControlerTelaPrincipal">
+<AnchorPane fx:id="TelaPrincipal" prefHeight="317.0" prefWidth="458.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ControleTelaPrincipalAssociado">
    <children>
       <Pane prefHeight="324.0" prefWidth="458.0">
          <children>

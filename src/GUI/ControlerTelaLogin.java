@@ -4,9 +4,16 @@ import fachada.Fachada;
 import fachada.interfaces.IFachadaAssociado;
 import javafx.fxml.FXML;
 
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import negocio.entidades.abstratas.Pessoa;
 
-public class ControlerTelaLogin {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class ControlerTelaLogin implements Initializable {
+
+    private Fachada fachada;
 
     @FXML
     private Button btnLogin;
@@ -18,11 +25,12 @@ public class ControlerTelaLogin {
     @FXML
     public void logar(){
         try{
+
             String login = entradaLogin.getText();
             String senha = entradaLogin.getText();
             IFachadaAssociado fachada = Fachada.getInstance();
-
             fachada.login(login,senha);
+
         }catch (Exception e){
             Alert alert = new Alert(Alert.AlertType.ERROR);
 
@@ -32,5 +40,10 @@ public class ControlerTelaLogin {
 
             alert.showAndWait();
         }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
     }
 }
