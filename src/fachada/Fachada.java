@@ -19,7 +19,9 @@ public class Fachada implements IFachadaAssociado, IFachadaGerente {
     private INegocioFornecedor negocioFornecedor;
     private INegocioSecao negocioSecao;
     private static Fachada fachada;
-
+    public String listarFuncionarios(){
+        return negocioFuncionario.toString();
+    }
     public Fachada(){
         this.negocioCliente = new NegocioCliente();
         this.negocioFuncionario = new NegocioFuncionario();
@@ -34,7 +36,8 @@ public class Fachada implements IFachadaAssociado, IFachadaGerente {
         return fachada;
     }
     public boolean login(String login,String senha) throws UsuarioOuSenhaInvalidoException {
-        return ((INegocioFuncionario)negocioFuncionario).login(login,senha);
+        boolean logado = ((INegocioFuncionario)negocioFuncionario).login(login,senha);
+        return logado;
     }
     @Override
     public void adicionarCliente(String nome, String rg, String cpf, Endereco endereco,String telefone, String email)
@@ -64,6 +67,7 @@ public class Fachada implements IFachadaAssociado, IFachadaGerente {
     public void removerClientePorCpf(String cpf) throws CpfNaoEncontrado {
         negocioCliente.removerPessoaPorCpf(cpf);
     }
+
     @Override
     public void adicionarNotas(int numero, int serie, Data dataEmissao, Data dataPagamento, Fornecedor fornecedor)
             throws NotaJaExisteException {

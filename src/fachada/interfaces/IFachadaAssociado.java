@@ -35,4 +35,5 @@ public interface IFachadaAssociado {
     String relatorioVenda(Funcionario funcionario, Data dataInicial, Data dataFinal) throws DataInvalidaException,RelatorioVazioException;
     String relatorioVenda(Secao secao, Data dataInicial, Data dataFinal) throws DataInvalidaException,RelatorioVazioException;
     String relatorioVenda(Produto produto, Data dataInicial, Data dataFinal) throws DataInvalidaException,RelatorioVazioException;
+
 }

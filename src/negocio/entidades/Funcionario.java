@@ -63,14 +63,14 @@ public class Funcionario extends Pessoa implements IAutenticavel {
     }
     @Override
     public String toString() {
-        String str = "NOME: " + getNome() + "\nRG : " + getRg()+"\nCPF: " + getCpf()  +
+        String str = "NOME: " + getNome() + "\nRG : " + getRg()+"\nCPF: " + getCpf()  + "\nSENHA: " + senha +
                      "\nCARGO: " + getCargo() + "\nSALARIO: R$ "+getSalario() + "\n"+ getEndereco().toString();
         return str;
     }
 
     @Override
     public boolean logar(String login, String senha) {
-        if(this.login.equals(login) || this.login.equals(this.getCpf()) && this.senha.equals(senha)){return true;}
+        if(this.login.equals(this.getCpf()) && this.senha.equals(senha)){return true;}
         else{ return false; }
     }
 }

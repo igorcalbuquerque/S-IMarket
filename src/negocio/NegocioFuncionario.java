@@ -2,6 +2,7 @@ package negocio;
 
 import dados.RepositorioPessoa;
 import dados.interfaces.IRepositorioPessoa;
+import negocio.entidades.Endereco;
 import negocio.entidades.Funcionario;
 import negocio.entidades.abstratas.Pessoa;
 import negocio.entidades.interfaces.IAutenticavel;
@@ -13,12 +14,16 @@ public class NegocioFuncionario implements INegocioPessoa, INegocioFuncionario {
 
     private IRepositorioPessoa funcionarios;
 
-    public NegocioFuncionario(){this.funcionarios = new RepositorioPessoa();}
+
+    public NegocioFuncionario(){
+        this.funcionarios = new RepositorioPessoa();
+    }
+
     @Override
     public boolean login(String login, String senha) throws UsuarioOuSenhaInvalidoException{
         IAutenticavel funcionario = (Funcionario)this.funcionarios.buscarPessoaPorCpf(login);
-        if(!funcionario.logar(login,senha)){ throw new UsuarioOuSenhaInvalidoException(); }
-        else{return true;}
+        if(funcionario.logar(login,senha)){return true;}
+        else{ throw new UsuarioOuSenhaInvalidoException(); }
     }
     @Override
     public void adicionarPessoa(Pessoa funcionario) throws CpfJaExisteException, RgJaExisteException {
@@ -58,4 +63,8 @@ public class NegocioFuncionario implements INegocioPessoa, INegocioFuncionario {
     public void promoverFuncionario(Funcionario funcionario){funcionario.setCargo(true);}
     @Override
     public void rebaixarFuncionario(Funcionario funcionario){funcionario.setCargo(false);}
+    @Override
+    public String toString(){
+        return funcionarios.toString();
+    }
 }

@@ -9,7 +9,7 @@ public interface IFachadaGerente {
             throws CpfJaExisteException, RgJaExisteException;
     void adicionarFuncionario(String nome, String rg,String cpf, Endereco endereco, boolean gerente,String senha)
             throws CpfJaExisteException, RgJaExisteException;
-    Pessoa buscarFuncionarioPorCpf(String cpf) throws CpfNaoEncontrado;
+    Pessoa buscarFuncionarioPorCpf(String cpf) throws CpfNaoEncontrado, PessoaNaoEncotradaException;
     Pessoa buscarFuncionarioPorRg(String rg) throws RgNaoEncontrado;
     String buscarFuncionarioPorNome(String nome) throws PessoaNaoEncotradaException;
     void removerFuncionarioPorRg(String rg) throws RgNaoEncontrado;
