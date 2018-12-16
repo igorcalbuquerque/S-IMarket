@@ -8,12 +8,11 @@
 
 <AnchorPane fx:id="TelaPrincipal" prefHeight="400.0" prefWidth="445.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ControlerTelaPrincipal">
    <children>
-      <Pane prefHeight="400.0" prefWidth="458.0">
+      <Pane fx:id="btnFornecedor" onDragDetected="#cliqueFornecedor" prefHeight="400.0" prefWidth="458.0">
          <children>
-            <Button fx:id="btnCadastroProduto" layoutX="21.0" layoutY="72.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="196.0" text="Cadastro de Produto" />
-            <Button fx:id="btnCadastroFuncionario" layoutX="21.0" layoutY="126.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="196.0" text="Cadastro de Funcionario" />
-            <Button fx:id="btnCadastroCliente" layoutX="21.0" layoutY="180.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="196.0" text="Cadastro de Cliente" />
-            <Button fx:id="btnEntradaNota" layoutX="21.0" layoutY="234.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="196.0" text="Entrada de Nota Fiscal" />
+            <Button fx:id="btnCadastroProduto" layoutX="21.0" layoutY="72.0" mnemonicParsing="false" onAction="#cliqueCadastroProduto" prefHeight="51.0" prefWidth="196.0" text="Cadastro de Produto" />
+            <Button fx:id="btnCadastroFuncionario" layoutX="21.0" layoutY="126.0" mnemonicParsing="false" onAction="#cliqueCadastroPessoa" prefHeight="51.0" prefWidth="196.0" text="Cadastro de Pessoa" />
+            <Button fx:id="btnEntradaNota" layoutX="21.0" layoutY="178.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="196.0" text="Entrada de Nota Fiscal" />
             <Button fx:id="btnProduto" layoutX="238.0" layoutY="72.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="196.0" text="Produto" />
             <Button fx:id="btnCliente" layoutX="238.0" layoutY="126.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="196.0" text="Cliente" />
             <Button fx:id="btnFuncionario" layoutX="238.0" layoutY="180.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="196.0" text="Funcionario" />
@@ -29,6 +28,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
+            <Button fx:id="btnFornecedor" layoutX="21.0" layoutY="231.0" mnemonicParsing="false" onAction="#cliqueFornecedor" prefHeight="51.0" prefWidth="196.0" text="Fornecedor" />
          </children></Pane>
    </children>
 </AnchorPane>
