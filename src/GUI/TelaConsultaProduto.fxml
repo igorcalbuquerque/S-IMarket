@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="398.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ControlerProduto">
+   <children>
+      <Pane fx:id="TelaContultaProduto" prefHeight="400.0" prefWidth="401.0">
+         <children>
+            <TableView fx:id="tbProdutosl" layoutX="-1.0" layoutY="-4.0" prefHeight="400.0" prefWidth="401.0">
+              <columns>
+                <TableColumn prefWidth="97.0" text="Descriçao" />
+                <TableColumn prefWidth="152.0" text="Valor" />
+                  <TableColumn prefWidth="152.0" text="Secao" />
+              </columns>
+            </TableView>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

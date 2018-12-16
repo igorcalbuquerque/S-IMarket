@@ -42,9 +42,34 @@ public class ControlerTelaPrincipal {
             e.getMessage();
         }
     }
+    @FXML
     public void cliqueFornecedor(){
         try {
             SIMarket.setJanela(FXMLLoader.load(getClass().getClassLoader().getResource("GUI/TelaFornecedor.fxml")));
+        }catch (IOException e){
+            e.getMessage();
+        }
+    }
+    @FXML
+    public void cliqueConsultaProduto(){
+        try {
+            SIMarket.setJanela(FXMLLoader.load(getClass().getClassLoader().getResource("GUI/TelaConsultaProduto.fxml")));
+        }catch (IOException e){
+            e.getMessage();
+        }
+    }
+    @FXML
+    public void cliqueConsultaCliente(){
+        try {
+            SIMarket.setJanela(FXMLLoader.load(getClass().getClassLoader().getResource("GUI/TelaConsultaCliente.fxml")));
+        }catch (IOException e){
+            e.getMessage();
+        }
+    }
+    @FXML
+    public void cliqueConsultaFuncionario(){
+        try {
+            SIMarket.setJanela(FXMLLoader.load(getClass().getClassLoader().getResource("GUI/TelaConsultaFuncionario.fxml")));
         }catch (IOException e){
             e.getMessage();
         }

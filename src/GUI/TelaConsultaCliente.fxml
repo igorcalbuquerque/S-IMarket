@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="490.0" prefWidth="679.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ControlerConsultaCliente">
+   <children>
+      <Pane fx:id="TelaContultaProduto" prefHeight="490.0" prefWidth="680.0">
+         <children>
+            <TableView prefHeight="490.0" prefWidth="678.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="Nome" />
+                <TableColumn prefWidth="75.0" text="CPF" />
+                  <TableColumn prefWidth="75.0" text="RG" />
+                  <TableColumn prefWidth="75.0" text="Rua" />
+                  <TableColumn prefWidth="75.0" text="Bairro" />
+                  <TableColumn prefWidth="75.0" text="Cidade" />
+                  <TableColumn prefWidth="75.0" text="Estado" />
+                  <TableColumn prefWidth="75.0" text="CEP" />
+                  <TableColumn prefWidth="75.0" text="Telefone" />
+              </columns>
+            </TableView>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

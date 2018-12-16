@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import main.SIMarket;
 import negocio.entidades.Endereco;
@@ -20,6 +21,7 @@ import negocio.excecao.CpfJaExisteException;
 import negocio.excecao.RgJaExisteException;
 import negocio.excecao.UsuarioOuSenhaInvalidoException;
 import negocio.interfaces.INegocioFuncionario;
+import sun.plugin.javascript.navig.Anchor;
 
 import java.io.IOException;
 import java.net.URL;
@@ -33,6 +35,8 @@ public class ControlerTelaLogin implements Initializable {
     private TextField entradaLogin;
     @FXML
     private TextField entradaSenha;
+    @FXML
+    private AnchorPane telaLogin;
 
     @FXML
     public void logar(){
@@ -52,6 +56,7 @@ public class ControlerTelaLogin implements Initializable {
 
             if (login.equals("igor") && senha.equals("123456")){
                 SIMarket.setJanela(FXMLLoader.load(getClass().getClassLoader().getResource("GUI/TelaPrincipal.fxml")));
+
             }
             else if (login.equals("sau") && senha.equals("123456")) {
                 SIMarket.setJanela(FXMLLoader.load(getClass().getClassLoader().getResource("GUI/TelaPrincipal.fxml")));
