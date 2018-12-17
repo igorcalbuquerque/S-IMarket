@@ -1,14 +1,21 @@
 package GUI;
 
+import fachada.Fachada;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import negocio.entidades.Endereco;
+import negocio.excecao.CpfJaExisteException;
+import negocio.excecao.FuncionarioJaCadastrado;
+import negocio.excecao.RgJaExisteException;
 import org.omg.CORBA.PRIVATE_MEMBER;
 
 public class ControlerCadastroPessoa {
 
+
+    Fachada fachada = new Fachada();
 
     @FXML
     private RadioButton rdFuncionario;
@@ -48,25 +55,60 @@ public class ControlerCadastroPessoa {
     private Label lblConfirma;
     @FXML
     private RadioButton rdGerente;
+    @FXML
+    private TextField txtTelefone;
+    @FXML
+    private TextField txtEmail;
 
     @FXML
-    private void desativaFuncionario(){
+    private void radioOpcoes(){
 
-       if (rdCliente.isSelected()) {
-
-
-           txtLogin.setVisible(false);
-           pssSenha.setVisible(false);
-           pssConfirmaSenha.setVisible(false);
-           lblConfirma.setVisible(false);
-           lblLogin.setVisible(false);
-           lblSenha.setVisible(false);
-           rdGerente.setVisible(false);
-        }
 
 
 
     }
+
+    @FXML
+    private void cadastrarPessoa(){
+
+        if (rdCliente.isSelected()) {
+
+            rdFuncionario.setVisible(false);
+            txtLogin.setVisible(false);
+            pssSenha.setVisible(false);
+            pssConfirmaSenha.setVisible(false);
+            lblConfirma.setVisible(false);
+            lblLogin.setVisible(false);
+            lblSenha.setVisible(false);
+            rdGerente.setVisible(false);
+
+            try {
+                Endereco endereco = new Endereco(txtRua.getText(), txtNumero.getText(), txtBairro.getText(), txtCidade.getText(), txtCep.getText(), txtEstado.getText());
+
+                fachada.adicionarCliente(txtNome.getText(), txtRG.getText(), txtCPF.getText(), endereco, txtTelefone.getText(), txtEmail.getText());
+            }catch (Exception e){
+                e.getMessage();
+            }
+        }
+        else{
+
+            try {
+                Endereco endereco = new Endereco(txtRua.getText(), txtNumero.getText(), txtBairro.getText(), txtCidade.getText(), txtCep.getText(), txtEstado.getText());
+
+                fachada.adicionarFuncionario(txtNome.getText(), txtRG.getText(), txtCPF.getText(), endereco, rdGerente.isSelected(), pssSenha.getText(), txtEmail.getText());
+
+            } catch (CpfJaExisteException e) {
+                e.printStackTrace();
+            } catch (RgJaExisteException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+
+    }
+
+
 
 
 
