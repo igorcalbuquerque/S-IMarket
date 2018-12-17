@@ -8,7 +8,7 @@
 
 <AnchorPane fx:id="TelaPrincipal" prefHeight="297.0" prefWidth="458.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ControlerTelaPrincipal">
    <children>
-      <Pane fx:id="btnFornecedor" onDragDetected="#cliqueFornecedor" prefHeight="303.0" prefWidth="458.0">
+      <Pane fx:id="btnFornecedor" prefHeight="303.0" prefWidth="458.0">
          <children>
             <Button fx:id="btnCadastroProduto" layoutX="21.0" layoutY="72.0" mnemonicParsing="false" onAction="#cliqueCadastroProduto" prefHeight="51.0" prefWidth="196.0" text="Cadastro de Produto" />
             <Button fx:id="btnCadastroFuncionario" layoutX="21.0" layoutY="126.0" mnemonicParsing="false" onAction="#cliqueCadastroPessoa" prefHeight="51.0" prefWidth="196.0" text="Cadastro de Pessoa" />
