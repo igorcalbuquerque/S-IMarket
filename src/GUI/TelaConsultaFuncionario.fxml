@@ -9,18 +9,18 @@
    <children>
       <Pane fx:id="TelaContultaProduto" prefHeight="547.0" prefWidth="826.0">
          <children>
-            <TableView prefHeight="547.0" prefWidth="826.0">
+            <TableView fx:id="tblFuncionario" prefHeight="547.0" prefWidth="826.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="Nome" />
-                <TableColumn prefWidth="75.0" text="CPF" />
-                  <TableColumn prefWidth="75.0" text="RG" />
-                  <TableColumn prefWidth="75.0" text="Rua" />
-                  <TableColumn prefWidth="75.0" text="Bairro" />
-                  <TableColumn prefWidth="75.0" text="Cidade" />
-                  <TableColumn prefWidth="75.0" text="Estado" />
-                  <TableColumn prefWidth="75.0" text="CEP" />
-                  <TableColumn prefWidth="75.0" text="Telefone" />
-                  <TableColumn prefWidth="75.0" text="Cargo" />
+                <TableColumn fx:id="nome" prefWidth="75.0" text="Nome" />
+                <TableColumn fx:id="cpf" prefWidth="75.0" text="CPF" />
+                  <TableColumn fx:id="rg" prefWidth="75.0" text="RG" />
+                  <TableColumn fx:id="rua" prefWidth="75.0" text="Rua" />
+                  <TableColumn fx:id="bairro" prefWidth="75.0" text="Bairro" />
+                  <TableColumn fx:id="cidade" prefWidth="75.0" text="Cidade" />
+                  <TableColumn fx:id="estado" prefWidth="75.0" text="Estado" />
+                  <TableColumn fx:id="cep" prefWidth="75.0" text="CEP" />
+                  <TableColumn fx:id="tel" prefWidth="75.0" text="Telefone" />
+                  <TableColumn fx:id="cargo" prefWidth="75.0" text="Cargo" />
               </columns>
             </TableView>
          </children>
