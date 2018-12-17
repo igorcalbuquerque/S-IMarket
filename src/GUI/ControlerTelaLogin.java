@@ -54,7 +54,7 @@ public class ControlerTelaLogin implements Initializable {
             Funcionario funcionario = null;
             
 
-            if (login.equals("igor") && senha.equals("123456")){
+            if (login.equals("igor") && senha.equals("123")){
                 SIMarket.setJanela(FXMLLoader.load(getClass().getClassLoader().getResource("GUI/TelaPrincipal.fxml")));
 
             }

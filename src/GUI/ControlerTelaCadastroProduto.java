@@ -6,6 +6,8 @@ import javafx.scene.control.TextField;
 import negocio.excecao.CodigoJaExisteException;
 import negocio.excecao.SecaoNaoEncontradaException;
 
+import java.io.IOException;
+
 public class ControlerTelaCadastroProduto {
 
     Fachada fachada = new Fachada();
@@ -24,7 +26,7 @@ public class ControlerTelaCadastroProduto {
     private TextField txtCodigoBarras;
 
     @FXML
-    public void cadastrarProduto(){
+    public void cadastrarProduto() throws IOException {
         try{
 
             fachada.adicionarProduto(Integer.parseInt(txtId.getText()), txtCodigoBarras.getText(), txtDescricao.getText(), Double.parseDouble(txtValorCompra.getText()), Double.parseDouble(txtValorVenda.getText()), Integer.parseInt(txtSecao.getText()));
