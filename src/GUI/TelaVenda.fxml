@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="telaVenda" prefHeight="489.0" prefWidth="772.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ControlerTelaVenda">
+   <children>
+      <TableView fx:id="tabelaProdutos" layoutX="6.0" layoutY="107.0" prefHeight="322.0" prefWidth="761.0">
+        <columns>
+          <TableColumn fx:id="colunaCodigo" prefWidth="159.0" text="CODIGO BARRA" />
+          <TableColumn fx:id="colunaDescricao" minWidth="6.9999847412109375" prefWidth="317.0" text="DESCRICAO" />
+            <TableColumn fx:id="colunaQuantidade" minWidth="0.0" prefWidth="74.0" text="QUANT" />
+            <TableColumn fx:id="colunaValor" prefWidth="86.0" text="VALOR" />
+            <TableColumn fx:id="colunaTotal" prefWidth="116.0" text="TOTAL" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnFinalizarVenda" layoutX="148.0" layoutY="440.0" mnemonicParsing="false" onAction="#clikFinalizar" prefHeight="35.0" prefWidth="168.0" text="Finalizar Venda" />
+      <Button fx:id="btnCancelarVenda" layoutX="430.0" layoutY="440.0" mnemonicParsing="false" onAction="#clikCancelar" prefHeight="35.0" prefWidth="168.0" text="Cancelar Venda" />
+      <HBox layoutX="20.0" layoutY="45.0" prefHeight="35.0" prefWidth="752.0">
+         <children>
+            <TextField fx:id="entradaCodigo" prefHeight="26.0" prefWidth="203.0" promptText="Insira o Codigo de Barra" />
+            <TextField fx:id="entradaQuantidade" prefHeight="26.0" prefWidth="147.0" promptText="Insira a Quantidade" />
+            <Button fx:id="btnAdicionar" mnemonicParsing="false" onAction="#clikAdicionar" prefHeight="26.0" prefWidth="150.0" text="Adicionar" />
+            <Label fx:id="labelTotal" prefHeight="26.0" prefWidth="89.0" text="Total: ">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <HBox layoutX="20.0" layoutY="10.0" prefHeight="35.0" prefWidth="413.0">
+         <children>
+            <TextField fx:id="entradaCpf" prefHeight="26.0" prefWidth="203.0" promptText="CPF do Cliente(Opcional)" />
+            <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#clikBuscar" prefHeight="26.0" prefWidth="147.0" text="Buscar" />
+         </children>
+      </HBox>
+      <Label fx:id="labelCliente" layoutX="34.0" layoutY="80.0" prefHeight="16.0" prefWidth="439.0" />
+   </children>
+</AnchorPane>

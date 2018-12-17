@@ -25,7 +25,14 @@ public class ControleTelaPrincipalAssociado {
     private Button btnVenda;
     @FXML
     private Button btnSair;
-
+    @FXML
+    public void clikVenda(){
+        try {
+            SIMarket.setJanela(FXMLLoader.load(getClass().getClassLoader().getResource("GUI/TelaVenda.fxml")));
+        }catch (IOException e){
+            e.getMessage();
+        }
+    }
     @FXML
     public void cliqueCadastroProduto(){
         try {

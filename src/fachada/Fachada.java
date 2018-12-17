@@ -46,13 +46,13 @@ public class Fachada implements IFachadaAssociado, IFachadaGerente {
         negocioCliente.adicionarPessoa(cliente);
     }
     @Override
-    public Pessoa buscarClientePorCpf(String cpf) throws CpfNaoEncontrado {
-        Pessoa cliente = negocioCliente.buscarPessoaPorCpf(cpf);
+    public Cliente buscarClientePorCpf(String cpf) throws CpfNaoEncontrado {
+        Cliente cliente = (Cliente)negocioCliente.buscarPessoaPorCpf(cpf);
         return cliente;
     }
     @Override
-    public Pessoa buscarcClientePorRg(String rg) throws RgNaoEncontrado {
-        Pessoa cliente = negocioCliente.buscarPessoaPorRg(rg);
+    public Cliente buscarcClientePorRg(String rg) throws RgNaoEncontrado {
+        Cliente cliente = (Cliente)negocioCliente.buscarPessoaPorRg(rg);
         return cliente;
     }
     @Override
@@ -104,6 +104,12 @@ public class Fachada implements IFachadaAssociado, IFachadaGerente {
     public void adicionarProduto(int codigo, String codigoBarra, String descricao, double valorCompra, double valorVenda, int codigoSecao)
             throws CodigoJaExisteException, SecaoNaoEncontradaException {
         Produto produto = new Produto(codigo,codigoBarra,descricao,valorCompra,valorVenda,negocioSecao.buscarSecao(codigoSecao));
+        negocioProduto.adicionarProduto(produto);
+    }
+    @Override
+    public void adicionarProduto(String codigoBarra, String descricao, double valorCompra, double valorVenda, int codigoSecao)
+            throws CodigoJaExisteException, SecaoNaoEncontradaException {
+        Produto produto = new Produto(codigoBarra,descricao,valorCompra,valorVenda,negocioSecao.buscarSecao(codigoSecao));
         negocioProduto.adicionarProduto(produto);
     }
     @Override
@@ -163,9 +169,9 @@ public class Fachada implements IFachadaAssociado, IFachadaGerente {
         negocioFuncionario.adicionarPessoa(funcionario);
     }
     @Override
-    public Pessoa buscarFuncionarioPorCpf(String cpf) throws CpfNaoEncontrado { return negocioFuncionario.buscarPessoaPorCpf(cpf); }
+    public Funcionario buscarFuncionarioPorCpf(String cpf) throws CpfNaoEncontrado { return (Funcionario)negocioFuncionario.buscarPessoaPorCpf(cpf); }
     @Override
-    public Pessoa buscarFuncionarioPorRg(String rg) throws RgNaoEncontrado {return negocioFuncionario.buscarPessoaPorRg(rg); }
+    public Funcionario buscarFuncionarioPorRg(String rg) throws RgNaoEncontrado {return (Funcionario)negocioFuncionario.buscarPessoaPorRg(rg); }
     @Override
     public String buscarFuncionarioPorNome(String nome) throws PessoaNaoEncotradaException {return negocioFuncionario.buscarPorNome(nome); }
     @Override

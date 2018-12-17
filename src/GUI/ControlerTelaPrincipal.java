@@ -2,12 +2,15 @@ package GUI;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import main.SIMarket;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class ControlerTelaPrincipal {
+public class ControlerTelaPrincipal implements Initializable {
 
     @FXML
     private Button btnCadastroProduto;
@@ -26,6 +29,14 @@ public class ControlerTelaPrincipal {
     @FXML
     private Button btnSair;
 
+    @FXML
+    public void clikVenda(){
+        try {
+            SIMarket.setJanela(FXMLLoader.load(getClass().getClassLoader().getResource("GUI/TelaVenda.fxml")));
+        }catch (IOException e){
+            e.getMessage();
+        }
+    }
     @FXML
     public void cliqueCadastroProduto(){
         try {
@@ -76,9 +87,8 @@ public class ControlerTelaPrincipal {
     }
 
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
 
-
-
-
-
+    }
 }

@@ -8,8 +8,8 @@ public interface IFachadaAssociado {
     boolean login(String login,String senha) throws UsuarioOuSenhaInvalidoException;
     void adicionarCliente(String nome, String rg, String cpf, Endereco endereco,String telefone, String email)
             throws CpfJaExisteException, RgJaExisteException;
-    Pessoa buscarClientePorCpf(String cpf) throws CpfNaoEncontrado;
-    Pessoa buscarcClientePorRg(String rg) throws RgNaoEncontrado;
+    Cliente buscarClientePorCpf(String cpf) throws CpfNaoEncontrado;
+    Cliente buscarcClientePorRg(String rg) throws RgNaoEncontrado;
     String buscarClientePorNome(String nome) throws PessoaNaoEncotradaException;
     void removerClientePorRg(String rg) throws RgNaoEncontrado;
     void removerClientePorCpf(String cpf) throws CpfNaoEncontrado;
@@ -23,6 +23,8 @@ public interface IFachadaAssociado {
             throws NenhumaNotaEcontradaException,DataInvalidaException;
     NotaFiscal buscarNota(int numero, int codigoFornecedor) throws NotaNaoEncontradaException, FornecedorNaoEncontradoException;
     void adicionarProduto(int codigo,String codigoBarra,String descricao, double valorCompra, double valorVenda, int codigoSecao)
+            throws CodigoJaExisteException, SecaoNaoEncontradaException;
+    void adicionarProduto(String codigoBarra, String descricao, double valorCompra, double valorVenda, int codigoSecao)
             throws CodigoJaExisteException, SecaoNaoEncontradaException;
     Produto buscarProdutoPorCodigo(int codigo) throws ProdutoNaoEncontradoException;
     Produto buscarProdutoPorCodigoDeBarras(String codigo) throws ProdutoNaoEncontradoException;

@@ -23,6 +23,8 @@ public abstract class ProdutoAbstrato {
     public void incrementar(double quant){
         quantidade += quant;
     }
+    public String getDescricao(){return produto.getDescricao();}
+    public String getCodigoBarra(){return produto.getCodigoBarra();}
     @Override
     public String toString(){
         return "CODIGO: " + produto.getCodigoProduto() + " DESCRICAO: "+produto.getDescricao() + " Quantidade : " + quantidade + "\n";

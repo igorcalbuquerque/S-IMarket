@@ -42,7 +42,7 @@
             <PasswordField fx:id="pssSenha" layoutX="234.0" layoutY="544.0" prefHeight="26.0" prefWidth="228.0" />
             <Label fx:id="lblConfirma" layoutX="27.0" layoutY="574.0" text="Confirma Senha:" />
             <PasswordField fx:id="pssConfirmaSenha" layoutX="27.0" layoutY="594.0" prefHeight="26.0" prefWidth="228.0" />
-            <Button fx:id="btnSalvar" layoutX="177.0" layoutY="647.0" mnemonicParsing="false" onAction="#cadastrarPessoa" prefHeight="60.0" prefWidth="149.0" text="Salvar" />
+            <Button fx:id="btnSalvar" layoutX="61.0" layoutY="647.0" mnemonicParsing="false" onAction="#cadastrarPessoa" prefHeight="60.0" prefWidth="149.0" text="Salvar" />
             <Label layoutX="147.0" layoutY="14.0" text="Cadastro De Pessoa">
                <font>
                   <Font name="System Bold" size="19.0" />
@@ -52,6 +52,7 @@
             <TextField fx:id="txtTelefone" layoutX="27.0" layoutY="376.0" />
             <Label layoutX="208.0" layoutY="360.0" text="E-Mail:" />
             <TextField fx:id="txtEmail" layoutX="210.0" layoutY="376.0" prefHeight="26.0" prefWidth="243.0" />
+            <Button fx:id="btnVoltar" layoutX="274.0" layoutY="647.0" mnemonicParsing="false" onAction="#clikVoltar" prefHeight="60.0" prefWidth="149.0" text="Voltar" />
          </children>
       </Pane>
    </children>

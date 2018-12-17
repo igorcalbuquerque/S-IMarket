@@ -2,15 +2,10 @@ package GUI;
 
 import fachada.Fachada;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.*;
+import main.SIMarket;
 import negocio.entidades.Endereco;
-import negocio.excecao.CpfJaExisteException;
-import negocio.excecao.FuncionarioJaCadastrado;
-import negocio.excecao.RgJaExisteException;
-import org.omg.CORBA.PRIVATE_MEMBER;
 
 public class ControlerCadastroPessoa {
 
@@ -63,11 +58,25 @@ public class ControlerCadastroPessoa {
     @FXML
     private void radioOpcoes(){
 
-
-
-
     }
+    @FXML
+    public void clikVoltar(){
+        try{
+            if(SIMarket.getUser().isGerente()){
+                SIMarket.setJanela(FXMLLoader.load(getClass().getClassLoader().getResource("GUI/TelaPrincipal.fxml")));
+            }else{
+                SIMarket.setJanela(FXMLLoader.load(getClass().getClassLoader().getResource("GUI/TelaPrincipalAssociado.fxml")));
+            }
+        }catch (Exception e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
 
+            alert.setTitle("ERRO");
+            alert.setHeaderText(null);
+            alert.setContentText(e.getMessage());
+
+            alert.showAndWait();
+        }
+    }
     @FXML
     private void cadastrarPessoa(){
 
@@ -87,7 +96,16 @@ public class ControlerCadastroPessoa {
 
                 fachada.adicionarCliente(txtNome.getText(), txtRG.getText(), txtCPF.getText(), endereco, txtTelefone.getText(), txtEmail.getText());
             }catch (Exception e){
-                e.getMessage();
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+
+                alert.setTitle("ERRO DE LOGIN");
+                alert.setHeaderText(null);
+                alert.setContentText(e.getMessage());
+
+                e.printStackTrace();
+
+                alert.showAndWait();
+
             }
         }
         else{
@@ -96,16 +114,23 @@ public class ControlerCadastroPessoa {
                 Endereco endereco = new Endereco(txtRua.getText(), txtNumero.getText(), txtBairro.getText(), txtCidade.getText(), txtCep.getText(), txtEstado.getText());
 
                 fachada.adicionarFuncionario(txtNome.getText(), txtRG.getText(), txtCPF.getText(), endereco, rdGerente.isSelected(), pssSenha.getText(), txtEmail.getText());
+                if(SIMarket.getUser().isGerente()){
+                    SIMarket.setJanela(FXMLLoader.load(getClass().getClassLoader().getResource("GUI/TelaPrincipal.fxml")));
+                }else{
+                    SIMarket.setJanela(FXMLLoader.load(getClass().getClassLoader().getResource("GUI/TelaPrincipalAssociado.fxml")));
+                }
+            } catch (Exception e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
 
-            } catch (CpfJaExisteException e) {
+                alert.setTitle("ERRO DE LOGIN");
+                alert.setHeaderText(null);
+                alert.setContentText(e.getMessage());
+
                 e.printStackTrace();
-            } catch (RgJaExisteException e) {
-                e.printStackTrace();
+
+                alert.showAndWait();
             }
-
         }
-
-
     }
 
 
