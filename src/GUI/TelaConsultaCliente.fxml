@@ -9,7 +9,7 @@
    <children>
       <Pane fx:id="TelaContultaProduto" prefHeight="490.0" prefWidth="680.0">
          <children>
-            <TableView prefHeight="490.0" prefWidth="678.0">
+            <TableView fx:id="tblCliente" prefHeight="490.0" prefWidth="678.0">
               <columns>
                 <TableColumn prefWidth="75.0" text="Nome" />
                 <TableColumn prefWidth="75.0" text="CPF" />

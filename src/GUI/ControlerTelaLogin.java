@@ -47,6 +47,7 @@ public class ControlerTelaLogin implements Initializable {
             fachadaGerente.adicionarFuncionario("Sau","4545","23456",new Endereco("","","","","",""),true,"123456");
             fachadaGerente.adicionarFuncionario("bolsonaro","1717","171717",new Endereco("","","","","",""),false,"123456");
             fachadaGerente.adicionarFuncionario("lula","1313","131313",new Endereco("","","","","",""),false,"123456");
+            fachadaGerente.adicionarFuncionario("admin","8546","654321",new Endereco("","","","","",""),true,"123");
 
             String login = entradaLogin.getText();
             String senha = entradaSenha.getText();
@@ -54,7 +55,7 @@ public class ControlerTelaLogin implements Initializable {
             Funcionario funcionario = null;
             
 
-            if (login.equals("igor") && senha.equals("123")){
+            if (login.equals("admin") && senha.equals("123")){
                 SIMarket.setJanela(FXMLLoader.load(getClass().getClassLoader().getResource("GUI/TelaPrincipal.fxml")));
 
             }

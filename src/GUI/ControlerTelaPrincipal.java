@@ -1,11 +1,15 @@
 package GUI;
 
+import fachada.Fachada;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import main.SIMarket;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ControlerTelaPrincipal {
 
@@ -65,14 +69,25 @@ public class ControlerTelaPrincipal {
         }catch (IOException e){
             e.getMessage();
         }
+
     }
     @FXML
     public void cliqueConsultaFuncionario(){
         try {
+
             SIMarket.setJanela(FXMLLoader.load(getClass().getClassLoader().getResource("GUI/TelaConsultaFuncionario.fxml")));
         }catch (IOException e){
             e.getMessage();
         }
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+
+        alert.setTitle("Funcionarios");
+        alert.setHeaderText("");
+        alert.setContentText(Fachada.getInstance().listarFuncionarios());
+
+
+
+        alert.showAndWait();
     }
 
 
