@@ -5,16 +5,12 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Pair;
 import main.SIMarket;
 import negocio.entidades.ProdutoVenda;
 import negocio.entidades.Venda;
 
-import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 

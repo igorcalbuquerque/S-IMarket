@@ -1,7 +1,6 @@
 package fachada.interfaces;
 
 import negocio.entidades.*;
-import negocio.entidades.abstratas.Pessoa;
 import negocio.excecao.*;
 
 public interface IFachadaAssociado {
@@ -24,6 +23,7 @@ public interface IFachadaAssociado {
     NotaFiscal buscarNota(int numero, int codigoFornecedor) throws NotaNaoEncontradaException, FornecedorNaoEncontradoException;
     void adicionarProduto(int codigo,String codigoBarra,String descricao, double valorCompra, double valorVenda, int codigoSecao)
             throws CodigoJaExisteException, SecaoNaoEncontradaException;
+    void adicionarFornecedor(String nome,String cnpj,Endereco endereco) throws CnpjJaExisteException, CodigoJaExisteException;
     void adicionarProduto(String codigoBarra, String descricao, double valorCompra, double valorVenda, int codigoSecao)
             throws CodigoJaExisteException, SecaoNaoEncontradaException;
     Produto buscarProdutoPorCodigo(int codigo) throws ProdutoNaoEncontradoException;

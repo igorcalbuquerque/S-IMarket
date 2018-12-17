@@ -4,10 +4,8 @@ import fachada.interfaces.IFachadaAssociado;
 import fachada.interfaces.IFachadaGerente;
 import negocio.*;
 import negocio.entidades.*;
-import negocio.entidades.abstratas.Pessoa;
 import negocio.excecao.*;
 import negocio.interfaces.*;
-import negocio.NegocioSecao;
 
 public class Fachada implements IFachadaAssociado, IFachadaGerente {
 
@@ -106,6 +104,12 @@ public class Fachada implements IFachadaAssociado, IFachadaGerente {
         Produto produto = new Produto(codigo,codigoBarra,descricao,valorCompra,valorVenda,negocioSecao.buscarSecao(codigoSecao));
         negocioProduto.adicionarProduto(produto);
     }
+
+    @Override
+    public void adicionarFornecedor(String nome, String cnpj, Endereco endereco) throws CnpjJaExisteException, CodigoJaExisteException {
+        negocioFornecedor.adicionarFornecedor(new Fornecedor(nome,cnpj,endereco));
+    }
+
     @Override
     public void adicionarProduto(String codigoBarra, String descricao, double valorCompra, double valorVenda, int codigoSecao)
             throws CodigoJaExisteException, SecaoNaoEncontradaException {
